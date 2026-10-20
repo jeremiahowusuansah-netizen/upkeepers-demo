@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Opleveren</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&amp;family=Nunito+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F7F3EB; color: #333333; font-family: 'Nunito Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <div style="flex: 0 0 auto; padding: 18px 20px 14px; background: #0A341E; color: #F7F3EB; display: flex; flex-direction: column; gap: 4px">
+    <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.14em; color: #CBA45C">UPKEEPERS · VAKMAN</span>
+    <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 22px">Opleveren</span>
+    <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #E6E0D2">KL-2026-0418 · KASTANJELAAN 14</span>
+  </div>
+
+  <div style="flex: 1 1 auto; overflow-y: auto; padding: 18px 16px; display: flex; flex-direction: column; gap: 18px">
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A2E">1 · FOTO PER KOZIJN</span>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+        <sc-for list="{{fotos}}" as="f" hint-placeholder-count="4">
+          <button type="button" onClick="{{f.pick}}" aria-label="{{f.label}}" style="{{f.style}}">
+            <sc-if value="{{f.klaar}}" hint-placeholder-val="{{ true }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F7F3EB" stroke-width="2.4" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg></sc-if>
+            <sc-if value="{{f.open}}" hint-placeholder-val="{{ false }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0A341E" stroke-width="1.8" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></sc-if>
+            <span style="font-size: 11px; font-weight: 700">{{f.nr}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A2E">2 · ZEG WAT JE HEBT GEDAAN EN GEZIEN</span>
+      <button type="button" onClick="{{toggleRec}}" style="{{recStyle}}">
+        <span style="{{recDot}}"></span>
+        <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px">
+          <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px">{{recLabel}}</span>
+          <span style="font-size: 13px; opacity: 0.85">{{recSub}}</span>
+        </span>
+      </button>
+      <sc-if value="{{hasText}}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 12px 14px; border-radius: 12px; background: #FFFFFF; font-size: 14px; line-height: 1.5; border: 1px solid #E2DACB">“Vier kozijnen geschuurd en twee keer gelakt. Onderdorpel links had rot, uitgefreesd en hersteld. Roosters vrijgehouden. Rechterraam boven klemt een beetje, dat is het hang- en sluitwerk.”</div>
+      </sc-if>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 10px">
+      <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A2E">3 · HOE IS HET GEGAAN</span>
+      <sc-for list="{{keuzes}}" as="k" hint-placeholder-count="3">
+        <button type="button" onClick="{{k.pick}}" style="{{k.style}}">{{k.label}}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="flex: 0 0 auto; padding: 12px 16px 30px; border-top: 1px solid #E2DACB">
+    <button type="button" style="width: 100%; min-height: 64px; border: 0; border-radius: 14px; background: #0A341E; color: #F7F3EB; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 17px; cursor: pointer">Lever op aan de klant</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { fotos: [true, true, true, false], rec: false, text: true, keuze: 1 };
+  }
+  renderVals() {
+    const st = this.state;
+    const labels = ['Alles volgens opdracht', 'Klaar, maar ik zag nog iets', 'Niet af, ik kom terug'];
+    return {
+      fotos: st.fotos.map((k, i) => ({
+        nr: 'K' + (i + 1),
+        label: 'Foto kozijn ' + (i + 1),
+        klaar: k,
+        open: !k,
+        pick: () => { const f = st.fotos.slice(); f[i] = !f[i]; this.setState({ fotos: f }); },
+        style: 'height: 84px; border-radius: 12px; cursor: pointer; font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; ' + (k ? 'border: 0; background: #0A341E; color: #F7F3EB' : 'border: 2px dashed #CBA45C; background: #FFFFFF; color: #0A341E')
+      })),
+      toggleRec: () => this.setState({ rec: !st.rec, text: st.rec ? true : st.text }),
+      recLabel: st.rec ? 'Tik om te stoppen' : 'Tik en praat',
+      recSub: st.rec ? 'Ik luister. Noem wat je zag.' : (st.text ? 'Opgenomen. Tik om opnieuw te doen.' : 'Wij zetten het om naar tekst'),
+      recStyle: 'display: flex; align-items: center; gap: 16px; min-height: 84px; padding: 0 20px; border-radius: 16px; cursor: pointer; font-family: inherit; text-align: left; border: 0; ' + (st.rec ? 'background: #CBA45C; color: #0A341E' : 'background: #0A341E; color: #F7F3EB'),
+      recDot: 'flex: 0 0 auto; width: 44px; height: 44px; border-radius: 999px; ' + (st.rec ? 'background: #0A341E' : 'background: #CBA45C'),
+      hasText: st.text && !st.rec,
+      keuzes: labels.map((l, i) => ({
+        label: l,
+        pick: () => this.setState({ keuze: i }),
+        style: 'min-height: 60px; padding: 0 18px; border-radius: 14px; cursor: pointer; font-family: inherit; font-size: 16px; font-weight: 700; text-align: left; background: #FFFFFF; color: #333333; border: ' + (st.keuze === i ? '2.5px solid #0A341E' : '2px solid #E2DACB')
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

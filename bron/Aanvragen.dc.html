@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Klus aanvragen</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&amp;family=Nunito+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F7F3EB; color: #333333; font-family: 'Nunito Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <div style="flex: 0 0 auto; padding: 14px 12px 0; display: flex; align-items: center; justify-content: space-between">
+    <button type="button" onClick="{{back}}" aria-label="Vorige stap" style="width: 44px; height: 44px; border: 0; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A341E" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <span style="font-size: 13px; font-weight: 700; color: #0A341E">Stap {{step}} van 4</span>
+    <a href="Home.dc.html" aria-label="Sluiten" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0A341E" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></a>
+  </div>
+  <div style="flex: 0 0 auto; padding: 6px 24px 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+    <sc-for list="{{bars}}" as="b" hint-placeholder-count="4"><span style="{{b.style}}"></span></sc-for>
+  </div>
+
+  <div style="flex: 1 1 auto; overflow-y: auto; padding: 28px 24px 16px; display: flex; flex-direction: column; gap: 22px">
+    <sc-if value="{{s1}}" hint-placeholder-val="{{ true }}">
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 26px; line-height: 1.2; color: #0A341E">Waar gaat het om?</h1>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <sc-for list="{{opts1}}" as="o" hint-placeholder-count="5">
+          <button type="button" onClick="{{o.pick}}" style="{{o.style}}">
+            <span style="font-weight: 700; font-size: 16px; color: #333333">{{o.label}}</span>
+            <span style="font-size: 13px; color: #5B5B55; line-height: 1.4">{{o.uitleg}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 26px; line-height: 1.2; color: #0A341E">Wat merk je aan je {{onderdeel}}?</h1>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <sc-for list="{{opts2}}" as="o" hint-placeholder-count="4">
+          <button type="button" onClick="{{o.pick}}" style="{{o.styleTile}}">
+            <span style="font-weight: 700; font-size: 15px; color: #333333">{{o.label}}</span>
+            <span style="font-size: 12px; color: #5B5B55; line-height: 1.4">{{o.uitleg}}</span>
+          </button>
+        </sc-for>
+      </div>
+      <p style="margin: 0; font-size: 13px; color: #5B5B55; line-height: 1.5">Je hoeft het niet precies te weten. De vakman kijkt het ter plekke na.</p>
+    </sc-if>
+    <sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 26px; line-height: 1.2; color: #0A341E">Wanneer ben je thuis?</h1>
+      <div style="display: flex; flex-direction: column; gap: 10px">
+        <sc-for list="{{opts3}}" as="o" hint-placeholder-count="4">
+          <button type="button" onClick="{{o.pick}}" style="{{o.style}}">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A2E">{{o.label}}</span>
+            <span style="font-size: 14px; color: #333333">{{o.uitleg}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </sc-if>
+    <sc-if value="{{s4}}" hint-placeholder-val="{{ false }}">
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 26px; line-height: 1.2; color: #0A341E">Klopt dit?</h1>
+      <div style="background: #FFFFFF; border-radius: 16px; box-shadow: 0 1px 2px rgba(10,52,30,0.08); padding: 6px 18px">
+        <div style="display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #EFE9DC"><span style="color: #5B5B55; font-size: 14px">Onderdeel</span><span style="font-weight: 700; font-size: 14px">{{onderdeelHoofd}}</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #EFE9DC"><span style="color: #5B5B55; font-size: 14px">Wat je merkt</span><span style="font-weight: 700; font-size: 14px; text-align: right">{{klacht}}</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 12px; padding: 12px 0"><span style="color: #5B5B55; font-size: 14px">Wanneer</span><span style="font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-align: right">{{moment}}</span></div>
+      </div>
+      <p style="margin: 0; font-size: 14px; line-height: 1.5">Wij zoeken een vakman en laten je weten wie er komt en wanneer precies. Kost het iets, dan zie je eerst de prijs en beslis jij.</p>
+    </sc-if>
+  </div>
+
+  <div style="flex: 0 0 auto; padding: 12px 24px 30px; display: flex; flex-direction: column; gap: 8px">
+    <sc-if value="{{notLast}}" hint-placeholder-val="{{ true }}">
+      <button type="button" onClick="{{next}}" style="min-height: 56px; border: 0; border-radius: 14px; background: #0A341E; color: #F7F3EB; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 16px; cursor: pointer">Verder</button>
+    </sc-if>
+    <sc-if value="{{s4}}" hint-placeholder-val="{{ false }}">
+      <a href="Home.dc.html" style="min-height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 14px; background: #0A341E; color: #F7F3EB; font-family: 'Montserrat', sans-serif; font-weight: 600; font-size: 16px; text-decoration: none">Vraag aan</a>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { step: 1, a: 1, b: 0, c: 0 };
+  }
+  renderVals() {
+    const st = this.state;
+    const row = (on) => 'display: flex; flex-direction: column; gap: 3px; text-align: left; min-height: 64px; justify-content: center; padding: 14px 18px; border-radius: 14px; background: #FFFFFF; cursor: pointer; font-family: inherit; border: ' + (on ? '2px solid #0A341E' : '2px solid #E2DACB');
+    const tile = (on) => 'display: flex; flex-direction: column; gap: 6px; text-align: left; min-height: 116px; padding: 16px; border-radius: 14px; background: #FFFFFF; cursor: pointer; font-family: inherit; border: ' + (on ? '2px solid #0A341E' : '2px solid #E2DACB');
+    const o1 = [
+      { label: 'Verwarming en warm water', uitleg: 'Cv-ketel, radiatoren, kranen die niet warm worden', kort: 'verwarming', hoofd: 'Verwarming' },
+      { label: 'Dak en dakgoot', uitleg: 'Lekkage, losse pannen, verstopte goot', kort: 'dak', hoofd: 'Dak' },
+      { label: 'Ramen, deuren en kozijnen', uitleg: 'Klemt, tocht, verf die loslaat', kort: 'ramen of deuren', hoofd: 'Kozijnen' },
+      { label: 'Water en afvoer', uitleg: 'Lekkende kraan, trage afvoer, vocht', kort: 'leidingen', hoofd: 'Water' },
+      { label: 'Ik weet het niet precies', uitleg: 'Beschrijf het in je eigen woorden, wij kijken mee', kort: 'woning', hoofd: 'Nog onbekend' }
+    ];
+    const o2 = [
+      { label: 'Het lekt', uitleg: 'Je ziet water of een vochtplek' },
+      { label: 'Het werkt niet', uitleg: 'Het doet helemaal niets meer' },
+      { label: 'Het maakt geluid', uitleg: 'Tikken, suizen of brommen' },
+      { label: 'Iets anders', uitleg: 'Spreek het in of maak een foto' }
+    ];
+    const o3 = [
+      { label: 'DEZE WEEK · OCHTEND', uitleg: 'Tussen 8 en 12 uur' },
+      { label: 'DEZE WEEK · MIDDAG', uitleg: 'Tussen 12 en 17 uur' },
+      { label: 'VOLGENDE WEEK', uitleg: 'Het maakt niet uit wanneer' },
+      { label: 'IK BEN NIET THUIS', uitleg: 'Wij regelen de sleutel met je' }
+    ];
+    return {
+      step: st.step,
+      s1: st.step === 1, s2: st.step === 2, s3: st.step === 3, s4: st.step === 4,
+      notLast: st.step < 4,
+      bars: [1, 2, 3, 4].map((n) => ({ style: 'height: 4px; border-radius: 2px; background: ' + (n <= st.step ? '#0A341E' : '#E2DACB') })),
+      opts1: o1.map((o, i) => ({ ...o, style: row(st.a === i), pick: () => this.setState({ a: i }) })),
+      opts2: o2.map((o, i) => ({ ...o, styleTile: tile(st.b === i), pick: () => this.setState({ b: i }) })),
+      opts3: o3.map((o, i) => ({ ...o, style: row(st.c === i), pick: () => this.setState({ c: i }) })),
+      onderdeel: o1[st.a].kort,
+      onderdeelHoofd: o1[st.a].hoofd,
+      klacht: o2[st.b].label,
+      moment: o3[st.c].label,
+      next: () => this.setState({ step: Math.min(4, st.step + 1) }),
+      back: () => this.setState({ step: Math.max(1, st.step - 1) })
+    };
+  }
+}
+</script>
+</body>
+</html>

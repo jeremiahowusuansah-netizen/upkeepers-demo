@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Startscherm C, de pas</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#123f28}
+.op{animation:op 900ms cubic-bezier(.22,.61,.36,1) both}
+.pas{animation:pas 1200ms 100ms cubic-bezier(.22,.61,.36,1) both}
+.op3{animation:op 900ms 300ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes pas{from{opacity:0;transform:perspective(900px) rotateX(14deg) translateY(30px)}to{opacity:1;transform:perspective(900px) rotateX(0deg)}}
+@media (prefers-reduced-motion:reduce){.op,.pas,.op3{animation:none}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: linear-gradient(180deg, #EFE9DC 0%, #F7F3EB 48%); color: #333333; font-family: 'Nunito Sans', system-ui, sans-serif">
+
+  <div style="padding: 22px 24px 0; display: flex; justify-content: space-between; align-items: center">
+    <span style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.32em; color: #0A341E">UPKEEPERS</span>
+    <span style="font-size: 12px; color: #5B5B55">Kastanjelaan 14</span>
+  </div>
+
+  <div class="op" style="padding: 40px 24px 0">
+    <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 34px; line-height: 1.1; letter-spacing: -0.02em; color: #0A341E">Goedenavond, Sanne.<br>Je volgende bezoek staat.</h1>
+  </div>
+
+  <div class="pas" style="margin: 34px 20px 0; border-radius: 24px; padding: 22px 22px 18px; color: #F7F3EB; background: linear-gradient(145deg, #154A2E 0%, #0A341E 55%, #072715 100%); box-shadow: 0 30px 60px -24px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.12); position: relative; overflow: hidden">
+    <div style="position: absolute; inset: 7px; border-radius: 18px; border: 1px solid rgba(203,164,92,0.35); pointer-events: none"></div>
+    <div style="display: flex; justify-content: space-between; align-items: center">
+      <span style="font-size: 10px; letter-spacing: 0.26em; color: #CBA45C">VOLGEND BEZOEK</span>
+      <span style="font-size: 10px; letter-spacing: 0.2em; color: rgba(247,243,235,0.7)">OVER 6 DAGEN</span>
+    </div>
+    <div style="margin-top: 22px; display: flex; flex-direction: column; gap: 4px">
+      <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 30px; letter-spacing: -0.01em">Cv-ketel</span>
+      <span style="font-size: 14px; font-weight: 300; color: rgba(247,243,235,0.78)">Jaarlijks onderhoud, branders en druk</span>
+    </div>
+    <div style="margin-top: 22px; padding-top: 14px; border-top: 1px dashed rgba(247,243,235,0.22); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+      <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 9px; letter-spacing: 0.22em; color: rgba(247,243,235,0.6)">DATUM</span><span style="font-size: 14px; letter-spacing: 0.06em">DO 23 OKT</span></span>
+      <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 9px; letter-spacing: 0.22em; color: rgba(247,243,235,0.6)">TIJD</span><span style="font-size: 14px; letter-spacing: 0.06em">09:00–11:00</span></span>
+      <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 9px; letter-spacing: 0.22em; color: rgba(247,243,235,0.6)">VAKMAN</span><span style="font-size: 14px; letter-spacing: 0.06em">AHMED</span></span>
+    </div>
+    <div style="margin-top: 18px; display: flex; justify-content: space-between; align-items: center">
+      <span style="font-size: 12px; color: rgba(247,243,235,0.72)">Je hoeft alleen thuis te zijn.</span>
+      <a href="Klus.dc.html" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(247,243,235,0.3); display: flex; align-items: center; font-size: 12px; letter-spacing: 0.04em; color: #F7F3EB; text-decoration: none">Bekijk</a>
+    </div>
+  </div>
+
+  <a href="APK.dc.html" class="op3" style="margin: 22px 24px 0; padding: 16px 0; border-top: 1px solid #E2DACB; border-bottom: 1px solid #E2DACB; display: flex; align-items: center; gap: 14px; text-decoration: none; color: #333333">
+    <span style="flex: 0 0 auto; width: 52px; height: 52px; border-radius: 14px; background: #0A341E; display: flex; align-items: flex-end; justify-content: center; overflow: hidden">
+      <svg width="40" height="38" viewBox="0 0 40 38" aria-hidden="true"><polygon points="4,38 4,16 20,4 36,16 36,38" fill="#1E4A33"/><rect x="10" y="20" width="7" height="8" fill="#E7C47A"/><rect x="23" y="20" width="7" height="8" fill="#E7C47A" opacity=".6"/></svg>
+    </span>
+    <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 3px">
+      <span style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 16px; color: #0A341E">Goede staat</span>
+      <span style="font-size: 13px; color: #5B5B55">Twee dingen om dit najaar te plannen</span>
+    </span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A341E" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+  </a>
+
+  <div class="op3" style="position: absolute; left: 20px; right: 20px; bottom: 106px">
+    <a href="Melden.dc.html" style="min-height: 56px; border-radius: 999px; background: #0A341E; color: #F7F3EB; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 16px; text-decoration: none">Meld een klus</a>
+  </div>
+
+  <nav aria-label="Hoofdmenu" style="position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 24px 26px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr))">
+    <a href="PremiumC.dc.html" aria-current="page" style="min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 10px; letter-spacing: 0.06em; color: #0A341E; text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Woning</a>
+    <a href="Dossier.dc.html" style="min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 10px; letter-spacing: 0.06em; color: #5B5B55; text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg>Dossier</a>
+    <a href="Klus.dc.html" style="min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 10px; letter-spacing: 0.06em; color: #5B5B55; text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>Klussen</a>
+    <a href="Abonnement.dc.html" style="min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 10px; letter-spacing: 0.06em; color: #5B5B55; text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Account</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

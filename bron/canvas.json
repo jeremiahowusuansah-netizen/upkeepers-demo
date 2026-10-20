@@ -1,0 +1,768 @@
+{
+ "v": 3,
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-10-17T01:20:00Z"
+ },
+ "title": "UPKeepers app prototype",
+ "launch": {
+  "view": "canvas",
+  "page": "welkom"
+ },
+ "pages": [
+  {
+   "id": "ronde1",
+   "name": "Ronde 1 · functioneel"
+  },
+  {
+   "id": "premium",
+   "name": "Ronde 2 · premium"
+  },
+  {
+   "id": "showroom",
+   "name": "Ronde 3 · showroom"
+  },
+  {
+   "id": "mindergroen",
+   "name": "Ronde 4 · minder groen"
+  },
+  {
+   "id": "creme",
+   "name": "Ronde 5 · crème"
+  },
+  {
+   "id": "zand",
+   "name": "Ronde 6 · zand en crème"
+  },
+  {
+   "id": "gaten",
+   "name": "Ronde 7 · de gaten uit de toetslijst"
+  },
+  {
+   "id": "welkom",
+   "name": "Ronde 8 · aanmelden en welkom zonder AI-look"
+  }
+ ],
+ "boards": {
+  "Main.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "1 · Dag één — het dossier is nooit leeg",
+   "is_interactive": true
+  },
+  "Home.dc.html": {
+   "x": 470,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "2 · Startscherm — de woning groot, één handeling",
+   "is_interactive": true
+  },
+  "Dossier.dc.html": {
+   "x": 940,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "3 · Woningdossier — aanwijzen op je eigen huis",
+   "is_interactive": true
+  },
+  "APK.dc.html": {
+   "x": 1410,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "4 · Woning-APK — totaaloordeel, alles zichtbaar, route per punt",
+   "is_interactive": true
+  },
+  "Aanvragen.dc.html": {
+   "x": 1880,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "5 · Klus aanvragen — VERVANGEN door Klus melden (ronde 2)",
+   "is_interactive": true
+  },
+  "Klus.dc.html": {
+   "x": 2350,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "6 · Lopende klus — vier lagen in één scherm",
+   "is_interactive": true
+  },
+  "Goedkeuren.dc.html": {
+   "x": 2820,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "7 · Goedkeuren — de APK-regel schuift",
+   "is_interactive": true
+  },
+  "Abonnement.dc.html": {
+   "x": 3290,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "8 · Abonnement en facturen — doosjes en lijnen",
+   "is_interactive": true
+  },
+  "VakmanAannemen.dc.html": {
+   "x": 0,
+   "y": 1230,
+   "w": 390,
+   "h": 844,
+   "title": "9 · Vakman neemt aan — tabel in vaktaal",
+   "is_interactive": true
+  },
+  "VakmanOpleveren.dc.html": {
+   "x": 470,
+   "y": 1230,
+   "w": 390,
+   "h": 844,
+   "title": "10 · Vakman levert op — spreken, foto, grote knoppen",
+   "is_interactive": true
+  },
+  "Admin.dc.html": {
+   "x": 940,
+   "y": 1230,
+   "w": 1280,
+   "h": 900,
+   "title": "11 · Admin aan de telefoon",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "PremiumA.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "A · Showroom — de woning als object, glas",
+   "page": "premium",
+   "is_interactive": true
+  },
+  "PremiumB.dc.html": {
+   "x": 470,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "B · Redactioneel — beeld tot de rand, haarlijnen",
+   "page": "premium",
+   "is_interactive": true
+  },
+  "PremiumC.dc.html": {
+   "x": 940,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "C · De pas — het volgende bezoek als object",
+   "page": "premium",
+   "is_interactive": true
+  },
+  "Melden.dc.html": {
+   "x": 1530,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Klus melden — de vijf stappen uit prototype v3",
+   "page": "premium",
+   "is_interactive": true
+  },
+  "SWelkom.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "1 · Welkom — dag één",
+   "page": "showroom",
+   "is_interactive": true
+  },
+  "SStart.dc.html": {
+   "x": 470,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "2 · Startscherm",
+   "page": "showroom",
+   "is_interactive": true
+  },
+  "SDossier.dc.html": {
+   "x": 940,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "3 · Woningdossier",
+   "page": "showroom",
+   "is_interactive": true
+  },
+  "SAPK.dc.html": {
+   "x": 1410,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "4 · Woning-APK",
+   "page": "showroom",
+   "is_interactive": true
+  },
+  "SMelden.dc.html": {
+   "x": 1880,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "5 · Klus melden, vijf stappen",
+   "page": "showroom",
+   "is_interactive": true
+  },
+  "SKlus.dc.html": {
+   "x": 2350,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "6 · Lopende klus",
+   "page": "showroom",
+   "is_interactive": true
+  },
+  "SGoedkeuren.dc.html": {
+   "x": 2820,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "7 · Goedkeuren",
+   "page": "showroom",
+   "is_interactive": true
+  },
+  "SAccount.dc.html": {
+   "x": 3290,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "8 · Account en facturen",
+   "page": "showroom",
+   "is_interactive": true
+  },
+  "SVakmanOpdracht.dc.html": {
+   "x": 0,
+   "y": 1230,
+   "w": 390,
+   "h": 844,
+   "title": "9 · Vakman: nieuwe opdracht",
+   "page": "showroom",
+   "is_interactive": true
+  },
+  "SVakmanKlus.dc.html": {
+   "x": 470,
+   "y": 1230,
+   "w": 390,
+   "h": 844,
+   "title": "10 · Vakman: actieve klus en opleveren",
+   "page": "showroom",
+   "is_interactive": true
+  },
+  "SAdmin.dc.html": {
+   "x": 940,
+   "y": 1230,
+   "w": 1280,
+   "h": 900,
+   "title": "11 · Admin aan de telefoon",
+   "page": "showroom",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "V4Gloed.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "1 · Charcoal met groen licht achter de woning",
+   "page": "mindergroen",
+   "is_interactive": true
+  },
+  "V4Charcoal.dc.html": {
+   "x": 470,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "2 · Charcoal, groen alleen in de woning",
+   "page": "mindergroen",
+   "is_interactive": true
+  },
+  "V4Creme.dc.html": {
+   "x": 940,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "3 · Crème, de woning als donker object",
+   "page": "mindergroen",
+   "is_interactive": true
+  },
+  "V5Toon.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "1 · Crème in één toon, donkergroen als inkt",
+   "page": "creme",
+   "is_interactive": true
+  },
+  "V5Charcoal.dc.html": {
+   "x": 470,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "2 · Crème met charcoal als inkt",
+   "page": "creme",
+   "is_interactive": true
+  },
+  "V5TweeTonen.dc.html": {
+   "x": 940,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "3 · Zand en crème, donkergroen als inkt",
+   "page": "creme",
+   "is_interactive": true
+  },
+  "CWelkom.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "1 · Welkom — versie ronde 79 (Gabriella: “wel ook AI-achtig”); drie varianten op Ronde 8",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "CStart.dc.html": {
+   "x": 470,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "2 · Startscherm",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "CDossier.dc.html": {
+   "x": 940,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "3 · Woningdossier",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "CAPK.dc.html": {
+   "x": 1410,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "4 · Woning-APK",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "CMelden.dc.html": {
+   "x": 1880,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "5 · Klus melden, vijf stappen",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "CKlus.dc.html": {
+   "x": 2350,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "6 · Lopende klus",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "CGoedkeuren.dc.html": {
+   "x": 2820,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "7 · Goedkeuren",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "CAccount.dc.html": {
+   "x": 3290,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "8 · Account en facturen",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "CVakmanOpdracht.dc.html": {
+   "x": 0,
+   "y": 1230,
+   "w": 390,
+   "h": 844,
+   "title": "9 · Vakman: nieuwe opdracht",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "CVakmanKlus.dc.html": {
+   "x": 470,
+   "y": 1230,
+   "w": 390,
+   "h": 844,
+   "title": "10 · Vakman: actieve klus en opleveren",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "CAdmin.dc.html": {
+   "x": 940,
+   "y": 1230,
+   "w": 1280,
+   "h": 900,
+   "title": "11 · Admin aan de telefoon",
+   "page": "zand",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "CVakmanWerk.dc.html": {
+   "x": 0,
+   "y": 2460,
+   "w": 390,
+   "h": 844,
+   "title": "12 · Vakman: werkvoorraad",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "CVakmanGeld.dc.html": {
+   "x": 470,
+   "y": 2460,
+   "w": 390,
+   "h": 844,
+   "title": "13 · Vakman: verdiensten",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "CAdminToewijzen.dc.html": {
+   "x": 940,
+   "y": 2460,
+   "w": 1280,
+   "h": 900,
+   "title": "14 · Admin: vakman toewijzen",
+   "page": "zand",
+   "is_interactive": true,
+   "expand": "fill"
+  },
+  "CAdminAPK.dc.html": {
+   "x": 2300,
+   "y": 2460,
+   "w": 1280,
+   "h": 900,
+   "title": "15 · Admin: APK-planning",
+   "page": "zand",
+   "is_interactive": true,
+   "expand": "fill"
+  },
+  "CAdminLeden.dc.html": {
+   "x": 3660,
+   "y": 2460,
+   "w": 1280,
+   "h": 900,
+   "title": "16 · Admin: ledenlijst",
+   "page": "zand",
+   "is_interactive": true,
+   "expand": "fill"
+  },
+  "GInlog.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "1 · Aanmelden: woning, over jou (naam, telefoon, AV), code, Face ID — aangevuld 19-10 uit mei-feedback en Gabriella",
+   "page": "welkom",
+   "is_interactive": true
+  },
+  "GBetalen.dc.html": {
+   "x": 470,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Lidmaatschap en betalen (1278, 982 upgrade)",
+   "page": "gaten",
+   "is_interactive": true
+  },
+  "GMeldingen.dc.html": {
+   "x": 940,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Meldingen in de app (981, smaakkaart ronde 10–11)",
+   "page": "gaten",
+   "is_interactive": true
+  },
+  "GStanden.dc.html": {
+   "x": 1410,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Laden, wachten, fout, leeg (962, 978, 982, 1332)",
+   "page": "gaten",
+   "is_interactive": true
+  },
+  "GToestemming.dc.html": {
+   "x": 1880,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Toestemming camera en microfoon (982)",
+   "page": "gaten",
+   "is_interactive": true
+  },
+  "GOpzeggen.dc.html": {
+   "x": 2350,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "Opzeggen met bevestiging (1323, gevaarlijke acties)",
+   "page": "gaten",
+   "is_interactive": true
+  },
+  "GSpec.dc.html": {
+   "x": 0,
+   "y": 1230,
+   "w": 1280,
+   "h": 1800,
+   "title": "Spec sheet (1021, 993, 1321, 983)",
+   "page": "gaten",
+   "is_interactive": true,
+   "expand": "fill"
+  },
+  "CKlussen.dc.html": {
+   "x": 3760,
+   "y": 0,
+   "w": 390,
+   "h": 844,
+   "title": "9 · Klussen op één plek (PureGym, 19-10)",
+   "page": "zand",
+   "is_interactive": true
+  },
+  "WWelkomA.dc.html": {
+   "w": 390,
+   "h": 844,
+   "is_interactive": true,
+   "page": "welkom",
+   "x": 550,
+   "y": 0,
+   "title": "2A · Welkom als specblad — bouwjaar groot, spec zonder kaarten, 01 02 03"
+  },
+  "WWelkomB.dc.html": {
+   "w": 390,
+   "h": 844,
+   "is_interactive": true,
+   "page": "welkom",
+   "x": 1020,
+   "y": 0,
+   "title": "2B · Welkom, één ding per scherm — 1932, het dak, de grond (tik door)"
+  },
+  "WWelkomC.dc.html": {
+   "w": 390,
+   "h": 844,
+   "is_interactive": true,
+   "page": "welkom",
+   "x": 1490,
+   "y": 0,
+   "title": "2C · Welkom, het perceel van boven — jouw dak tussen de buren"
+  }
+ },
+ "order": [
+  "Main.dc.html",
+  "Home.dc.html",
+  "Dossier.dc.html",
+  "APK.dc.html",
+  "Aanvragen.dc.html",
+  "Klus.dc.html",
+  "Goedkeuren.dc.html",
+  "Abonnement.dc.html",
+  "VakmanAannemen.dc.html",
+  "VakmanOpleveren.dc.html",
+  "Admin.dc.html",
+  "PremiumA.dc.html",
+  "PremiumB.dc.html",
+  "PremiumC.dc.html",
+  "Melden.dc.html",
+  "SWelkom.dc.html",
+  "SStart.dc.html",
+  "SDossier.dc.html",
+  "SAPK.dc.html",
+  "SMelden.dc.html",
+  "SKlus.dc.html",
+  "SGoedkeuren.dc.html",
+  "SAccount.dc.html",
+  "SVakmanOpdracht.dc.html",
+  "SVakmanKlus.dc.html",
+  "SAdmin.dc.html",
+  "V4Gloed.dc.html",
+  "V4Charcoal.dc.html",
+  "V4Creme.dc.html",
+  "V5Toon.dc.html",
+  "V5Charcoal.dc.html",
+  "V5TweeTonen.dc.html",
+  "CWelkom.dc.html",
+  "CStart.dc.html",
+  "CDossier.dc.html",
+  "CAPK.dc.html",
+  "CMelden.dc.html",
+  "CKlus.dc.html",
+  "CGoedkeuren.dc.html",
+  "CAccount.dc.html",
+  "CVakmanOpdracht.dc.html",
+  "CVakmanKlus.dc.html",
+  "CAdmin.dc.html",
+  "CVakmanWerk.dc.html",
+  "CVakmanGeld.dc.html",
+  "CAdminToewijzen.dc.html",
+  "CAdminAPK.dc.html",
+  "CAdminLeden.dc.html",
+  "GInlog.dc.html",
+  "GBetalen.dc.html",
+  "GMeldingen.dc.html",
+  "GStanden.dc.html",
+  "GToestemming.dc.html",
+  "GOpzeggen.dc.html",
+  "GSpec.dc.html",
+  "CKlussen.dc.html"
+ ],
+ "notes": {
+  "rij1": {
+   "x": 0,
+   "y": -280,
+   "text": "Klant-app — beeld, een oordeel bij elke waarde, een zin die zegt wat het betekent",
+   "kind": "title1",
+   "maxW": 3680,
+   "page": "ronde1"
+  },
+  "rij2": {
+   "x": 0,
+   "y": 950,
+   "text": "Vakman en admin — dezelfde bouwstenen, volledig in vaktaal",
+   "kind": "title1",
+   "maxW": 2220,
+   "page": "ronde1"
+  },
+  "uitleg": {
+   "x": 2300,
+   "y": 1230,
+   "w": 420,
+   "text": "Gebouwd op de smaakkaart van 19-09-2026 en DESIGN.md v0.1. Huisstijl generatie 3: donkergroen #0A341E, goud #CBA45C, crème #F7F3EB, charcoal #333333, Montserrat en Nunito Sans.\n\nAlle namen, adressen en bedragen behalve de abonnementsprijs zijn voorbeelddata. Lege fotovlakken zijn plekken voor echte foto's van de eigen woning: geen stockfoto's.\n\nOpen gelaten, en dus niet ontworpen: het monogram (bestanden bij Gabriella), de mono-letter voor register B (B8), de boog als gebaar (B6) en de kleuren voor goed en aandacht (vraag aan Gabriella).",
+   "size": "m",
+   "fill": "gray",
+   "page": "ronde1"
+  },
+  "p2titel": {
+   "x": 0,
+   "y": -280,
+   "text": "Ronde 2 — van Kia naar Audi: drie manieren om het startscherm premium te maken",
+   "kind": "title1",
+   "maxW": 1920,
+   "page": "premium"
+  },
+  "p2kia": {
+   "x": 2010,
+   "y": 0,
+   "w": 440,
+   "text": "Waarom ronde 1 als een Kia las:\n\n1. Alle tekst even zwaar en klein. Geen schaalverschil zoals bij Apple TV 2 en 4.\n2. Witte kaartjes met schaduw op crème. Dat is het standaardbeeld van elke SaaS-app.\n3. Goud als vlak in chips en balkjes. Goud werkt premium als haarlijn, niet als vulling.\n4. Lijntekeningen op de plek van beeld. Dat leest als een wireframe.\n5. Geen diepte en geen materiaal: geen glas, geen licht, geen lagen.\n6. Krappe marges van 16 tot 20 px en te veel dingen per scherm.\n\nDe drie varianten verschillen op compositie en techniek, niet op kleur. Kleur blijft bij Gabriella.",
+   "size": "m",
+   "fill": "gray",
+   "page": "premium"
+  },
+  "s3titel": {
+   "x": 0,
+   "y": -280,
+   "text": "Ronde 3 — showroom: de woning als object, glas, licht",
+   "kind": "title1",
+   "maxW": 3680,
+   "page": "showroom"
+  },
+  "s3rij2": {
+   "x": 0,
+   "y": 950,
+   "text": "Vakman en admin — dezelfde taal, volledig in vaktaal",
+   "kind": "title1",
+   "maxW": 2220,
+   "page": "showroom"
+  },
+  "m4titel": {
+   "x": 0,
+   "y": -280,
+   "text": "Ronde 4 — te groen: drie manieren om het groen terug te brengen tot de woning",
+   "kind": "title1",
+   "maxW": 1330,
+   "page": "mindergroen"
+  },
+  "m4uitleg": {
+   "x": 1420,
+   "y": 0,
+   "w": 400,
+   "text": "Alle drie blijven binnen het brand board van Gabriella: donkergroen, goud, crème en charcoal #333333.\n\nIn ronde 3 leidde donkergroen als achtergrond. Hier is het groen teruggebracht tot de woning zelf, het object. De ruimte eromheen is charcoal (1 en 2) of crème (3).\n\nDe gekozen variant wordt daarna op alle elf schermen doorgevoerd.",
+   "size": "m",
+   "fill": "gray",
+   "page": "mindergroen"
+  },
+  "c5titel": {
+   "x": 0,
+   "y": -280,
+   "text": "Ronde 5 — crème, maar met tinten die bij elkaar horen",
+   "kind": "title1",
+   "maxW": 1330,
+   "page": "creme"
+  },
+  "c5uitleg": {
+   "x": 1420,
+   "y": 0,
+   "w": 400,
+   "text": "Wat er in ronde 4 (crème) niet samenging: koel grijs (#5A5F5B) naast warm crème, bruinig goud (#8A6D32) als tekst, koel wit glas, en een mintgroene stip.\n\nHier komt alles uit één familie: crème #F7F3EB, een donkerdere crème #EFE8DA voor kaarten, donkergroen of charcoal als inkt, en die inkt op 62 % voor bijzaken. Goud alleen nog als haarlijn en stip.",
+   "size": "m",
+   "fill": "gray",
+   "page": "creme"
+  },
+  "z6titel": {
+   "x": 0,
+   "y": -280,
+   "text": "Ronde 6 — de showroom in zand en crème, alle elf schermen",
+   "kind": "title1",
+   "maxW": 4150,
+   "page": "zand"
+  },
+  "z6rij2": {
+   "x": 0,
+   "y": 950,
+   "text": "Vakman en admin — dezelfde taal, volledig in vaktaal",
+   "kind": "title1",
+   "maxW": 2220,
+   "page": "zand"
+  },
+  "z6rij3": {
+   "x": 0,
+   "y": 2180,
+   "text": "De vijf schermen uit prototype v3 die nog ontbraken",
+   "kind": "title1",
+   "maxW": 4940,
+   "page": "zand"
+  },
+  "g7titel": {
+   "x": 0,
+   "y": -280,
+   "text": "Ronde 7 — de gaten uit de toetslijst, met het rijnummer uit Probeersels",
+   "kind": "title1",
+   "maxW": 2740,
+   "page": "gaten"
+  },
+  "g7spec": {
+   "x": 0,
+   "y": 970,
+   "text": "De spec sheet: alles wat genormaliseerd moet zijn voordat er gebouwd wordt",
+   "kind": "title1",
+   "maxW": 1280,
+   "page": "gaten"
+  }
+ },
+ "designSystems": []
+}

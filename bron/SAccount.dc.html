@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Account</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#F7F3EB}a:hover{color:#FFFFFF}
+.op{animation:op 900ms cubic-bezier(.22,.61,.36,1) both}
+.pas{animation:pas 1200ms 100ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes pas{from{opacity:0;transform:perspective(900px) rotateX(14deg) translateY(24px)}to{opacity:1;transform:perspective(900px) rotateX(0)}}
+@media (prefers-reduced-motion:reduce){.op,.pas{animation:none}}
+.lbl{font-size:10px;letter-spacing:0.22em;color:#CBA45C}
+.r{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid rgba(247,243,235,0.1);font-size:14px}
+.r i{font-style:normal;font-size:11px;letter-spacing:0.14em;color:rgba(247,243,235,0.66)}
+.m{display:flex;justify-content:space-between;align-items:center;min-height:52px;border-bottom:1px solid rgba(247,243,235,0.1);font-size:15px;text-decoration:none}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #F7F3EB; font-family: 'Nunito Sans', system-ui, sans-serif; background: radial-gradient(120% 60% at 50% 10%, #164A2E 0%, #0A341E 45%, #051A0E 100%)">
+  <div style="position: absolute; inset: 0 0 104px 0; overflow-y: auto; padding-bottom: 20px">
+    <div class="op" style="padding: 28px 28px 0; display: flex; flex-direction: column; gap: 6px">
+      <span class="lbl" style="font-size: 11px">ACCOUNT</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 34px; letter-spacing: -0.02em">Sanne de Vries</h1>
+    </div>
+
+    <div class="pas" style="margin: 24px 20px 0; padding: 22px; border-radius: 24px; position: relative; overflow: hidden; background: linear-gradient(145deg, rgba(247,243,235,0.16) 0%, rgba(247,243,235,0.05) 60%); border: 1px solid rgba(247,243,235,0.2); backdrop-filter: blur(24px); box-shadow: 0 30px 60px -28px rgba(0,0,0,0.6)">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 0.32em">UPKEEPERS</span>
+        <span class="lbl">LID</span>
+      </div>
+      <div style="margin-top: 34px; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 22px">Kastanjelaan 14</div>
+      <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(247,243,235,0.16); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 9px; letter-spacing: 0.22em; color: rgba(247,243,235,0.6)">LID SINDS</span><span style="font-size: 13px; letter-spacing: 0.08em">MRT 2026</span></span>
+        <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 9px; letter-spacing: 0.22em; color: rgba(247,243,235,0.6)">VOLGENDE APK</span><span style="font-size: 13px; letter-spacing: 0.08em">OKT 2028</span></span>
+      </div>
+    </div>
+
+    <div style="padding: 32px 28px 0; display: flex; flex-direction: column">
+      <span class="lbl">AFGERONDE KLUSSEN</span>
+      <div class="r"><span>Kozijnen geschilderd</span><i>17 OKT</i></div>
+      <div class="r"><span>Woning-APK</span><i>14 OKT</i></div>
+      <div class="r"><span>Kitnaden badkamer</span><i>22 SEP</i></div>
+    </div>
+
+    <div style="padding: 30px 28px 0; display: flex; flex-direction: column">
+      <span class="lbl">FACTUREN</span>
+      <div class="r"><span>Kozijnen geschilderd</span><span style="font-size: 13px; letter-spacing: 0.06em">€ 1.240,00</span></div>
+      <div class="r"><span>Kitnaden badkamer</span><span style="font-size: 13px; letter-spacing: 0.06em">€ 185,00</span></div>
+      <a href="#" class="m" style="color: rgba(247,243,235,0.8)">Alle facturen<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <div style="padding: 30px 28px 0; display: flex; flex-direction: column">
+      <span class="lbl">INSTELLINGEN</span>
+      <a href="#" class="m">Gegevens en woning<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+      <a href="#" class="m">Meldingen<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+      <a href="#" class="m">Betaling<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+      <a href="#" class="m">Lidmaatschap<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <div style="margin: 30px 20px 0; padding: 18px 20px; border-radius: 22px; background: rgba(247,243,235,0.07); border: 1px solid rgba(247,243,235,0.14); display: flex; justify-content: space-between; align-items: center; gap: 12px">
+      <span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 15px">Kom je er niet uit?</span><span style="font-size: 12px; font-weight: 300; color: rgba(247,243,235,0.66)">Werkdagen 08:00 tot 18:00</span></span>
+      <a href="#" style="min-height: 40px; padding: 0 16px; border-radius: 999px; background: #F7F3EB; color: #0A341E; display: flex; align-items: center; font-size: 13px; text-decoration: none">Vraag het ons</a>
+    </div>
+  </div>
+
+  <nav aria-label="Hoofdmenu" style="position: absolute; left: 20px; right: 20px; bottom: 28px; height: 64px; border-radius: 999px; background: rgba(5,26,14,0.6); border: 1px solid rgba(247,243,235,0.12); backdrop-filter: blur(24px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center; padding: 0 6px">
+    <a href="SStart.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; letter-spacing: 0.04em; color: rgba(247,243,235,0.7); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Woning</a>
+    <a href="SDossier.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; letter-spacing: 0.04em; color: rgba(247,243,235,0.7); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg>Dossier</a>
+    <a href="SKlus.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; letter-spacing: 0.04em; color: rgba(247,243,235,0.7); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>Klussen</a>
+    <a href="SAccount.dc.html" aria-current="page" style="height: 52px; border-radius: 999px; background: rgba(247,243,235,0.12); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; letter-spacing: 0.04em; text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Account</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

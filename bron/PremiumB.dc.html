@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Startscherm B, redactioneel</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#123f28}
+.op{animation:op 900ms cubic-bezier(.22,.61,.36,1) both}
+.op2{animation:op 900ms 150ms cubic-bezier(.22,.61,.36,1) both}
+.beeld{animation:beeld 1600ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes beeld{from{transform:scale(1.06)}to{transform:none}}
+.lijn{position:relative}
+.lijn::before{content:"";position:absolute;left:0;top:0;height:1px;width:100%;background:#CBA45C;transform-origin:left;animation:lijn 560ms 400ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes lijn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.op,.op2,.beeld,.lijn::before{animation:none}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; background: #F7F3EB; color: #333333; font-family: 'Nunito Sans', system-ui, sans-serif">
+
+  <div style="position: relative; height: 520px; overflow: hidden; background: #0A341E">
+    <svg class="beeld" width="390" height="520" viewBox="0 0 390 520" role="img" aria-label="Plek voor de foto van je gevel" style="position: absolute; inset: 0">
+      <defs>
+        <linearGradient id="lucht" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#06190E"/><stop offset=".55" stop-color="#1D4A31"/><stop offset="1" stop-color="#3B5C45"/></linearGradient>
+        <linearGradient id="gevel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A3426"/><stop offset="1" stop-color="#0C2216"/></linearGradient>
+        <linearGradient id="gevel2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#132A1D"/><stop offset="1" stop-color="#081A10"/></linearGradient>
+        <linearGradient id="licht" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E3B4"/><stop offset="1" stop-color="#C9A05A"/></linearGradient>
+        <filter id="gl" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+        <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset=".45" stop-color="#051A0E" stop-opacity="0"/><stop offset="1" stop-color="#051A0E" stop-opacity=".92"/></linearGradient>
+      </defs>
+      <rect width="390" height="520" fill="url(#lucht)"/>
+      <polygon points="-20,520 -20,190 40,140 100,190 100,520" fill="url(#gevel2)"/>
+      <polygon points="290,520 290,200 345,150 410,200 410,520" fill="url(#gevel2)"/>
+      <polygon points="80,520 80,170 195,70 310,170 310,520" fill="url(#gevel)"/>
+      <path d="M80 170L195 70L310 170" stroke="#CBA45C" stroke-width="1.2" fill="none" opacity=".8"/>
+      <g opacity=".8" filter="url(#gl)">
+        <rect x="118" y="210" width="50" height="74" fill="#E7C47A"/><rect x="222" y="210" width="50" height="74" fill="#E7C47A"/>
+        <rect x="118" y="330" width="50" height="80" fill="#E7C47A"/><rect x="176" y="120" width="38" height="44" fill="#E7C47A"/>
+      </g>
+      <rect x="118" y="210" width="50" height="74" fill="url(#licht)"/><rect x="222" y="210" width="50" height="74" fill="url(#licht)" opacity=".55"/>
+      <rect x="118" y="330" width="50" height="80" fill="url(#licht)"/><rect x="176" y="120" width="38" height="44" fill="url(#licht)" opacity=".85"/>
+      <path d="M143 210v74M118 247h50M247 210v74M222 247h50M143 330v80M118 370h50M195 120v44" stroke="#0C2216" stroke-width="2"/>
+      <rect x="226" y="326" width="42" height="100" rx="21" fill="#071A0F"/>
+      <rect x="0" y="460" width="390" height="60" fill="#0A1F14"/>
+      <rect width="390" height="520" fill="url(#fade)"/>
+    </svg>
+    <div style="position: absolute; top: 22px; left: 24px; right: 24px; display: flex; justify-content: space-between; align-items: center; color: #F7F3EB">
+      <span style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.32em">UPKEEPERS</span>
+      <span style="font-size: 11px; letter-spacing: 0.06em; padding: 6px 10px; border-radius: 999px; background: rgba(247,243,235,0.12); backdrop-filter: blur(16px)">Plek voor je eigen foto</span>
+    </div>
+    <div class="op" style="position: absolute; left: 24px; right: 24px; bottom: 26px; color: #F7F3EB; display: flex; flex-direction: column; gap: 14px">
+      <span style="align-self: flex-start; font-size: 11px; letter-spacing: 0.2em; padding: 5px 10px; border: 1px solid rgba(203,164,92,0.7); border-radius: 999px; color: #E9CF97">GOEDE STAAT</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 44px; line-height: 1; letter-spacing: -0.025em">Kastanjelaan 14</h1>
+      <span style="font-size: 14px; font-weight: 300; color: rgba(247,243,235,0.78)">Hilversum · 1932 · twee dingen dit najaar</span>
+      <div style="display: flex; gap: 10px; margin-top: 4px">
+        <a href="Melden.dc.html" style="min-height: 52px; padding: 0 26px; border-radius: 999px; background: #F7F3EB; color: #0A341E; display: flex; align-items: center; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 15px; text-decoration: none">Meld een klus</a>
+        <a href="Dossier.dc.html" aria-label="Open je dossier" style="width: 52px; height: 52px; border-radius: 999px; background: rgba(247,243,235,0.14); border: 1px solid rgba(247,243,235,0.2); backdrop-filter: blur(16px); display: flex; align-items: center; justify-content: center; color: #F7F3EB">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="op2" style="padding: 26px 24px 0; display: flex; flex-direction: column">
+    <span style="font-size: 11px; letter-spacing: 0.22em; color: #6B5A2E; padding-bottom: 12px">WAT ER NU SPEELT</span>
+    <a href="Klus.dc.html" class="lijn" style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 16px 0; text-decoration: none; color: #333333">
+      <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 17px; color: #0A341E">Cv-ketel, onderhoud</span><span style="font-size: 13px; color: #5B5B55">Ahmed komt. Geregeld.</span></span>
+      <span style="font-size: 11px; letter-spacing: 0.14em; color: #333333; white-space: nowrap">DO 23 OKT</span>
+    </a>
+    <a href="APK.dc.html" style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 16px 0; border-top: 1px solid #E2DACB; text-decoration: none; color: #333333">
+      <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 17px; color: #0A341E">Dakgoot, schoonmaken</span><span style="font-size: 13px; color: #5B5B55">Na de bladval. Plan het in.</span></span>
+      <span style="font-size: 11px; letter-spacing: 0.14em; color: #333333; white-space: nowrap">NOVEMBER</span>
+    </a>
+  </div>
+
+  <nav aria-label="Hoofdmenu" style="position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 24px 26px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #F7F3EB; border-top: 1px solid #E2DACB">
+    <a href="PremiumB.dc.html" aria-current="page" style="min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 11px; letter-spacing: 0.06em; color: #0A341E; text-decoration: none"><span style="width: 18px; height: 1px; background: #CBA45C"></span>Woning</a>
+    <a href="Dossier.dc.html" style="min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 11px; letter-spacing: 0.06em; color: #5B5B55; text-decoration: none"><span style="width: 18px; height: 1px; background: transparent"></span>Dossier</a>
+    <a href="Klus.dc.html" style="min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 11px; letter-spacing: 0.06em; color: #5B5B55; text-decoration: none"><span style="width: 18px; height: 1px; background: transparent"></span>Klussen</a>
+    <a href="Abonnement.dc.html" style="min-height: 44px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; font-size: 11px; letter-spacing: 0.06em; color: #5B5B55; text-decoration: none"><span style="width: 18px; height: 1px; background: transparent"></span>Account</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Admin, APK-planning</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.lbl{font-size:12px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+.kaart{background:#F7F3EB;border:1px solid rgba(10,52,30,0.08);border-radius:22px}
+.nav a{min-height:40px;display:flex;align-items:center;padding:0 14px;border-radius:999px;font-size:15px;text-decoration:none;color:rgba(10,52,30,0.62)}
+.nav a[aria-current]{background:#F7F3EB;color:#0A341E;border:1px solid rgba(10,52,30,0.1)}
+th{text-align:left;padding:14px 12px 12px 0;font-size:12px;font-weight:400;letter-spacing:0.2em;color:rgba(10,52,30,0.62)}
+td{padding:14px 12px 14px 0;font-size:16px;border-bottom:1px solid rgba(10,52,30,0.08)}
+</style>
+</helmet>
+<div style="min-height: 900px; box-sizing: border-box; background: #ECE5D7; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif">
+  <header style="border-bottom: 1px solid rgba(10,52,30,0.1)">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px">
+      <a href="CAdmin.dc.html" aria-label="Naar de startpagina" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.32em; color: inherit; text-decoration: none">UPKEEPERS <span style="color: rgba(10,52,30,0.62)">· ADMIN</span></a>
+      <nav class="nav" aria-label="Adminmenu" style="display: flex; flex-wrap: wrap; gap: 4px">
+        <a href="CAdmin.dc.html">Klant opzoeken</a>
+        <a href="CAdminToewijzen.dc.html">Toewijzen</a>
+        <a href="CAdminAPK.dc.html" aria-current="page">APK-planning</a>
+        <a href="CAdminLeden.dc.html">Leden</a>
+      </nav>
+      <span style="margin-left: auto; font-size: 15px; color: rgba(10,52,30,0.62)">Lisa · supportdienst</span>
+    </div>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: 28px 24px; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <span class="lbl" style="font-size: 13px">WONING-APK · ELKE TWEE JAAR</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 34px; letter-spacing: -0.02em">APK-planning</h1>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px">
+      <sc-for list="{{tellers}}" as="t" hint-placeholder-count="3">
+        <button type="button" onClick="{{t.pick}}" style="{{t.style}}">
+          <span class="lbl">{{t.naam}}</span>
+          <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 40px; letter-spacing: -0.02em">{{t.aantal}}</span>
+          <span style="font-size: 15px; font-weight: 300; color: rgba(10,52,30,0.72)">{{t.oordeel}}</span>
+        </button>
+      </sc-for>
+    </div>
+
+    <div class="kaart" style="padding: 4px 22px 8px; overflow-x: auto">
+      <table style="width: 100%; min-width: 760px; border-collapse: collapse">
+        <thead>
+          <tr style="border-bottom: 1px solid #CBA45C"><th scope="col">WONING</th><th scope="col">PLAATS</th><th scope="col">VORIGE APK</th><th scope="col">{{kolom}}</th><th scope="col">STAND</th><th scope="col"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Actie</span></th></tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{rijen}}" as="r" hint-placeholder-count="5">
+            <tr>
+              <td>{{r.adres}}</td>
+              <td style="color: rgba(10,52,30,0.72)">{{r.plaats}}</td>
+              <td style="font-size: 14px; letter-spacing: 0.1em">{{r.vorige}}</td>
+              <td style="font-size: 14px; letter-spacing: 0.1em">{{r.wanneer}}</td>
+              <td><span style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px"><span style="{{r.dot}}"></span>{{r.stand}}</span></td>
+              <td style="text-align: right"><a href="CDossier.dc.html" style="min-height: 36px; display: inline-flex; align-items: center; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.16); font-size: 14px; text-decoration: none">Dossier</a></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+    <span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.62)">Kleur is nooit het enige signaal: elke stand heeft een woord. Woningen buiten het dekkingsgebied staan apart, zodat ze niet als gewone achterstand meetellen.</span>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { f: 0 };
+  }
+  renderVals() {
+    const sets = [
+      { naam: 'OPEN', kolom: 'MOET VÓÓR', oordeel: 'Twee wachten langer dan een week', rijen: [
+        { adres: 'Lindenlaan 3', plaats: 'Huizen', vorige: '— (NIEUW LID)', wanneer: '31 OKT', stand: 'Wacht 9 dagen', k: 'aandacht' },
+        { adres: 'Rembrandtweg 41', plaats: 'Amstelveen', vorige: 'NOV 2024', wanneer: '30 NOV', stand: 'Wacht 8 dagen', k: 'aandacht' },
+        { adres: 'Prinsenstraat 12', plaats: 'Amsterdam', vorige: 'DEC 2024', wanneer: '15 DEC', stand: 'Buiten dekking', k: 'buiten' },
+        { adres: 'Brinklaan 77', plaats: 'Bussum', vorige: '— (NIEUW LID)', wanneer: '20 NOV', stand: 'Op tijd', k: 'goed' }
+      ] },
+      { naam: 'GEPLAND', kolom: 'GEPLAND OP', oordeel: 'Allemaal met een vakman en een tijdstip', rijen: [
+        { adres: 'Kastanjelaan 14', plaats: 'Hilversum', vorige: 'OKT 2024', wanneer: 'DI 14 OKT · 13:00', stand: 'Ahmed R.', k: 'goed' },
+        { adres: 'Laren-Noord 8', plaats: 'Laren', vorige: 'OKT 2024', wanneer: 'DO 23 OKT · 09:00', stand: 'Kees V.', k: 'goed' },
+        { adres: 'Vondellaan 120', plaats: 'Amstelveen', vorige: '— (NIEUW LID)', wanneer: 'MA 27 OKT · 10:00', stand: 'Ahmed R.', k: 'goed' }
+      ] },
+      { naam: 'AFGEROND', kolom: 'AFGEROND OP', oordeel: 'Rapport bij de klant, volgende over twee jaar', rijen: [
+        { adres: 'Kastanjelaan 14', plaats: 'Hilversum', vorige: 'OKT 2024', wanneer: '14 OKT', stand: 'Goede staat · 3 aandacht', k: 'goed' },
+        { adres: 'Koningsweg 5', plaats: 'Blaricum', vorige: '— (NIEUW LID)', wanneer: '9 OKT', stand: 'Goede staat · 1 aandacht', k: 'goed' },
+        { adres: 'Esdoornlaan 22', plaats: 'Bussum', vorige: 'SEP 2024', wanneer: '2 OKT', stand: 'Aandacht · 5 punten', k: 'aandacht' }
+      ] }
+    ];
+    const dot = (k) => 'width: 7px; height: 7px; border-radius: 999px; box-sizing: border-box; ' + (k === 'goed' ? 'background: #0A341E' : k === 'aandacht' ? 'background: #CBA45C' : 'border: 1px solid #0A341E');
+    const cur = sets[this.state.f];
+    return {
+      tellers: sets.map((s, i) => ({
+        naam: s.naam, aantal: s.naam === 'OPEN' ? 4 : s.naam === 'GEPLAND' ? 9 : 31, oordeel: s.oordeel,
+        pick: () => this.setState({ f: i }),
+        style: 'display: flex; flex-direction: column; gap: 6px; text-align: left; padding: 18px 20px; border-radius: 22px; cursor: pointer; font-family: inherit; color: #0A341E; transition: background 400ms; ' + (i === this.state.f ? 'background: #F7F3EB; border: 1px solid #0A341E' : 'background: transparent; border: 1px solid rgba(10,52,30,0.12)')
+      })),
+      kolom: cur.kolom,
+      rijen: cur.rijen.map((r) => ({ ...r, dot: dot(r.k) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

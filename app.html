@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#ECE5D7">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>UPKeepers</title>
+<style>
+html,body{margin:0;background:#ECE5D7;-webkit-text-size-adjust:100%}
+*{scrollbar-width:none}
+*::-webkit-scrollbar{display:none;width:0;height:0}
+a,button{-webkit-tap-highlight-color:transparent}
+button{touch-action:manipulation}
+.dc-tel{width:100%!important;max-width:430px!important;height:100vh!important;height:100dvh!important;max-height:none!important;margin:0 auto!important}
+@media (min-width:600px){.dc-tel{max-width:390px!important;max-height:844px!important;margin:24px auto!important;border-radius:36px;box-shadow:0 30px 80px -40px rgba(10,52,30,.45)}}
+.dc-desk{min-width:1280px}
+</style>
+<script>
+  window.UPK = { woningtype: 'tussenwoning' };
+  try { const t = localStorage.getItem('upk-woningtype'); if (t) window.UPK.woningtype = t; } catch (e) {}
+</script>
+</head>
+<body>
+<div id="helmet"></div>
+<div id="app"></div>
+<script>
+  // Altijd de nieuwste versie laden, ook na een update op GitHub Pages.
+  const v = Date.now();
+  document.write('<script src="bundel.js?' + v + '"><\/script><script src="dcplayer.js?' + v + '"><\/script>');
+</script>
+</body>
+</html>

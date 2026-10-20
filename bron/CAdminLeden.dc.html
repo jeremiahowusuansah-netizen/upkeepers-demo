@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Admin, ledenlijst</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.lbl{font-size:12px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+.kaart{background:#F7F3EB;border:1px solid rgba(10,52,30,0.08);border-radius:22px}
+.nav a{min-height:40px;display:flex;align-items:center;padding:0 14px;border-radius:999px;font-size:15px;text-decoration:none;color:rgba(10,52,30,0.62)}
+.nav a[aria-current]{background:#F7F3EB;color:#0A341E;border:1px solid rgba(10,52,30,0.1)}
+th{text-align:left;padding:14px 12px 12px 0;font-size:12px;font-weight:400;letter-spacing:0.2em;color:rgba(10,52,30,0.62)}
+td{padding:14px 12px 14px 0;font-size:16px;border-bottom:1px solid rgba(10,52,30,0.08)}
+</style>
+</helmet>
+<div style="min-height: 900px; box-sizing: border-box; background: #ECE5D7; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif">
+  <header style="border-bottom: 1px solid rgba(10,52,30,0.1)">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px">
+      <a href="CAdmin.dc.html" aria-label="Naar de startpagina" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.32em; color: inherit; text-decoration: none">UPKEEPERS <span style="color: rgba(10,52,30,0.62)">· ADMIN</span></a>
+      <nav class="nav" aria-label="Adminmenu" style="display: flex; flex-wrap: wrap; gap: 4px">
+        <a href="CAdmin.dc.html">Klant opzoeken</a>
+        <a href="CAdminToewijzen.dc.html">Toewijzen</a>
+        <a href="CAdminAPK.dc.html">APK-planning</a>
+        <a href="CAdminLeden.dc.html" aria-current="page">Leden</a>
+      </nav>
+      <span style="margin-left: auto; font-size: 15px; color: rgba(10,52,30,0.62)">Lisa · supportdienst</span>
+    </div>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: 28px 24px; display: flex; flex-direction: column; gap: 22px">
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: stretch">
+      <div class="kaart" style="flex: 2 1 420px; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px">
+        <span class="lbl">TERUGKERENDE OMZET PER MAAND</span>
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 44px; letter-spacing: -0.025em">{{mrr}}</span>
+        <span style="font-size: 15px; font-weight: 300; color: rgba(10,52,30,0.72)">{{mrrUitleg}}</span>
+        <div role="img" aria-label="{{verdelingLabel}}" style="display: flex; gap: 3px; margin-top: 10px; height: 6px">
+          <sc-for list="{{balk}}" as="b" hint-placeholder-count="3"><span style="{{b.style}}"></span></sc-for>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 18px; font-size: 14px; color: rgba(10,52,30,0.72)">
+          <sc-for list="{{balk}}" as="b" hint-placeholder-count="3"><span style="display: flex; align-items: center; gap: 6px"><span style="{{b.dot}}"></span>{{b.legenda}}</span></sc-for>
+        </div>
+      </div>
+      <div class="kaart" style="flex: 1 1 280px; padding: 22px 24px; display: flex; flex-direction: column; gap: 8px; border-color: rgba(203,164,92,0.6)">
+        <span class="lbl">FOUNDING MEMBERS</span>
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 44px; letter-spacing: -0.025em">37 <span style="font-size: 20px; color: rgba(10,52,30,0.62)">van 100</span></span>
+        <div style="height: 2px; background: rgba(10,52,30,0.12); position: relative"><span style="position: absolute; left: 0; top: 0; height: 2px; width: 37%; background: #CBA45C"></span></div>
+        <span style="font-size: 15px; font-weight: 300; line-height: 1.5; color: rgba(10,52,30,0.72)">Op volgorde van aanmelding. Een vrijgekomen plek wordt niet opnieuw uitgegeven.</span>
+      </div>
+    </div>
+
+    <div class="kaart" style="padding: 18px 24px; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 10px">
+        <span class="lbl">MISLUKTE INCASSO · LOOPT VANZELF</span>
+        <span style="font-size: 14px; color: rgba(10,52,30,0.66)">Jij komt pas in actie bij stap 4</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px">
+        <div style="padding: 12px 14px; border-radius: 14px; background: #ECE5D7; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; letter-spacing: 0.14em; color: rgba(10,52,30,0.62)">1 · DAG 0</span><span style="font-size: 15px; line-height: 1.45">Incasso mislukt. Het lid krijgt meteen een vriendelijk bericht met een betaallink.</span></div>
+        <div style="padding: 12px 14px; border-radius: 14px; background: #ECE5D7; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; letter-spacing: 0.14em; color: rgba(10,52,30,0.62)">2 · DAG 5</span><span style="font-size: 15px; line-height: 1.45">Nieuwe poging. Het bericht noemt die datum vooraf.</span></div>
+        <div style="padding: 12px 14px; border-radius: 14px; background: #ECE5D7; display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; letter-spacing: 0.14em; color: rgba(10,52,30,0.62)">3 · DAG 10</span><span style="font-size: 15px; line-height: 1.45">Nog niet betaald: herinnering met dezelfde betaallink.</span></div>
+        <div style="padding: 12px 14px; border-radius: 14px; border: 1px solid rgba(203,164,92,0.6); display: flex; flex-direction: column; gap: 4px"><span style="font-size: 13px; letter-spacing: 0.14em; color: rgba(10,52,30,0.62)">4 · DAG 14</span><span style="font-size: 15px; line-height: 1.45">Komt bij jou op de lijst. Dan bel je zelf.</span></div>
+      </div>
+      <span style="font-size: 13px; font-weight: 300; color: rgba(10,52,30,0.62)">De dagen zijn een voorbeeld en nog niet besloten.</span>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 6px">
+      <sc-for list="{{filters}}" as="f" hint-placeholder-count="4">
+        <button type="button" onClick="{{f.pick}}" style="{{f.style}}">{{f.naam}}</button>
+      </sc-for>
+    </div>
+
+    <div class="kaart" style="padding: 4px 22px 8px; overflow-x: auto">
+      <table style="width: 100%; min-width: 760px; border-collapse: collapse">
+        <thead>
+          <tr style="border-bottom: 1px solid #CBA45C"><th scope="col">LID</th><th scope="col">WONING</th><th scope="col">VORM</th><th scope="col">LID SINDS</th><th scope="col">VOLGENDE APK</th><th scope="col">BETALING</th></tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{leden}}" as="l" hint-placeholder-count="6">
+            <tr>
+              <td>{{l.naam}}</td>
+              <td style="color: rgba(10,52,30,0.72)">{{l.woning}}</td>
+              <td>{{l.vorm}}</td>
+              <td style="font-size: 14px; letter-spacing: 0.1em">{{l.sinds}}</td>
+              <td style="font-size: 14px; letter-spacing: 0.1em">{{l.apk}}</td>
+              <td><span style="display: flex; flex-direction: column; gap: 3px"><span style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px"><span style="{{l.dot}}"></span>{{l.betaling}}</span><span style="padding-left: 15px; font-size: 13px; line-height: 1.45; color: rgba(10,52,30,0.66)">{{l.sub}}</span></span></td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+    <span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.62)">Voorbeelddata. Omzet per maand: maand € 39,95; jaar € 399 gedeeld door 12; Founding Member € 179 per halfjaar gedeeld door 6.</span>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { f: 'Alle' };
+  }
+  renderVals() {
+    const eur = (n) => '€ ' + n.toLocaleString('nl-NL', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    const tiers = [
+      { naam: 'Founding', aantal: 37, perMaand: 179 / 6, kleur: '#CBA45C' },
+      { naam: 'Jaar', aantal: 22, perMaand: 399 / 12, kleur: '#0A341E' },
+      { naam: 'Maand', aantal: 41, perMaand: 39.95, kleur: 'rgba(10,52,30,0.35)' }
+    ];
+    const totaalLeden = tiers.reduce((a, t) => a + t.aantal, 0);
+    const mrr = tiers.reduce((a, t) => a + t.aantal * t.perMaand, 0);
+    const leden = [
+      { naam: 'Sanne de Vries', woning: 'Kastanjelaan 14, Hilversum', vorm: 'Maand', sinds: 'MRT 2026', apk: 'OKT 2028', betaling: 'Op orde', k: 'goed' },
+      { naam: 'Pieter Smit', woning: 'Koningsweg 5, Blaricum', vorm: 'Founding', sinds: 'FEB 2026', apk: 'OKT 2028', betaling: 'Op orde', k: 'goed' },
+      { naam: 'Aïcha Bennani', woning: 'Vondellaan 120, Amstelveen', vorm: 'Jaar', sinds: 'SEP 2026', apk: 'OKT 2026', betaling: 'Op orde', k: 'goed' },
+      { naam: 'Tom van Dijk', woning: 'Esdoornlaan 22, Bussum', vorm: 'Founding', sinds: 'JAN 2026', apk: 'OKT 2028', betaling: 'Incasso mislukt, loopt vanzelf', sub: 'Bericht met betaallink verstuurd 15 okt · nieuwe poging 20 okt', k: 'aandacht' },
+      { naam: 'Mirjam Kok', woning: 'Lindenlaan 3, Huizen', vorm: 'Maand', sinds: 'OKT 2026', apk: 'OKT 2026', betaling: 'Op orde', k: 'goed' },
+      { naam: 'Ruben Hartman', woning: 'Brinklaan 77, Bussum', vorm: 'Jaar', sinds: 'OKT 2026', apk: 'NOV 2026', betaling: 'Eerste betaling 1 nov', k: 'open' }
+    ];
+    const dot = (k) => 'width: 7px; height: 7px; border-radius: 999px; box-sizing: border-box; ' + (k === 'goed' ? 'background: #0A341E' : k === 'aandacht' ? 'background: #CBA45C' : 'border: 1px solid #0A341E');
+    return {
+      mrr: eur(mrr),
+      mrrUitleg: totaalLeden + ' leden, gemiddeld ' + eur(mrr / totaalLeden) + ' per lid per maand',
+      verdelingLabel: tiers.map((t) => t.naam + ' ' + t.aantal).join(', '),
+      balk: tiers.map((t) => ({
+        style: 'flex: ' + t.aantal + ' 1 0; height: 6px; border-radius: 2px; background: ' + t.kleur,
+        dot: 'width: 8px; height: 8px; border-radius: 2px; background: ' + t.kleur,
+        legenda: t.naam + ' · ' + t.aantal + ' · ' + eur(t.aantal * t.perMaand)
+      })),
+      filters: ['Alle', 'Founding', 'Jaar', 'Maand'].map((n) => ({
+        naam: n === 'Alle' ? 'Alle ' + totaalLeden : n + ' ' + tiers.find((t) => t.naam === n).aantal,
+        pick: () => this.setState({ f: n }),
+        style: 'min-height: 40px; padding: 0 16px; border-radius: 999px; cursor: pointer; font-family: inherit; font-size: 15px; ' + (this.state.f === n ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: #F7F3EB; color: #0A341E; border: 1px solid rgba(10,52,30,0.12)')
+      })),
+      leden: leden.filter((l) => this.state.f === 'Alle' || l.vorm === this.state.f).map((l) => ({ ...l, sub: l.sub || '', dot: dot(l.k) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

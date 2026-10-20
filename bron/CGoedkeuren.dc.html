@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Goedkeuren</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.op{animation:op 900ms cubic-bezier(.22,.61,.36,1) both}
+.op2{animation:op 900ms 200ms cubic-bezier(.22,.61,.36,1) both}
+.op3{animation:op 900ms 400ms cubic-bezier(.22,.61,.36,1) both}
+.huis{animation:huis 1400ms cubic-bezier(.22,.61,.36,1) both}
+.aan{animation:aan 1600ms 300ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes huis{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes aan{from{opacity:.15}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.op,.op2,.op3,.huis,.aan{animation:none}}
+.lbl{font-size:12px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif; background: #ECE5D7">
+
+  <sc-if value="{{open}}" hint-placeholder-val="{{ true }}">
+    <div style="position: absolute; inset: 0 0 150px 0; overflow-y: auto">
+      <div style="padding: 18px 16px 0; display: flex; align-items: center; justify-content: space-between">
+        <a href="CKlus.dc.html" aria-label="Terug" style="width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></a>
+        <span style="font-size: 12px; letter-spacing: 0.24em; color: rgba(10,52,30,0.62)">OPGELEVERD 10:40</span>
+        <span style="width: 44px"></span>
+      </div>
+      <div class="op" style="padding: 26px 28px 0; display: flex; flex-direction: column; gap: 10px">
+        <span class="lbl" style="font-size: 13px">KOZIJNEN · ZUIDGEVEL</span>
+        <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 36px; line-height: 1.08; letter-spacing: -0.02em">Bekijk het werk van Marco</h1>
+      </div>
+      <div class="op2" style="margin: 24px 20px 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="position: relative; height: 230px; border-radius: 20px; overflow: hidden"><img src="https://images.unsplash.com/photo-1643010186434-1caefa887166?w=600&amp;h=600&amp;fit=crop&amp;q=70" alt="Kozijn vóór: bladderende verf" style="width: 100%; height: 100%; object-fit: cover; display: block"><span style="position: absolute; left: 10px; bottom: 10px; padding: 4px 10px; border-radius: 999px; background: rgba(247,243,235,0.92); font-size: 14px">Vóór</span></div>
+          <span style="font-size: 12px; letter-spacing: 0.2em; color: rgba(10,52,30,0.62)">DI 14 OKT</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="position: relative; height: 230px; border-radius: 20px; overflow: hidden; outline: 1.5px solid #CBA45C; outline-offset: -1.5px"><img src="https://images.unsplash.com/photo-1695928668952-c3c01a638e1d?w=600&amp;h=600&amp;fit=crop&amp;q=70" alt="Kozijn ná: geschilderd" style="width: 100%; height: 100%; object-fit: cover; display: block"><span style="position: absolute; left: 10px; bottom: 10px; padding: 4px 10px; border-radius: 999px; background: rgba(247,243,235,0.92); font-size: 14px">Ná</span></div>
+          <span style="font-size: 12px; letter-spacing: 0.2em; color: rgba(10,52,30,0.62)">VANDAAG</span>
+        </div>
+      </div>
+      <div class="op2" style="margin: 12px 20px 0; display: flex; flex-direction: column; gap: 8px">
+        <span style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-size: 13px; letter-spacing: 0.2em; color: rgba(10,52,30,0.62)">WAT ER GEBEURD IS</span><span style="display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: rgba(10,52,30,0.62)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></svg>Herkend op de foto's</span></span>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 8px"><div style="display: flex; flex-direction: column; gap: 6px"><img src="https://images.unsplash.com/photo-1705868438193-603fb53546e7?w=400&amp;h=300&amp;fit=crop&amp;q=70" alt="Rot gevonden" style="width: 100%; height: 108px; border-radius: 14px; object-fit: cover; display: block"><span style="display: flex; flex-direction: column; gap: 1px"><span style="font-size: 16px">Rot gevonden</span><span style="font-size: 14px; color: rgba(10,52,30,0.62)">linkerkozijn, onderaan</span></span></div><div style="display: flex; flex-direction: column; gap: 6px"><img src="https://images.unsplash.com/photo-1561297331-a9c00b9c2c44?w=400&amp;h=300&amp;fit=crop&amp;q=70" alt="Geschuurd" style="width: 100%; height: 108px; border-radius: 14px; object-fit: cover; display: block"><span style="display: flex; flex-direction: column; gap: 1px"><span style="font-size: 16px">Geschuurd</span><span style="font-size: 14px; color: rgba(10,52,30,0.62)">oude verf eraf</span></span></div><div style="display: flex; flex-direction: column; gap: 6px"><img src="https://images.unsplash.com/photo-1463082459669-fd1ca1692fea?w=400&amp;h=300&amp;fit=crop&amp;q=70" alt="Hersteld" style="width: 100%; height: 108px; border-radius: 14px; object-fit: cover; display: block"><span style="display: flex; flex-direction: column; gap: 1px"><span style="font-size: 16px">Hersteld</span><span style="font-size: 14px; color: rgba(10,52,30,0.62)">rot vervangen door houtvuller</span></span></div><div style="display: flex; flex-direction: column; gap: 6px"><img src="https://images.unsplash.com/photo-1787068235625-c5798f5b56da?w=400&amp;h=300&amp;fit=crop&amp;q=70" alt="Gegrond en gelakt" style="width: 100%; height: 108px; border-radius: 14px; object-fit: cover; display: block"><span style="display: flex; flex-direction: column; gap: 1px"><span style="font-size: 16px">Gegrond en gelakt</span><span style="font-size: 14px; color: rgba(10,52,30,0.62)">twee lagen</span></span></div></div>
+      </div>
+      <p class="op2" style="margin: 20px 28px 0; font-size: 16px; font-weight: 300; line-height: 1.6; color: rgba(10,52,30,0.62)"><span style="color: #0A341E; font-weight: 600">Marco:</span> “Oude verf geschuurd, twee rotte plekken onderaan het linkerkozijn hersteld, gegrond en twee keer gelakt.”</p>
+      <div class="op3" style="margin: 22px 20px 0; padding: 18px 20px; border-radius: 22px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); display: flex; flex-direction: column; gap: 12px">
+        <span class="lbl">ZO VERANDERT JE DOSSIER</span>
+        <div style="display: flex; justify-content: space-between; align-items: center">
+          <span style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 21px">Kozijnen</span>
+          <span style="display: flex; align-items: center; gap: 10px; font-size: 15px">
+            <span style="display: flex; align-items: center; gap: 6px; color: rgba(10,52,30,0.62)"><span style="width: 6px; height: 6px; border-radius: 999px; background: #CBA45C"></span>Aandacht</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#CBA45C" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 6px; height: 6px; border-radius: 999px; background: #0A341E"></span>Goed</span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div style="position: absolute; left: 20px; right: 20px; bottom: 30px; display: flex; flex-direction: column; gap: 6px">
+      <button type="button" onClick="{{approve}}" style="min-height: 56px; border: 0; border-radius: 999px; background: #0A341E; color: #F7F3EB; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 18px; cursor: pointer">Keur het werk goed</button>
+      <button type="button" onClick="{{naarKlopt}}" style="min-height: 48px; border: 0; background: transparent; color: rgba(10,52,30,0.72); font-family: inherit; font-size: 16px; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: rgba(10,52,30,0.25)">Er klopt iets niet</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{klopt}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; inset: 0 0 120px 0; overflow-y: auto">
+      <div style="padding: 18px 16px 0; display: flex; align-items: center; justify-content: space-between">
+        <button type="button" onClick="{{naarOpen}}" aria-label="Terug" style="width: 44px; height: 44px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); color: #0A341E; cursor: pointer">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <span style="font-size: 12px; letter-spacing: 0.24em; color: rgba(10,52,30,0.62)">KOZIJNEN · ZUIDGEVEL</span>
+        <span style="width: 44px"></span>
+      </div>
+      <div class="op" style="padding: 26px 28px 0; display: flex; flex-direction: column; gap: 10px">
+        <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 32px; line-height: 1.1; letter-spacing: -0.02em">Wat klopt er niet?</h1>
+        <p style="margin: 0; font-size: 16px; font-weight: 300; line-height: 1.5; color: rgba(10,52,30,0.72)">Marco wordt pas betaald als het klopt. Je hoeft het niet met hem uit te praten, dat doen wij.</p>
+      </div>
+      <div class="op2" style="margin: 22px 20px 0; display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{redenen}}" as="r" hint-placeholder-count="4">
+          <button type="button" onClick="{{r.pick}}" style="{{r.style}}"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px">{{r.naam}}</span><span style="font-size: 14px; opacity: 0.72">{{r.hint}}</span></span><span style="{{r.rondje}}"></span></button>
+        </sc-for>
+      </div>
+      <div class="op3" style="margin: 18px 20px 0; display: flex; flex-direction: column; gap: 8px">
+        <span style="padding: 0 4px; font-size: 12px; letter-spacing: 0.2em; color: rgba(10,52,30,0.62)">LAAT HET ZIEN</span>
+        <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px"><button type="button" onClick="{{foto}}" style="{{fotoStijl}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>{{fotoTekst}}</button><button type="button" onClick="{{video}}" style="{{videoStijl}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg>{{videoTekst}}</button><button type="button" onClick="{{spreek}}" style="{{spreekStijl}}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>{{spreekTekst}}</button></div>
+      </div>
+    </div>
+    <div style="position: absolute; left: 20px; right: 20px; bottom: 30px">
+      <button type="button" onClick="{{verstuur}}" style="{{verstuurStyle}}">Meld het aan UPKeepers</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{gemeld}}" hint-placeholder-val="{{ false }}">
+    <div class="op" style="position: absolute; inset: 0; padding: 90px 28px 30px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px">
+      <span class="lbl" style="font-size: 13px">GEMELD · {{redenNaam}}</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 34px; line-height: 1.1; letter-spacing: -0.02em">We bellen je binnen één werkdag</h1>
+      <div style="margin-top: 10px; display: flex; flex-direction: column; border-top: 1px solid #CBA45C">
+        <div style="display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid rgba(10,52,30,0.1); font-size: 16px; line-height: 1.5"><span style="flex: 0 0 auto; width: 22px; color: rgba(10,52,30,0.62)">1</span><span>Wij bekijken je foto's naast die van Marco.</span></div>
+        <div style="display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid rgba(10,52,30,0.1); font-size: 16px; line-height: 1.5"><span style="flex: 0 0 auto; width: 22px; color: rgba(10,52,30,0.62)">2</span><span>We bellen je en spreken samen af hoe het wordt opgelost.</span></div>
+        <div style="display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid rgba(10,52,30,0.1); font-size: 16px; line-height: 1.5"><span style="flex: 0 0 auto; width: 22px; color: rgba(10,52,30,0.62)">3</span><span>Pas als jij het goedkeurt, wordt Marco betaald.</span></div>
+      </div>
+      <div style="margin-top: auto; display: flex; flex-direction: column; gap: 6px">
+        <a href="CStart.dc.html" style="min-height: 56px; border-radius: 999px; background: #0A341E; color: #F7F3EB; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 18px; text-decoration: none">Naar je woning</a>
+        <button type="button" onClick="{{naarOpen}}" style="min-height: 44px; border: 0; background: transparent; color: rgba(10,52,30,0.62); font-family: inherit; font-size: 14px; cursor: pointer">Terug naar vóór goedkeuren (prototype)</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{done}}" hint-placeholder-val="{{ false }}">
+    <svg class="huis" width="300" height="250" viewBox="0 0 320 300" fill="none" aria-hidden="true" style="position: absolute; top: 70px; left: 45px">
+      <defs>
+        <linearGradient id="voor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A5B40"/><stop offset="1" stop-color="#123522"/></linearGradient>
+        <linearGradient id="zij" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0F2C1C"/><stop offset="1" stop-color="#0A2114"/></linearGradient>
+        <linearGradient id="dakR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26362C"/><stop offset="1" stop-color="#141F18"/></linearGradient>
+        <linearGradient id="raam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E3B4"/><stop offset="1" stop-color="#CBA45C"/></linearGradient>
+        <filter id="gloed" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="7"/></filter>
+        <filter id="schaduw" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="12"/></filter>
+      </defs>
+      <ellipse cx="165" cy="292" rx="150" ry="26" fill="#0A341E" opacity=".28" filter="url(#schaduw)"/>
+      <polygon points="60,150 115,105 205,60 150,105" fill="#141F18"/>
+      <polygon points="60,250 60,150 115,105 170,200 170,300" fill="url(#voor)"/>
+      <polygon points="170,200 260,155 260,255 170,300" fill="url(#zij)"/>
+      <polygon points="115,105 170,200 260,155 205,60" fill="url(#dakR)"/>
+      <path d="M115 105L205 60" stroke="#CBA45C" stroke-width="1.2"/>
+      <g class="aan">
+        <g opacity=".8" filter="url(#gloed)"><polygon points="75,182 103,195 103,229 75,216" fill="#E9C77E"/><polygon points="127,206 155,218 155,252 127,240" fill="#E9C77E"/></g>
+        <polygon points="75,182 103,195 103,229 75,216" fill="url(#raam)"/>
+        <polygon points="127,206 155,218 155,252 127,240" fill="url(#raam)"/>
+        <path d="M75 182L103 195L103 229L75 216Z M127 206L155 218L155 252L127 240Z" stroke="#CBA45C" stroke-width="1.5" fill="none"/>
+      </g>
+      <polygon points="190,200 220,185 220,219 190,234" fill="url(#raam)" opacity=".5"/>
+      <polygon points="232,199 250,190 250,258 232,267" fill="#071A0F"/>
+    </svg>
+    <div class="op2" style="position: absolute; top: 340px; left: 28px; right: 28px; display: flex; flex-direction: column; gap: 10px; text-align: center; align-items: center">
+      <span class="lbl" style="font-size: 13px">GOEDGEKEURD · 10:52</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 36px; line-height: 1.08; letter-spacing: -0.02em">Je kozijnen zijn weer goed</h1>
+      <p style="margin: 0; font-size: 17px; font-weight: 300; line-height: 1.5; color: rgba(10,52,30,0.62)">Het hout is beschermd tegen vocht. Marco krijgt nu zijn betaling.</p>
+    </div>
+    <div class="op3" style="position: absolute; left: 20px; right: 20px; top: 520px; padding: 6px 20px; border-radius: 22px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); backdrop-filter: blur(24px)">
+      <div style="display: flex; justify-content: space-between; padding: 13px 0; border-bottom: 1px solid rgba(10,52,30,0.1); font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.62)">Dit jaar afgerond</span><span>4 klussen</span></div>
+      <div style="display: flex; justify-content: space-between; padding: 13px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.62)">Naar goed</span><span>Dak, kozijnen</span></div>
+    </div>
+    <div style="position: absolute; left: 20px; right: 20px; bottom: 30px; display: flex; flex-direction: column; gap: 6px">
+      <a href="CDossier.dc.html" style="min-height: 56px; border-radius: 999px; background: #0A341E; color: #F7F3EB; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 18px; text-decoration: none">Bekijk je dossier</a>
+      <button type="button" onClick="{{reset}}" style="min-height: 44px; border: 0; background: transparent; color: rgba(10,52,30,0.62); font-family: inherit; font-size: 14px; cursor: pointer">Terug naar vóór goedkeuren (prototype)</button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { view: 'open', reden: -1 };
+  }
+  renderVals() {
+    const laatZien = (n) => 'min-height: 84px; border-radius: 18px; font-family: inherit; font-size: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; cursor: pointer; transition: background 250ms, color 250ms; ' + (n ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: #F7F3EB; color: #0A341E; border: 1px solid rgba(10,52,30,0.1)');
+    const st = this.state;
+    const R = [
+      ['Het is niet af', 'Er is een stuk overgeslagen'],
+      ['Er is iets beschadigd', 'Aan je huis of je spullen'],
+      ['Anders dan afgesproken', 'Kleur, plek of aanpak'],
+      ['Iets anders', 'Vertel het in je eigen woorden']
+    ];
+    return {
+      foto: () => this.setState({ nFoto: (st.nFoto || 0) + 1 }),
+      video: () => this.setState({ nVideo: (st.nVideo || 0) + 1 }),
+      spreek: () => this.setState({ nSpreek: (st.nSpreek || 0) + 1 }),
+      fotoTekst: st.nFoto ? st.nFoto + (st.nFoto === 1 ? ' foto' : " foto's") : 'Foto',
+      videoTekst: st.nVideo ? st.nVideo + (st.nVideo === 1 ? ' video' : " video's") : 'Video',
+      spreekTekst: st.nSpreek ? st.nSpreek + ' opname' + (st.nSpreek === 1 ? '' : 's') : 'Inspreken',
+      fotoStijl: laatZien(st.nFoto), videoStijl: laatZien(st.nVideo), spreekStijl: laatZien(st.nSpreek),
+      open: st.view === 'open', klopt: st.view === 'klopt', gemeld: st.view === 'gemeld', done: st.view === 'done',
+      approve: () => this.setState({ view: 'done' }),
+      reset: () => this.setState({ view: 'open', reden: -1 }),
+      naarKlopt: () => this.setState({ view: 'klopt' }),
+      naarOpen: () => this.setState({ view: 'open', reden: -1 }),
+      redenen: R.map((r, i) => {
+        const on = st.reden === i;
+        return {
+          naam: r[0], hint: r[1],
+          pick: () => this.setState({ reden: i }),
+          style: 'min-height: 64px; padding: 0 16px; border-radius: 16px; cursor: pointer; font-family: inherit; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 12px; transition: background 300ms, color 300ms; ' + (on ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: #F7F3EB; color: #0A341E; border: 1px solid rgba(10,52,30,0.1)'),
+          rondje: 'flex: 0 0 auto; width: 18px; height: 18px; border-radius: 999px; box-sizing: border-box; ' + (on ? 'border: 5px solid #F7F3EB' : 'border: 1px solid rgba(10,52,30,0.3)')
+        };
+      }),
+      redenNaam: st.reden >= 0 ? R[st.reden][0].toUpperCase() : '',
+      verstuur: () => { if (st.reden >= 0) this.setState({ view: 'gemeld' }); },
+      verstuurStyle: 'width: 100%; min-height: 56px; border: 0; border-radius: 999px; font-family: \'Montserrat\', sans-serif; font-weight: 500; font-size: 18px; transition: opacity 300ms; ' + (st.reden >= 0 ? 'background: #0A341E; color: #F7F3EB; cursor: pointer' : 'background: rgba(10,52,30,0.12); color: rgba(10,52,30,0.5); cursor: default')
+    };
+  }
+}
+</script>
+</body>
+</html>

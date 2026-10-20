@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Welkom</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.op{animation:op 900ms cubic-bezier(.22,.61,.36,1) both}
+.op2{animation:op 900ms 150ms cubic-bezier(.22,.61,.36,1) both}
+.huis{animation:huis 1400ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes huis{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.op,.op2,.huis{animation:none}}
+.rij{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid rgba(10,52,30,0.08)}
+.ic{flex:0 0 auto;width:36px;height:36px;border-radius:10px;background:#ECE5D7;display:flex;align-items:center;justify-content:center}
+.bron{font-size:11px;letter-spacing:0.18em;color:rgba(10,52,30,0.55);white-space:nowrap;margin-left:auto;padding-top:3px}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif; background: #ECE5D7">
+  <div style="position: absolute; inset: 0 0 156px 0; overflow-y: auto; padding-bottom: 16px">
+    <div style="padding: 22px 24px 0; display: flex; justify-content: center">
+      <a href="CStart.dc.html" aria-label="Naar de startpagina" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.32em; color: inherit; text-decoration: none">UPKEEPERS</a>
+    </div>
+    <svg class="huis" width="200" height="168" viewBox="0 0 320 300" fill="none" role="img" aria-label="Jouw woning" style="display: block; margin: 8px auto 0">
+      <defs>
+        <linearGradient id="voor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A5B40"/><stop offset="1" stop-color="#123522"/></linearGradient>
+        <linearGradient id="zij" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0F2C1C"/><stop offset="1" stop-color="#0A2114"/></linearGradient>
+        <linearGradient id="dakR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26362C"/><stop offset="1" stop-color="#141F18"/></linearGradient>
+        <linearGradient id="raam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E3B4"/><stop offset="1" stop-color="#CBA45C"/></linearGradient>
+        <filter id="schaduw" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="12"/></filter>
+      </defs>
+      <ellipse cx="165" cy="292" rx="150" ry="26" fill="#0A341E" opacity=".28" filter="url(#schaduw)"/>
+      <polygon points="60,150 115,105 205,60 150,105" fill="#141F18"/>
+      <polygon points="60,250 60,150 115,105 170,200 170,300" fill="url(#voor)"/>
+      <polygon points="170,200 260,155 260,255 170,300" fill="url(#zij)"/>
+      <polygon points="115,105 170,200 260,155 205,60" fill="url(#dakR)"/>
+      <path d="M115 105L205 60" stroke="#CBA45C" stroke-width="1.2"/>
+      <polygon points="75,182 103,195 103,229 75,216" fill="url(#raam)"/>
+      <polygon points="127,206 155,218 155,252 127,240" fill="url(#raam)"/>
+      <polygon points="190,200 220,185 220,219 190,234" fill="url(#raam)"/>
+      <polygon points="232,199 250,190 250,258 232,267" fill="#071A0F"/>
+    </svg>
+
+    <div class="op" style="padding: 18px 28px 0; display: flex; flex-direction: column; gap: 8px; text-align: center; align-items: center">
+      <span style="font-size: 13px; letter-spacing: 0.24em; color: rgba(10,52,30,0.62)">KASTANJELAAN 14 · HILVERSUM</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 32px; line-height: 1.1; letter-spacing: -0.02em">Welkom thuis, Sanne.</h1>
+      <p style="margin: 0; font-size: 16px; font-weight: 300; line-height: 1.5; color: rgba(10,52,30,0.72)">Dit weten we al over je huis, uit openbare bronnen. Klopt iets niet, tik het dan aan.</p>
+    </div>
+
+    <div class="op2" style="margin: 20px 16px 0; padding: 2px 18px; border-radius: 22px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.06)">
+      <div class="rij"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 11l9-7 9 7v9H3z"/></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px">Gebouwd in 1932</span><span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.7)">Houten kozijnen en vloeren vragen hier vaker aandacht</span></span><span class="bron">BAG</span></div>
+      <div class="rij"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 4h16v16H4zM4 12h16M12 4v16"/></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px">Tussenwoning, 142 m²</span><span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.7)">Twee lagen en een zolder</span></span><span class="bron">BAG</span></div>
+      <div class="rij"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M2 14L12 5l10 9M6 12v8h12v-8"/></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px">Zadeldak met pannen, 9 m hoog</span><span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.7)">Goot en pannen hebben elk jaar een blik nodig</span></span><span class="bron">3D BAG</span></div>
+      <div class="rij"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px">Energielabel C</span><span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.7)">Gemiddeld voor dit bouwjaar, winst bij het dak</span></span><span class="bron">EP-ONLINE</span></div>
+      <div class="rij"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 20h18M5 20V9h14v11M8 13h2M14 13h2"/></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px">Fundering: let op</span><span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.7)">Woningen uit deze buurt en tijd staan vaak op houten palen. We kijken er bij de APK naar</span></span><span class="bron">FUNDERINGSVIEWER</span></div>
+      <div class="rij"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 3c3 4 5 6.5 5 9a5 5 0 0 1-10 0c0-2.5 2-5 5-9z"/></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px">Wateroverlast bij hevige regen: klein</span><span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.7)">Een schone goot en afvoer houden het zo</span></span><span class="bron">KLIMAATEFFECTATLAS</span></div>
+      <div class="rij" style="border-bottom: 0"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></svg></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px">Zuidkant van het dak: geschikt voor zonnepanelen</span><span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.7)">Een kans, geen klus</span></span><span class="bron">ZONATLAS</span></div>
+    </div>
+    <p style="margin: 12px 28px 0; font-size: 13px; line-height: 1.5; color: rgba(10,52,30,0.55)">Voorbeelddata. Geen monument; perceel 168 m². WOZ-waarde laten we weg tot er een besluit is.</p>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 20px 26px; background: #ECE5D7; border-top: 1px solid rgba(10,52,30,0.06); display: flex; flex-direction: column; gap: 6px; align-items: center">
+    <a href="CMelden.dc.html?klus=apk" style="width: 100%; min-height: 56px; border-radius: 999px; background: #2F5D45; color: #F7F3EB; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 18px; text-decoration: none">Plan je Woning-APK</a>
+    <span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.66); text-align: center">Een vakman loopt je hele huis na. Daarna weet je wat er speelt.</span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

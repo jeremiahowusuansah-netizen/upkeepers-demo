@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Laden, wachten, fout en leeg</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.lbl{font-size:12px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+.sk{background:linear-gradient(90deg,#E2DACB 0%,#EFE8DA 50%,#E2DACB 100%);background-size:200% 100%;animation:sk 1600ms ease-in-out infinite;border-radius:10px}
+@keyframes sk{from{background-position:100% 0}to{background-position:-100% 0}}
+.loop{position:relative;overflow:hidden;height:2px;background:rgba(10,52,30,0.12);border-radius:2px}
+.loop::after{content:"";position:absolute;top:0;left:-40%;width:40%;height:2px;background:#0A341E;animation:loop 1400ms cubic-bezier(.22,.61,.36,1) infinite}
+@keyframes loop{to{left:100%}}
+@media (prefers-reduced-motion:reduce){.sk,.loop::after{animation:none}}
+.knop{min-height:52px;border:0;border-radius:999px;background:#0A341E;color:#F7F3EB;font-family:'Montserrat',sans-serif;font-weight:500;font-size:17px;cursor:pointer}
+.knop2{min-height:52px;border-radius:999px;background:#F7F3EB;border:1px solid rgba(10,52,30,0.14);color:#0A341E;font-family:inherit;font-size:16px;cursor:pointer}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif; background: #ECE5D7">
+  <div style="padding: 20px 16px 0">
+    <div role="tablist" aria-label="Toestand" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 999px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.08)">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+        <button type="button" role="tab" aria-selected="{{t.aan}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.naam}}</button>
+      </sc-for>
+    </div>
+  </div>
+
+  <sc-if value="{{laden}}" hint-placeholder-val="{{ true }}">
+    <div style="padding: 26px 24px 0; display: flex; flex-direction: column; gap: 14px" aria-busy="true" aria-label="Je dossier wordt geladen">
+      <span class="lbl">LADEN · HET DOSSIER</span>
+      <span class="sk" style="width: 60%; height: 30px"></span>
+      <span class="sk" style="width: 100%; height: 230px; border-radius: 22px"></span>
+      <span class="sk" style="width: 100%; height: 130px; border-radius: 22px"></span>
+      <span class="sk" style="width: 70%; height: 16px"></span>
+      <span class="sk" style="width: 85%; height: 16px"></span>
+      <span style="margin-top: 6px; font-size: 14px; color: rgba(10,52,30,0.62)">Het skelet heeft dezelfde vorm als het scherm dat komt, zodat er niets verspringt.</span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{wachten}}" hint-placeholder-val="{{ false }}">
+    <div style="padding: 60px 28px 0; display: flex; flex-direction: column; gap: 22px">
+      <span class="lbl">WACHTEN MET EEN ZIN</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 30px; line-height: 1.15; letter-spacing: -0.02em">We zoeken je woning op</h1>
+      <div class="loop" role="progressbar" aria-label="Bezig"></div>
+      <div style="display: flex; flex-direction: column">
+        <div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(10,52,30,0.1); font-size: 17px"><span>Adres en bouwjaar</span><span style="font-size: 14px; color: rgba(10,52,30,0.62)">Gevonden in BAG</span></div>
+        <div style="display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(10,52,30,0.1); font-size: 17px"><span>Perceel en eigendom</span><span style="font-size: 14px">Kadaster…</span></div>
+        <div style="display: flex; justify-content: space-between; padding: 14px 0; font-size: 17px; color: rgba(10,52,30,0.5)"><span>Energielabel</span><span style="font-size: 14px">Hierna</span></div>
+      </div>
+      <span style="font-size: 14px; line-height: 1.5; color: rgba(10,52,30,0.62)">Nooit een teller die oploopt. Wel een zin die zegt wat er gebeurt.</span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{fout}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; top: 76px; left: 16px; right: 16px; padding: 12px 16px; border-radius: 16px; background: #0A341E; color: #F7F3EB; display: flex; justify-content: space-between; align-items: center; gap: 10px; box-shadow: 0 12px 30px -16px rgba(0,0,0,0.3)" role="status">
+      <span style="font-size: 16px">Geen verbinding. Je melding staat klaar.</span>
+      <span style="font-size: 14px; color: rgba(247,243,235,0.7)">Toast</span>
+    </div>
+    <div style="padding: 120px 28px 0; display: flex; flex-direction: column; gap: 18px">
+      <span class="lbl">FOUT, MET EEN WEG TERUG</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 30px; line-height: 1.15; letter-spacing: -0.02em">Je melding is nog niet verstuurd</h1>
+      <p style="margin: 0; font-size: 17px; font-weight: 300; line-height: 1.55; color: rgba(10,52,30,0.8)">Je telefoon heeft geen verbinding. Alles wat je invulde, ook de foto, is bewaard op je telefoon. Zodra je weer verbinding hebt, kun je hem versturen.</p>
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px">
+        <button type="button" class="knop">Probeer opnieuw</button>
+        <button type="button" class="knop2">Bewaar en verstuur later</button>
+      </div>
+      <span style="font-size: 14px; line-height: 1.5; color: rgba(10,52,30,0.62)">Geen foutcode op het scherm. Wat er mis is, waarom, en wat je nu kunt doen.</span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{leeg}}" hint-placeholder-val="{{ false }}">
+    <div style="padding: 26px 24px 0; display: flex; flex-direction: column; gap: 18px">
+      <label style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 16px; border-radius: 999px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.12)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Zoek in je dossier</span>
+        <input type="search" value="vloerverwarming" style="flex: 1; min-width: 0; border: 0; background: transparent; font-family: inherit; font-size: 17px; color: #0A341E; outline: none">
+      </label>
+      <span class="lbl">GEEN RESULTATEN</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 28px; line-height: 1.15; letter-spacing: -0.02em">Geen vloerverwarming in je dossier</h1>
+      <p style="margin: 0; font-size: 17px; font-weight: 300; line-height: 1.55; color: rgba(10,52,30,0.8)">Bij de Woning-APK is die niet gevonden. Misschien heet het anders, of is het later aangelegd.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <button type="button" class="knop2" style="min-height: 40px; padding: 0 14px; font-size: 15px">Verwarming</button>
+        <button type="button" class="knop2" style="min-height: 40px; padding: 0 14px; font-size: 15px">Cv-ketel</button>
+        <button type="button" class="knop2" style="min-height: 40px; padding: 0 14px; font-size: 15px">Vloeren</button>
+      </div>
+      <a href="CMelden.dc.html" class="knop" style="display: flex; align-items: center; justify-content: center; text-decoration: none; margin-top: 8px">Meld het met een foto</a>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { t: 0 };
+  }
+  renderVals() {
+    const namen = ['Laden', 'Wachten', 'Fout', 'Leeg'];
+    return {
+      laden: this.state.t === 0, wachten: this.state.t === 1, fout: this.state.t === 2, leeg: this.state.t === 3,
+      tabs: namen.map((n, i) => ({
+        naam: n, aan: i === this.state.t ? 'true' : 'false',
+        pick: () => this.setState({ t: i }),
+        style: 'min-height: 40px; border-radius: 999px; border: 0; cursor: pointer; font-family: inherit; font-size: 15px; transition: background 300ms, color 300ms; ' + (i === this.state.t ? 'background: #0A341E; color: #F7F3EB' : 'background: transparent; color: #0A341E')
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

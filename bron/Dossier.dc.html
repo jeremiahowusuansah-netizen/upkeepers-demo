@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Woningdossier</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&amp;family=Nunito+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.lijn{position:relative}
+.lijn::after{content:"";position:absolute;left:18px;right:18px;bottom:0;height:2px;background:#CBA45C;transform-origin:left;animation:lijn 560ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes lijn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.lijn::after{animation:none}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; background: #F7F3EB; color: #333333; font-family: 'Nunito Sans', system-ui, sans-serif; display: flex; flex-direction: column; overflow: hidden">
+  <div style="flex: 1 1 auto; overflow-y: auto">
+    <div style="padding: 20px 20px 10px; display: flex; flex-direction: column; gap: 4px">
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A2E">KASTANJELAAN 14 · BOUWJAAR 1932</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 24px; color: #0A341E">Je woningdossier</h1>
+      <p style="margin: 2px 0 0; font-size: 14px; color: #5B5B55; line-height: 1.45">Tik een punt aan op je huis om te zien wat het is.</p>
+    </div>
+
+    <div style="position: relative; margin: 6px 16px 0; height: 250px; border-radius: 18px; background: #0A341E; overflow: hidden">
+      <svg width="358" height="250" viewBox="0 0 358 250" fill="none" aria-hidden="true" style="position: absolute; inset: 0">
+        <path d="M70 236V108L179 24l109 84v128" stroke="#F7F3EB" stroke-opacity=".7" stroke-width="2"/>
+        <path d="M52 122L179 20l127 102" stroke="#CBA45C" stroke-width="2"/>
+        <path d="M70 172h218M70 108h218" stroke="#F7F3EB" stroke-opacity=".3" stroke-dasharray="4 5"/>
+        <rect x="96" y="124" width="40" height="36" stroke="#F7F3EB" stroke-opacity=".55" stroke-width="1.5"/>
+        <rect x="222" y="124" width="40" height="36" stroke="#F7F3EB" stroke-opacity=".55" stroke-width="1.5"/>
+        <rect x="104" y="188" width="44" height="32" stroke="#F7F3EB" stroke-opacity=".35" stroke-width="1.2"/>
+        <rect x="236" y="184" width="22" height="34" rx="3" stroke="#F7F3EB" stroke-opacity=".55" stroke-width="1.2"/>
+        <path d="M40 236h278" stroke="#F7F3EB" stroke-opacity=".5" stroke-width="2"/>
+        <path d="M296 116h18v6h-18" stroke="#F7F3EB" stroke-opacity=".55" stroke-width="1.5"/>
+      </svg>
+      <sc-for list="{{parts}}" as="p" hint-placeholder-count="6">
+        <button type="button" onClick="{{p.pick}}" aria-label="{{p.naam}}" style="{{p.markerStyle}}">{{p.nr}}</button>
+      </sc-for>
+      <span style="position: absolute; right: 12px; bottom: 10px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: #F7F3EB; opacity: 0.75">DOORSNEDE · VOORBEELD</span>
+    </div>
+
+    <div class="lijn" style="margin: 14px 16px 0; padding: 16px 18px 18px; background: #FFFFFF; border-radius: 16px; box-shadow: 0 1px 2px rgba(10,52,30,0.08); display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+        <div style="display: flex; flex-direction: column; gap: 2px">
+          <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: #6B5A2E">PUNT {{sel.nr}} · {{sel.plek}}</span>
+          <span style="font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 19px; color: #0A341E">{{sel.naam}}</span>
+        </div>
+        <span style="{{sel.chipStyle}}">{{sel.oordeel}}</span>
+      </div>
+      <p style="margin: 0; font-size: 14px; line-height: 1.5"><strong>Wat het is: </strong>{{sel.watIs}}</p>
+      <p style="margin: 0; font-size: 14px; line-height: 1.5; color: #5B5B55">{{sel.zin}}</p>
+      <div style="height: 120px; border-radius: 12px; background: #E8E1D2; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #5B5B55">Foto van dit onderdeel in jouw huis</div>
+    </div>
+
+    <div style="padding: 22px 16px 24px; display: flex; flex-direction: column; gap: 12px">
+      <h2 style="margin: 0 4px; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px; color: #0A341E">Alle onderdelen</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <sc-for list="{{parts}}" as="p" hint-placeholder-count="6">
+          <button type="button" onClick="{{p.pick}}" style="{{p.cardStyle}}">
+            <span style="height: 74px; border-radius: 10px; background: #E8E1D2; display: flex; align-items: flex-start; justify-content: flex-start; padding: 8px; box-sizing: border-box">
+              <span style="width: 22px; height: 22px; border-radius: 999px; background: #0A341E; color: #F7F3EB; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center">{{p.nr}}</span>
+            </span>
+            <span style="font-weight: 700; font-size: 14px; color: #333333">{{p.naam}}</span>
+            <span style="font-size: 12px; line-height: 1.35; color: #5B5B55">{{p.kort}}</span>
+            <span style="{{p.chipStyle}}">{{p.oordeel}}</span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <nav aria-label="Hoofdmenu" style="flex: 0 0 auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 8px 8px 22px; background: #F7F3EB; border-top: 1px solid #E2DACB">
+    <a href="Home.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 44px; justify-content: center; text-decoration: none; color: #5B5B55; font-size: 11px; font-weight: 600">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Woning</a>
+    <a href="Dossier.dc.html" aria-current="page" style="display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 44px; justify-content: center; text-decoration: none; color: #0A341E; font-size: 11px; font-weight: 700">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5M8 13h8M8 17h6"/></svg>Dossier</a>
+    <a href="Klus.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 44px; justify-content: center; text-decoration: none; color: #5B5B55; font-size: 11px; font-weight: 600">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>Klussen</a>
+    <a href="Abonnement.dc.html" style="display: flex; flex-direction: column; align-items: center; gap: 4px; min-height: 44px; justify-content: center; text-decoration: none; color: #5B5B55; font-size: 11px; font-weight: 600">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Account</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { picked: 2 };
+  }
+  renderVals() {
+    const data = [
+      { nr: 1, naam: 'Dakpannen', plek: 'DAK', x: 132, y: 58, oordeel: 'Goed', kort: 'De buitenkant van je dak', watIs: 'de pannen die je huis droog houden.', zin: 'Liggen recht en zijn heel. Volgende controle over twee jaar.' },
+      { nr: 2, naam: 'Dakgoot', plek: 'DAKRAND', x: 300, y: 106, oordeel: 'Aandacht', kort: 'Vangt regenwater op', watIs: 'de bak langs de dakrand die het regenwater naar de afvoer leidt.', zin: 'Er ligt blad in. Schoonmaken in november voorkomt lekkage langs de gevel.' },
+      { nr: 3, naam: 'Kozijnen', plek: 'GEVEL', x: 112, y: 128, oordeel: 'Aandacht', kort: 'De houten ramen', watIs: 'het houten frame om je ramen.', zin: 'De verf bladdert aan de zuidkant. Schilderen binnen een jaar houdt het hout gezond.' },
+      { nr: 4, naam: 'Cv-ketel', plek: 'ZOLDER', x: 179, y: 82, oordeel: 'Goed', kort: 'Verwarming en warm water', watIs: 'het toestel dat je huis verwarmt en je water warm maakt.', zin: 'Onderhoud staat gepland op 23 oktober. Daarna weer een jaar vooruit.' },
+      { nr: 5, naam: 'Meterkast', plek: 'HAL', x: 247, y: 196, oordeel: 'Goed', kort: 'Stroom en gas komen binnen', watIs: 'de kast waar stroom, gas en water je huis binnenkomen.', zin: 'Zes groepen met aardlekschakelaar. Genoeg voor een inductiekookplaat.' },
+      { nr: 6, naam: 'Kruipruimte', plek: 'ONDER DE VLOER', x: 126, y: 206, oordeel: 'Goed', kort: 'De ruimte onder je vloer', watIs: 'de lage ruimte onder de begane grond, waar leidingen lopen.', zin: 'Droog en goed geventileerd. Geen houtrot aan de balken.' }
+    ];
+    const chip = (o) => o === 'Goed'
+      ? 'align-self: flex-start; font-size: 12px; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: #E3EBDD; color: #0A341E; white-space: nowrap'
+      : 'align-self: flex-start; font-size: 12px; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: #F3E6C8; color: #5A4313; white-space: nowrap';
+    const parts = data.map((p) => {
+      const on = this.state.picked === p.nr;
+      return {
+        ...p,
+        chipStyle: chip(p.oordeel),
+        pick: () => this.setState({ picked: p.nr }),
+        markerStyle: 'position: absolute; left: ' + (p.x - 22) + 'px; top: ' + (p.y - 22) + 'px; width: 44px; height: 44px; border: 0; padding: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; font-family: inherit; font-size: 12px; font-weight: 700; color: ' + (on ? '#0A341E' : '#F7F3EB') + '; background-image: radial-gradient(circle, ' + (on ? '#CBA45C' : 'rgba(10,52,30,0.9)') + ' 0 13px, ' + (on ? 'rgba(203,164,92,0.35)' : '#CBA45C') + ' 13px 15px, transparent 15px)',
+        cardStyle: 'display: flex; flex-direction: column; gap: 6px; text-align: left; padding: 8px 8px 12px; border-radius: 14px; background: #FFFFFF; cursor: pointer; font-family: inherit; border: ' + (on ? '2px solid #0A341E' : '2px solid transparent') + '; box-shadow: 0 1px 2px rgba(10,52,30,0.08)'
+      };
+    });
+    const sel = parts.find((p) => p.nr === this.state.picked) || parts[0];
+    return { parts, sel };
+  }
+}
+</script>
+</body>
+</html>

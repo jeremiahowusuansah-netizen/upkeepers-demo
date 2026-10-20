@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Woningdossier</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.op{animation:op 900ms cubic-bezier(.22,.61,.36,1) both}
+.huis{animation:huis 1400ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes huis{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.kaart{transition:opacity 500ms cubic-bezier(.22,.61,.36,1)}
+.lbl{font-size:13px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+.knop{min-height:48px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:17px;text-decoration:none}
+@media (prefers-reduced-motion:reduce){.op,.huis{animation:none}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif; background: #ECE5D7">
+  <div style="position: absolute; inset: 0 0 104px 0; overflow-y: auto">
+    <div class="op" style="padding: 22px 24px 0; display: flex; justify-content: space-between; align-items: flex-start">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span class="lbl">WONINGDOSSIER</span>
+        <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 30px; letter-spacing: -0.02em">Kastanjelaan 14</h1>
+      </div>
+      <a href="CAPK.dc.html" style="margin-top: 4px; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); font-size: 15px; text-decoration: none"><span style="width: 6px; height: 6px; border-radius: 999px; background: #0A341E"></span>Goede staat</a>
+    </div>
+    <div class="op" style="margin: 16px 24px 0">
+      <div role="tablist" aria-label="Kant van je huis" style="display: inline-flex; padding: 3px; border-radius: 999px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1)">
+        <button type="button" role="tab" aria-selected="{{buiten}}" onClick="{{naarBuiten}}" style="{{tabBuiten}}">Buiten</button>
+        <button type="button" role="tab" aria-selected="{{binnen}}" onClick="{{naarBinnen}}" style="{{tabBinnen}}">Binnen</button>
+      </div>
+    </div>
+
+    <sc-if value="{{buiten}}" hint-placeholder-val="{{ true }}">
+    <div style="position: relative; height: 330px; margin-top: 4px">
+      <svg class="huis" width="390" height="366" viewBox="0 0 320 300" fill="none" aria-hidden="true" style="position: absolute; top: -10px; left: 0">
+        <defs>
+          <linearGradient id="voor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A5B40"/><stop offset="1" stop-color="#123522"/></linearGradient>
+          <linearGradient id="zij" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0F2C1C"/><stop offset="1" stop-color="#0A2114"/></linearGradient>
+          <linearGradient id="dakL" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1C2A22"/><stop offset="1" stop-color="#101A14"/></linearGradient>
+          <linearGradient id="dakR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26362C"/><stop offset="1" stop-color="#141F18"/></linearGradient>
+          <linearGradient id="raam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E3B4"/><stop offset="1" stop-color="#CBA45C"/></linearGradient>
+          <filter id="schaduw" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="12"/></filter>
+        </defs>
+        <ellipse cx="165" cy="292" rx="150" ry="26" fill="#0A341E" opacity=".28" filter="url(#schaduw)"/>
+        <polygon points="60,150 115,105 205,60 150,105" fill="url(#dakL)"/>
+        <polygon points="60,250 60,150 115,105 170,200 170,300" fill="url(#voor)"/>
+        <polygon points="170,200 260,155 260,255 170,300" fill="url(#zij)"/>
+        <polygon points="115,105 170,200 260,155 205,60" fill="url(#dakR)"/>
+        <path d="M115 105L205 60" stroke="#CBA45C" stroke-width="1.2" opacity=".9"/>
+        <polygon points="75,182 103,195 103,229 75,216" fill="url(#raam)" opacity=".55"/>
+        <polygon points="127,206 155,218 155,252 127,240" fill="url(#raam)" opacity=".55"/>
+        <polygon points="105,140 125,149 125,170 105,161" fill="url(#raam)" opacity=".45"/>
+        <polygon points="190,200 220,185 220,219 190,234" fill="url(#raam)" opacity=".55"/>
+        <polygon points="232,199 250,190 250,258 232,267" fill="#071A0F"/>
+      </svg>
+      <sc-for list="{{punten}}" as="p" hint-placeholder-count="3">
+        <button type="button" onClick="{{p.pick}}" aria-label="{{p.naam}}" style="{{p.markerStyle}}"><span style="{{p.dotStyle}}">{{p.nr}}</span></button>
+      </sc-for>
+    </div>
+    <div style="margin: 0 20px; padding: 20px; border-radius: 22px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px">
+        <span class="lbl">{{sel.plek}}</span>
+        <span style="display: flex; align-items: center; gap: 8px; font-size: 16px"><span style="{{sel.statusDot}}"></span>{{sel.oordeel}}</span>
+      </div>
+      <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 28px; letter-spacing: -0.01em">{{sel.naam}}</span>
+      <p style="margin: 0; font-size: 17px; font-weight: 300; line-height: 1.5; color: rgba(10,52,30,0.66)">{{sel.watIs}}</p>
+      <p style="margin: 0; padding-top: 12px; border-top: 1px solid rgba(10,52,30,0.1); font-size: 17px; line-height: 1.5">{{sel.zin}}</p>
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 15px; color: rgba(10,52,30,0.66)">
+        <span>Laatst bekeken: {{sel.datum}}</span>
+        <span style="display: inline-flex; align-items: center; gap: 5px"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>UPKeepers</span>
+      </div>
+      <sc-if value="{{sel.heeftKlus}}" hint-placeholder-val="{{ true }}"><a href="{{sel.planHref}}" class="knop" style="background: #2F5D45; color: #F7F3EB">Plan {{sel.naamKlein}} in</a></sc-if>
+      <a href="{{sel.meldHref}}" class="knop" style="border: 1px solid rgba(10,52,30,0.18)">{{sel.meldTekst}}</a>
+    </div>
+    <div style="padding: 30px 24px 12px; display: flex; flex-direction: column">
+      <span class="lbl" style="padding-bottom: 6px">BUITEN · GEVEL EN DAK</span>
+      <sc-for list="{{punten}}" as="p" hint-placeholder-count="3">
+        <button type="button" onClick="{{p.pick}}" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 64px; padding: 0; border: 0; border-bottom: 1px solid rgba(10,52,30,0.1); background: transparent; color: #0A341E; font-family: inherit; text-align: left; cursor: pointer">
+          <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 18px">{{p.naam}}</span><span style="font-size: 15px; font-weight: 300; color: rgba(10,52,30,0.62)">{{p.mee}}</span></span>
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 15px; color: rgba(10,52,30,0.7)"><span style="{{p.statusDot}}"></span>{{p.oordeel}}</span>
+        </button>
+      </sc-for>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{binnen}}" hint-placeholder-val="{{ false }}">
+    <div style="position: relative; height: 350px; margin-top: 0">
+<svg class="huis" width="390" height="366" viewBox="0 0 320 300" fill="none" aria-hidden="true" style="position: absolute; top: -10px; left: 0">
+        <path d="M40 122L160 42l120 80" stroke="#0A341E" stroke-width="1.6" stroke-linejoin="round"/>
+        <path d="M60 110L160 52l100 58v8H60z" fill="#E4DCCB"/>
+        <rect x="60" y="118" width="200" height="66" fill="#F7F3EB"/>
+        <rect x="60" y="186" width="200" height="64" fill="#F2ECE0"/>
+        <rect x="60" y="252" width="200" height="30" fill="#DCD3C1"/>
+        <path d="M60 110v172M260 110v172M60 118h200M60 186h200M60 252h200M60 282h200" stroke="#0A341E" stroke-width="1.6"/>
+        <path d="M20 252h40M260 252h40" stroke="#0A341E" stroke-width="1" stroke-dasharray="3 4" opacity=".5"/>
+        <path d="M160 186v64M160 118v66" stroke="#0A341E" stroke-width="1" opacity=".35"/>
+        <path d="M150 52L160 46l10 6" stroke="#CBA45C" stroke-width="1.2"/>
+        <text x="68" y="104" font-family="Nunito Sans, sans-serif" font-size="9.5" letter-spacing="1.2" fill="#0A341E" opacity=".6">ZOLDER</text>
+        <text x="68" y="130" font-family="Nunito Sans, sans-serif" font-size="9.5" letter-spacing="1.2" fill="#0A341E" opacity=".6">1E VERDIEPING</text>
+        <text x="68" y="198" font-family="Nunito Sans, sans-serif" font-size="9.5" letter-spacing="1.2" fill="#0A341E" opacity=".6">BEGANE GROND</text>
+        <text x="68" y="264" font-family="Nunito Sans, sans-serif" font-size="9.5" letter-spacing="1.2" fill="#0A341E" opacity=".6">KRUIPRUIMTE</text>
+      </svg>
+      <sc-for list="{{verdiepingen}}" as="v" hint-placeholder-count="4">
+        <button type="button" onClick="{{v.pick}}" aria-label="{{v.naam}}" aria-pressed="{{v.aan}}" style="{{v.style}}"></button>
+      </sc-for>
+    </div>
+    <div class="op" style="padding: 0 20px; display: flex; flex-direction: column; gap: 12px">
+      <span class="lbl" style="padding: 0 4px">{{vKop}}</span>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <sc-for list="{{kamers}}" as="k" hint-placeholder-count="4">
+          <button type="button" onClick="{{k.pick}}" style="{{k.style}}"><span style="font-size: 18px">{{k.naam}}</span><span style="display: flex; align-items: center; gap: 7px; font-size: 15px; opacity: 0.8"><span style="{{k.dot}}"></span>{{k.stand}}</span></button>
+        </sc-for>
+      </div>
+      <div style="margin-top: 6px; border-radius: 22px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); padding: 6px 18px">
+        <span class="lbl" style="display: block; padding: 14px 0 4px">{{kamerKop}}</span>
+        <sc-for list="{{items}}" as="it" hint-placeholder-count="3">
+          <div style="border-top: 1px solid rgba(10,52,30,0.1)">
+            <button type="button" onClick="{{it.pick}}" aria-expanded="{{it.open}}" style="width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 64px; padding: 8px 0; border: 0; background: transparent; color: #0A341E; font-family: inherit; text-align: left; cursor: pointer">
+              <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 18px">{{it.naam}}</span><span style="font-size: 15px; font-weight: 300; color: rgba(10,52,30,0.62)">{{it.mee}}</span></span>
+              <span style="display: flex; align-items: center; gap: 8px; font-size: 15px"><span style="{{it.statusDot}}"></span>{{it.oordeel}}</span>
+            </button>
+            <sc-if value="{{it.open}}" hint-placeholder-val="{{ false }}">
+              <div class="op" style="display: flex; flex-direction: column; gap: 10px; padding: 0 0 16px">
+                <p style="margin: 0; font-size: 17px; font-weight: 300; line-height: 1.5; color: rgba(10,52,30,0.66)">{{it.watIs}}</p>
+                <p style="margin: 0; font-size: 17px; line-height: 1.5">{{it.zin}}</p>
+                <span style="font-size: 15px; color: rgba(10,52,30,0.62)">Laatst bekeken: {{it.datum}}</span>
+                <sc-if value="{{it.heeftKlus}}" hint-placeholder-val="{{ false }}"><a href="{{it.planHref}}" class="knop" style="background: #2F5D45; color: #F7F3EB">Plan {{it.naamKlein}} in</a></sc-if>
+                <a href="{{it.meldHref}}" class="knop" style="border: 1px solid rgba(10,52,30,0.18)">{{it.meldTekst}}</a>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="height: 24px"></div>
+    </sc-if>
+  </div>
+
+  <nav aria-label="Hoofdmenu" style="position: absolute; left: 16px; right: 16px; bottom: 26px; height: 64px; border-radius: 999px; background: rgba(247,243,235,0.94); border: 1px solid rgba(10,52,30,0.1); backdrop-filter: blur(24px); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center; padding: 0 6px">
+    <a href="CStart.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: rgba(10,52,30,0.62); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Woning</a>
+    <a href="CDossier.dc.html" aria-current="page" style="height: 52px; border-radius: 999px; background: rgba(10,52,30,0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg>Dossier</a>
+    <a href="CMelden.dc.html" aria-label="Meld een klus" style="justify-self: center; align-self: start; margin-top: -16px; width: 50px; height: 50px; border-radius: 999px; background: #2F5D45; color: #F7F3EB; border: 3px solid #ECE5D7; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 8px 18px -12px rgba(0,0,0,0.35)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a>
+    <a href="CKlussen.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: rgba(10,52,30,0.62); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>Klussen</a>
+    <a href="CAccount.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: rgba(10,52,30,0.62); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Account</a>
+    <span style="position: absolute; left: 50%; bottom: 7px; transform: translateX(-50%); font-size: 12px; pointer-events: none">Melden</span>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { kant: 'buiten', picked: 2, verdieping: 1, kamer: 0, open: 'Kitnaden' };
+  }
+  renderVals() {
+    const st = this.state;
+    const k = 390 / 320;
+    const dot = (o) => 'flex: 0 0 auto; width: 7px; height: 7px; border-radius: 999px; background: ' + (o === 'Goed' ? '#0A341E' : '#CBA45C');
+    const meld = (ruimte, it) => 'CMelden.dc.html?ruimte=' + encodeURIComponent(ruimte) + '&element=' + encodeURIComponent(it.type) + '&naam=' + encodeURIComponent(it.naam);
+    const klein = (n) => n === 'Cv-ketel' ? 'de cv-ketel' : 'de ' + n.toLowerCase();
+    const verrijk = (ruimte, it) => ({
+      ...it,
+      statusDot: dot(it.oordeel),
+      naamKlein: klein(it.naam),
+      heeftKlus: !!it.klus,
+      planHref: it.klus ? 'CMelden.dc.html?klus=' + it.klus : '',
+      meldHref: meld(ruimte, it),
+      meldTekst: it.klus ? 'Iets anders melden' : 'Meld iets over ' + klein(it.naam)
+    });
+    const BUITEN = [
+      { id: 1, naam: 'Dakpannen', type: 'Dak', plek: 'DAK', x: 160, y: 92, oordeel: 'Goed', mee: 'Gaat nog ± 15 jaar mee', datum: '14 okt 2026, APK', watIs: 'De pannen die je huis droog houden.', zin: 'Liggen recht en zijn heel. Volgende controle in 2028.' },
+      { id: 2, naam: 'Dakgoot', type: 'Dakgoot', plek: 'DAKRAND', x: 222, y: 176, oordeel: 'Aandacht', mee: 'Schoonmaken in november', datum: '14 okt 2026, APK', klus: 'dakgoot', watIs: 'De bak langs de dakrand die het regenwater afvoert.', zin: 'Er ligt blad in. Schoonmaken voorkomt water langs de gevel.' },
+      { id: 3, naam: 'Kozijnen', type: 'Raam of kozijn', plek: 'GEVEL', x: 89, y: 206, oordeel: 'Aandacht', mee: 'Schilderen binnen een jaar', datum: '14 okt 2026, APK', klus: 'kozijnen', watIs: 'Het houten frame om je ramen.', zin: 'De verf bladdert aan de zuidkant. Schilderen houdt het hout gezond.' }
+    ];
+    const punten = BUITEN.map((p, i) => {
+      const on = st.picked === p.id;
+      return {
+        ...verrijk('Gevel en dak', p),
+        nr: i + 1,
+        pick: () => this.setState({ picked: p.id }),
+        markerStyle: 'position: absolute; left: ' + Math.round(p.x * k - 22) + 'px; top: ' + Math.round(p.y * k - 32) + 'px; width: 44px; height: 44px; border: 0; padding: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center',
+        dotStyle: 'width: 30px; height: 30px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-family: inherit; font-size: 15px; transition: background 400ms, color 400ms; ' + (on ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: rgba(247,243,235,0.94); color: #0A341E; border: 1px solid rgba(203,164,92,0.8)')
+      };
+    });
+    const sel = punten.find((p) => p.id === st.picked) || punten[0];
+    const V = Component.BINNEN;
+    const v = V[st.verdieping];
+    const kamer = v.kamers[st.kamer] || v.kamers[0];
+    const tab = (on) => 'min-height: 40px; padding: 0 20px; border: 0; border-radius: 999px; cursor: pointer; font-family: inherit; font-size: 16px; transition: background 400ms, color 400ms; ' + (on ? 'background: #0A341E; color: #F7F3EB' : 'background: transparent; color: #0A341E');
+    return {
+      buiten: st.kant === 'buiten', binnen: st.kant === 'binnen',
+      tabBuiten: tab(st.kant === 'buiten'), tabBinnen: tab(st.kant === 'binnen'),
+      naarBuiten: () => this.setState({ kant: 'buiten' }),
+      naarBinnen: () => this.setState({ kant: 'binnen' }),
+      punten, sel,
+      verdiepingen: V.map((x, i) => ({
+        naam: x.naam, aan: i === st.verdieping,
+        pick: () => this.setState({ verdieping: i, kamer: 0, open: '' }),
+        style: 'position: absolute; left: ' + Math.round(60 * k) + 'px; width: ' + Math.round(200 * k) + 'px; top: ' + Math.round(x.y * k - 10) + 'px; height: ' + Math.round(x.h * k) + 'px; padding: 0; cursor: pointer; border-radius: 4px; transition: background 300ms, border-color 300ms; ' + (i === st.verdieping ? 'background: rgba(203,164,92,0.22); border: 1.5px solid #CBA45C' : 'background: transparent; border: 1.5px solid transparent')
+      })),
+      vKop: v.naam.toUpperCase() + ' · ' + v.kamers.length + (v.kamers.length === 1 ? ' RUIMTE' : ' RUIMTES'),
+      kamers: v.kamers.map((km, i) => {
+        const aandacht = km.items.filter((it) => it.oordeel !== 'Goed').length;
+        const on = i === st.kamer;
+        return {
+          naam: km.naam,
+          stand: aandacht ? aandacht + ' punt aandacht' : 'Alles goed',
+          dot: dot(aandacht ? 'Aandacht' : 'Goed') + (on && !aandacht ? '; background: #F7F3EB' : ''),
+          pick: () => this.setState({ kamer: i, open: '' }),
+          style: 'min-height: 76px; padding: 12px 14px; border-radius: 18px; cursor: pointer; font-family: inherit; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; text-align: left; transition: background 300ms, color 300ms; ' + (on ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: #F7F3EB; color: #0A341E; border: 1px solid ' + (aandacht ? 'rgba(203,164,92,0.8)' : 'rgba(10,52,30,0.1)'))
+        };
+      }),
+      kamerKop: kamer.naam.toUpperCase(),
+      items: kamer.items.map((it) => ({
+        ...verrijk(kamer.ruimte, it),
+        open: st.open === it.naam,
+        pick: () => this.setState({ open: st.open === it.naam ? '' : it.naam })
+      }))
+    };
+  }
+}
+Component.BINNEN = [
+  { naam: 'Zolder', y: 52, h: 66, kamers: [
+    { naam: 'Zolder', ruimte: 'Zolder', items: [
+      { naam: 'Cv-ketel', type: 'Verwarming', oordeel: 'Goed', mee: 'Gaat nog ± 5 jaar mee', datum: '23 okt 2025, onderhoud', watIs: 'Het toestel dat je huis verwarmt en je water warm maakt.', zin: 'Onderhoud staat op 23 oktober.' },
+      { naam: 'Dakraam', type: 'Raam of kozijn', oordeel: 'Goed', mee: 'Gaat nog ± 12 jaar mee', datum: '14 okt 2026, APK', watIs: 'Het raam in het schuine dak.', zin: 'Sluit goed, geen sporen van lekkage.' }
+    ] },
+    { naam: 'Wasruimte', ruimte: 'Zolder', items: [
+      { naam: 'Wasmachinekraan', type: 'Kraan', oordeel: 'Goed', mee: 'Gaat nog 10+ jaar mee', datum: '14 okt 2026, APK', watIs: 'De kraan waar de wasmachine op zit.', zin: 'Droog, met een keerklep.' },
+      { naam: 'Afvoer', type: 'Afvoer', oordeel: 'Goed', mee: 'Gaat nog 20+ jaar mee', datum: '14 okt 2026, APK', watIs: 'De buis waar het water van de wasmachine heen gaat.', zin: 'Loopt goed door.' }
+    ] }
+  ] },
+  { naam: '1e verdieping', y: 118, h: 66, kamers: [
+    { naam: 'Badkamer', ruimte: 'Badkamer', items: [
+      { naam: 'Kitnaden', type: 'Tegels en kit', oordeel: 'Aandacht', mee: 'Vervangen binnen 3 maanden', datum: '14 okt 2026, APK', klus: 'kitnaden', watIs: 'De rubberen randen langs bad, douche en tegels die het water tegenhouden.', zin: 'Bij de douche laat de kit los. Nieuwe kit voorkomt vocht achter de tegels.' },
+      { naam: 'Kranen', type: 'Kraan', oordeel: 'Goed', mee: 'Gaat nog 10+ jaar mee', datum: 'mrt 2026, vervangen', watIs: 'Kraan van wastafel en douche.', zin: 'In maart vervangen door Ahmed.' },
+      { naam: 'Ventilatie', type: 'Ventilatie', oordeel: 'Goed', mee: 'Gaat nog ± 8 jaar mee', datum: '14 okt 2026, APK', watIs: 'Het rooster dat vocht naar buiten zuigt.', zin: 'Trekt goed, rooster is schoon.' },
+      { naam: 'Afvoer douche', type: 'Afvoer', oordeel: 'Goed', mee: 'Gaat nog 20+ jaar mee', datum: '14 okt 2026, APK', watIs: 'Het putje in de douche.', zin: 'Loopt goed weg.' }
+    ] },
+    { naam: 'Slaapkamer', ruimte: 'Slaapkamer', items: [
+      { naam: 'Raam en kozijn', type: 'Raam of kozijn', oordeel: 'Goed', mee: 'Gaat nog ± 10 jaar mee', datum: '14 okt 2026, APK', watIs: 'Het raam aan de achterkant.', zin: 'Sluit goed, geen tocht.' },
+      { naam: 'Radiator', type: 'Verwarming', oordeel: 'Goed', mee: 'Gaat nog 15+ jaar mee', datum: '14 okt 2026, APK', watIs: 'De verwarming onder het raam.', zin: 'Wordt overal warm.' }
+    ] },
+    { naam: 'Kinderkamer', ruimte: 'Kinderkamer', items: [
+      { naam: 'Radiator', type: 'Verwarming', oordeel: 'Goed', mee: 'Gaat nog 15+ jaar mee', datum: '14 okt 2026, APK', watIs: 'De verwarming naast de deur.', zin: 'Wordt overal warm.' },
+      { naam: 'Stopcontacten', type: 'Stopcontact of licht', oordeel: 'Goed', mee: 'Gaat nog 20+ jaar mee', datum: '14 okt 2026, APK', watIs: 'Alle stopcontacten in de kamer.', zin: 'Met kinderbeveiliging.' }
+    ] },
+    { naam: 'Overloop', ruimte: 'Gang', items: [
+      { naam: 'Rookmelder', type: 'Rookmelder', oordeel: 'Goed', mee: 'Gaat nog ± 4 jaar mee', datum: '3 nov 2025, getest', klus: 'rookmelders', watIs: 'De melder aan het plafond bij de trap.', zin: 'Werkt. Elk najaar testen.' }
+    ] }
+  ] },
+  { naam: 'Begane grond', y: 186, h: 64, kamers: [
+    { naam: 'Woonkamer', ruimte: 'Woonkamer', items: [
+      { naam: 'Radiatoren', type: 'Verwarming', oordeel: 'Goed', mee: 'Gaat nog 15+ jaar mee', datum: '14 okt 2026, APK', watIs: 'De twee radiatoren onder de ramen.', zin: 'Worden overal warm.' },
+      { naam: 'Vloer', type: 'Vloer', oordeel: 'Goed', mee: 'Gaat nog 20+ jaar mee', datum: '14 okt 2026, APK', watIs: 'Houten vloer op balken.', zin: 'Vlak, kraakt niet.' }
+    ] },
+    { naam: 'Keuken', ruimte: 'Keuken', items: [
+      { naam: 'Kraan', type: 'Kraan', oordeel: 'Goed', mee: 'Gaat nog ± 8 jaar mee', datum: '14 okt 2026, APK', watIs: 'De kraan boven het aanrecht.', zin: 'Druppelt niet.' },
+      { naam: 'Kookplaat', type: 'Kookplaat', oordeel: 'Goed', mee: 'Gaat nog ± 10 jaar mee', datum: '14 okt 2026, APK', watIs: 'Inductie, op een eigen groep.', zin: 'Werkt op alle zones.' },
+      { naam: 'Afzuigkap', type: 'Afzuigkap', oordeel: 'Goed', mee: 'Gaat nog ± 6 jaar mee', datum: '14 okt 2026, APK', watIs: 'Boven de kookplaat.', zin: 'Filter is in juni vervangen.' }
+    ] },
+    { naam: 'Gang', ruimte: 'Gang', items: [
+      { naam: 'Meterkast', type: 'Stopcontact of licht', oordeel: 'Goed', mee: 'Gaat nog 20+ jaar mee', datum: '14 okt 2026, APK', watIs: 'De kast waar stroom, gas en water binnenkomen.', zin: 'Zes groepen met aardlekschakelaar.' },
+      { naam: 'Hoofdkraan', type: 'Kraan', oordeel: 'Goed', mee: 'Gaat nog 20+ jaar mee', datum: '14 okt 2026, APK', watIs: 'Hiermee zet je al het water in huis dicht.', zin: 'In de meterkast, links onder. Draait soepel.' },
+      { naam: 'Rookmelder', type: 'Rookmelder', oordeel: 'Goed', mee: 'Gaat nog ± 4 jaar mee', datum: '3 nov 2025, getest', klus: 'rookmelders', watIs: 'De melder bij de voordeur.', zin: 'Werkt. Elk najaar testen.' }
+    ] },
+    { naam: 'Toilet', ruimte: 'WC', items: [
+      { naam: 'Toilet', type: 'Toilet', oordeel: 'Goed', mee: 'Gaat nog 15+ jaar mee', datum: '14 okt 2026, APK', watIs: 'Hangtoilet met inbouwreservoir.', zin: 'Loopt niet door.' }
+    ] }
+  ] },
+  { naam: 'Kruipruimte', y: 252, h: 30, kamers: [
+    { naam: 'Kruipruimte', ruimte: 'Kruipruimte', items: [
+      { naam: 'Balken', type: 'Vloer', oordeel: 'Goed', mee: 'Blijft goed zolang het droog is', datum: '14 okt 2026, APK', watIs: 'De houten balken onder de begane grond.', zin: 'Droog, geen houtrot.' },
+      { naam: 'Leidingen', type: 'Kraan', oordeel: 'Goed', mee: 'Gaat nog 25+ jaar mee', datum: '14 okt 2026, APK', watIs: 'Water- en gasleidingen onder de vloer.', zin: 'Koper, geen lekkage.' }
+    ] }
+  ] }
+];
+</script>
+</body>
+</html>

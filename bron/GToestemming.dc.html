@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Toestemming camera en microfoon</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.op{animation:op 900ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.op{animation:none}}
+.lbl{font-size:12px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+.knop{min-height:60px;border:0;border-radius:999px;background:#0A341E;color:#F7F3EB;font-family:'Montserrat',sans-serif;font-weight:500;font-size:18px;cursor:pointer;transition:transform 120ms}
+.knop:active{transform:scale(.98)}.knop:focus-visible{outline:2px solid #CBA45C;outline-offset:3px}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif; background: #ECE5D7">
+  <div style="position: absolute; inset: 0 0 150px 0; overflow-y: auto; padding: 24px 24px 20px; box-sizing: border-box">
+    <a href="CVakmanWerk.dc.html" aria-label="Naar de startpagina" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 0.32em; color: inherit; text-decoration: none">UPKEEPERS <span style="color: rgba(10,52,30,0.62)">· VAKMAN</span></a>
+    <div class="op" style="margin-top: 34px; display: flex; flex-direction: column; gap: 10px">
+      <span class="lbl" style="font-size: 13px">VOORDAT JE OPLEVERT</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 32px; line-height: 1.12; letter-spacing: -0.02em">Fotograferen en inspreken, zonder te typen</h1>
+      <p style="margin: 4px 0 0; font-size: 17px; font-weight: 300; line-height: 1.55; color: rgba(10,52,30,0.8)">Je telefoon vraagt zo om toestemming. Dit is waarvoor.</p>
+    </div>
+
+    <div style="margin-top: 26px; display: flex; flex-direction: column; gap: 10px">
+      <sc-for list="{{rechten}}" as="r" hint-placeholder-count="2">
+        <div style="padding: 18px 20px; border-radius: 22px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.08); display: flex; gap: 14px; align-items: flex-start">
+          <span style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.14); display: flex; align-items: center; justify-content: center">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="{{r.icon}}"/></svg>
+          </span>
+          <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 4px">
+            <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><span style="font-size: 18px">{{r.naam}}</span><span style="display: flex; align-items: center; gap: 6px; font-size: 14px; color: rgba(10,52,30,0.72)"><span style="{{r.dot}}"></span>{{r.stand}}</span></span>
+            <span style="font-size: 15px; font-weight: 300; line-height: 1.5; color: rgba(10,52,30,0.78)">{{r.waarom}}</span>
+          </span>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="margin-top: 18px; padding: 16px 18px; border-radius: 20px; border: 1px solid rgba(203,164,92,0.6); display: flex; flex-direction: column; gap: 6px">
+      <span class="lbl">WAT ER MET JE OPNAME GEBEURT</span>
+      <span style="font-size: 15px; font-weight: 300; line-height: 1.55">Je opname wordt tekst in het woningdossier van dit huis. De klant leest de tekst, niet de opname. Hoe lang de opname zelf bewaard blijft: [nog te besluiten].</span>
+    </div>
+  </div>
+
+  <div style="position: absolute; left: 20px; right: 20px; bottom: 30px; display: flex; flex-direction: column; gap: 8px">
+    <button type="button" class="knop" onClick="{{toestaan}}">{{knop}}</button>
+    <button type="button" onClick="{{later}}" style="min-height: 48px; border: 0; background: transparent; color: rgba(10,52,30,0.72); font-family: inherit; font-size: 16px; cursor: pointer">{{laterTekst}}</button>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { aan: false, later: false };
+  }
+  renderVals() {
+    const st = this.state;
+    const stand = st.aan ? 'Toegestaan' : st.later ? 'Later' : 'Nog niet';
+    const dot = 'width: 6px; height: 6px; border-radius: 999px; box-sizing: border-box; ' + (st.aan ? 'background: #0A341E' : st.later ? 'background: #CBA45C' : 'border: 1px solid #0A341E');
+    return {
+      rechten: [
+        { naam: 'Camera', icon: 'M4 8h3l2-3h6l2 3h3v11H4zM12 16.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z', waarom: 'Voor een foto per stap. De klant keurt je werk goed op die foto, en daarna volgt je uitbetaling.', stand, dot },
+        { naam: 'Microfoon', icon: 'M9 3h6v11a3 3 0 0 1-6 0zM5 11a7 7 0 0 0 14 0M12 18v3', waarom: 'Om in te spreken wat je zag en deed. Dan hoef je niets in te typen met vuile handen.', stand, dot }
+      ],
+      knop: st.aan ? 'Ga naar opleveren' : 'Sta camera en microfoon toe',
+      toestaan: () => this.setState({ aan: true, later: false }),
+      laterTekst: st.later ? 'Zonder camera kun je niet opleveren. Je kunt dit later aanzetten in je instellingen.' : 'Niet nu',
+      later: () => this.setState({ later: true, aan: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

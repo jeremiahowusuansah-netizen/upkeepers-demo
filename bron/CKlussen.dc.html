@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Klussen</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.op{animation:op 900ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.op{animation:none}}
+.lbl{font-size:12px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif; background: #ECE5D7">
+  <div style="position: absolute; inset: 0 0 104px 0; overflow-y: auto; padding-bottom: 20px">
+    <div class="op" style="padding: 22px 24px 0; display: flex; flex-direction: column; gap: 6px">
+      <span class="lbl" style="font-size: 13px">KASTANJELAAN 14</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 34px; letter-spacing: -0.02em">Klussen</h1>
+    </div>
+
+    <div style="padding: 18px 16px 0">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 0 8px 10px"><span class="lbl">OKTOBER · WEEK 43</span><span style="font-size: 14px; color: rgba(10,52,30,0.62)">Vandaag ma 20</span></div>
+      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px">
+        <sc-for list="{{dagen}}" as="d" hint-placeholder-count="7">
+          <button type="button" onClick="{{d.pick}}" style="{{d.style}}">
+            <span style="font-size: 12px; letter-spacing: 0.12em; opacity: 0.75">{{d.dag}}</span>
+            <span style="font-family: 'Montserrat', sans-serif; font-size: 19px; font-weight: 400">{{d.nr}}</span>
+            <span style="{{d.stip}}"></span>
+          </button>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="padding: 18px 16px 0">
+      <div role="tablist" aria-label="Soort" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 999px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.08)">
+        <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3"><button type="button" role="tab" aria-selected="{{t.aan}}" onClick="{{t.pick}}" style="{{t.style}}">{{t.naam}}</button></sc-for>
+      </div>
+    </div>
+
+    <div style="padding: 14px 16px 0; display: flex; flex-direction: column; gap: 10px">
+      <sc-for list="{{klussen}}" as="k" hint-placeholder-count="3">
+        <a href="{{k.link}}" style="display: flex; gap: 14px; align-items: center; padding: 10px; border-radius: 22px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.06); text-decoration: none; color: #0A341E">
+          <span style="{{k.beeld}}"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F7F3EB" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{k.icon}}"/></svg><span style="font-size: 11px; letter-spacing: 0.14em; color: #F7F3EB; white-space: nowrap">{{k.wanneer}}</span></span>
+          <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 4px; min-width: 0">
+            <span style="font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 400">{{k.wat}}</span>
+            <span style="font-size: 14px; color: rgba(10,52,30,0.66)">{{k.uitleg}}</span>
+            <span style="display: flex; align-items: center; gap: 6px; font-size: 14px"><span style="{{k.dot}}"></span>{{k.stand}}</span>
+          </span>
+        </a>
+      </sc-for>
+      <sc-if value="{{leeg}}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 28px 20px; border-radius: 22px; border: 1px dashed rgba(10,52,30,0.2); display: flex; flex-direction: column; gap: 10px; align-items: flex-start">
+          <span style="font-size: 17px">Nu loopt er niets.</span>
+          <span style="font-size: 15px; color: rgba(10,52,30,0.72)">Zie je iets aan je huis? Meld het, dan regelen wij een vakman.</span>
+          <a href="CMelden.dc.html" style="min-height: 40px; padding: 0 16px; border-radius: 999px; background: #0A341E; color: #F7F3EB; display: flex; align-items: center; font-size: 15px; text-decoration: none">Meld een klus</a>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+
+  <nav aria-label="Hoofdmenu" style="position: absolute; left: 16px; right: 16px; bottom: 26px; height: 64px; border-radius: 999px; background: rgba(247,243,235,0.94); border: 1px solid rgba(10,52,30,0.1); backdrop-filter: blur(24px); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center; padding: 0 6px">
+    <a href="CStart.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: rgba(10,52,30,0.62); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Woning</a>
+    <a href="CDossier.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: rgba(10,52,30,0.62); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg>Dossier</a>
+    <a href="CMelden.dc.html" aria-label="Meld een klus" style="justify-self: center; align-self: start; margin-top: -16px; width: 50px; height: 50px; border-radius: 999px; background: #2F5D45; color: #F7F3EB; border: 3px solid #ECE5D7; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 8px 18px -12px rgba(0,0,0,0.35)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a>
+    <a href="CKlussen.dc.html" aria-current="page" style="height: 52px; border-radius: 999px; background: rgba(10,52,30,0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>Klussen</a>
+    <a href="CAccount.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: rgba(10,52,30,0.62); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Account</a>
+    <span style="position: absolute; left: 50%; bottom: 7px; transform: translateX(-50%); font-size: 12px; pointer-events: none">Melden</span>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 0, dag: 3 };
+  }
+  renderVals() {
+    const st = this.state;
+    const dagen = [['MA', 20, false], ['DI', 21, false], ['WO', 22, false], ['DO', 23, true], ['VR', 24, false], ['ZA', 25, false], ['ZO', 26, false]];
+    const lijsten = [
+      [
+        { wat: 'Cv-ketel onderhoud', uitleg: 'Zolder · Ahmed komt · ongeveer 2 uur', wanneer: 'DO 23 OKT', stand: 'Bevestigd, 09:00 tot 11:00', k: 'goed', link: 'CKlus.dc.html', g: '#2E6446, #123522' },
+        { wat: 'Dakgoot schoonmaken', uitleg: 'Gevel en dak · gemeld 14 okt · vakman wordt gekozen', wanneer: 'NOV', stand: 'Wacht op een moment', k: 'open', link: 'CKlus.dc.html', g: '#3B5C45, #123522' }
+      ],
+      [
+        { wat: 'Kozijnen schilderen', uitleg: 'Voorgevel · Marco · opgeleverd 10:40', wanneer: 'VANDAAG', stand: 'Wacht op jouw goedkeuring', k: 'aandacht', link: 'CGoedkeuren.dc.html', g: '#2A5B40, #0E2A1B' }
+      ],
+      [
+        { wat: 'Woning-APK', uitleg: '14 onderdelen bekeken', wanneer: '14 OKT', stand: 'Goede staat', k: 'goed', link: 'CAPK.dc.html', g: '#26362C, #141F18' },
+        { wat: 'Kitnaden badkamer', uitleg: 'Badkamer · goedgekeurd', wanneer: '22 SEP', stand: 'Afgerond', k: 'goed', link: 'CDossier.dc.html', g: '#3B5C45, #1B3526' },
+        { wat: 'Dakgoot schoonmaken', uitleg: 'Gevel en dak · goedgekeurd', wanneer: '12 NOV 25', stand: 'Afgerond', k: 'goed', link: 'CDossier.dc.html', g: '#2E6446, #0E2A1B' }
+      ]
+    ];
+    const ICON = {"Cv-ketel onderhoud": "M6 3h12v18H6zM12 16.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM9 6h6", "Dakgoot schoonmaken": "M3 11l9-7 9 7M2 11h20v2.5H2zM19 13.5v4", "Kozijnen schilderen": "M5 3h14v18H5zM12 3v18M5 12h14", "Woning-APK": "M3 11l9-7 9 7v9H3zM9 15l2 2 4-4", "Kitnaden badkamer": "M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"};
+    const dot = (k) => 'width: 6px; height: 6px; border-radius: 999px; box-sizing: border-box; ' + (k === 'goed' ? 'background: #0A341E' : k === 'aandacht' ? 'background: #CBA45C' : 'border: 1px solid #0A341E');
+    const lijst = lijsten[st.tab];
+    return {
+      dagen: dagen.map((d, i) => ({
+        dag: d[0], nr: d[1],
+        pick: () => this.setState({ dag: i }),
+        stip: 'width: 5px; height: 5px; border-radius: 999px; background: ' + (d[2] ? (i === st.dag ? '#CBA45C' : '#0A341E') : 'transparent'),
+        style: 'min-height: 70px; border-radius: 18px; cursor: pointer; font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; transition: background 300ms, color 300ms; ' + (i === st.dag ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: #F7F3EB; color: #0A341E; border: 1px solid rgba(10,52,30,0.08)')
+      })),
+      tabs: ['Gepland', 'Loopt nu', 'Afgerond'].map((n, i) => ({
+        naam: n + ' · ' + lijsten[i].length, aan: i === st.tab ? 'true' : 'false',
+        pick: () => this.setState({ tab: i }),
+        style: 'min-height: 40px; border-radius: 999px; border: 0; cursor: pointer; font-family: inherit; font-size: 15px; transition: background 300ms, color 300ms; ' + (i === st.tab ? 'background: #0A341E; color: #F7F3EB' : 'background: transparent; color: #0A341E')
+      })),
+      klussen: lijst.map((k) => ({ ...k, icon: ICON[k.wat] || '', dot: dot(k.k), beeld: 'position: relative; flex: 0 0 auto; width: 88px; height: 88px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(160deg, ' + k.g + ')' })),
+      leeg: lijst.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>

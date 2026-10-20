@@ -8,91 +8,81 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 :root{--zand:#ECE5D7;--creme:#F7F3EB;--inkt:#0A341E;--gedempt:rgba(10,52,30,.62);--lijn:rgba(10,52,30,.1);--goud:#CBA45C}
-*{box-sizing:border-box}
+*{box-sizing:border-box;scrollbar-width:none}
+*::-webkit-scrollbar{display:none}
 body{margin:0;background:var(--zand);color:var(--inkt);font-family:"Nunito Sans",system-ui,sans-serif;line-height:1.5}
 main{max-width:560px;margin:0 auto;padding:40px 16px 64px}
-h1{font-family:Montserrat,sans-serif;font-weight:300;font-size:30px;margin:0 0 6px;letter-spacing:.01em}
-.sub{color:var(--gedempt);margin:0 0 28px;font-size:15px}
+h1{font-family:Montserrat,sans-serif;font-weight:300;font-size:34px;margin:0 0 6px;letter-spacing:.01em}
+.sub{color:var(--gedempt);margin:0 0 24px;font-size:17px}
 .lijn{height:1px;background:var(--goud);width:56px;margin:0 0 28px}
-h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gedempt);margin:32px 0 10px}
-ul{list-style:none;margin:0;padding:0;background:var(--creme);border-radius:14px;overflow:hidden}
+.start{display:flex;align-items:center;justify-content:center;min-height:58px;border-radius:999px;background:var(--inkt);color:var(--creme);font-family:Montserrat,sans-serif;font-weight:500;font-size:18px;text-decoration:none}
+h2{font-family:Montserrat,sans-serif;font-weight:400;font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--gedempt);margin:34px 0 10px}
+ul{list-style:none;margin:0;padding:0;background:var(--creme);border-radius:16px;overflow:hidden}
 li+li{border-top:1px solid var(--lijn)}
-a{display:flex;justify-content:space-between;gap:12px;padding:14px 16px;color:var(--inkt);text-decoration:none}
-a:hover{background:rgba(10,52,30,.04)}
-a span{color:var(--gedempt);font-size:14px;text-align:right}
-.voet{margin-top:40px;color:var(--gedempt);font-size:13px}
+li a{display:flex;justify-content:space-between;gap:12px;padding:15px 16px;color:var(--inkt);text-decoration:none;font-size:17px}
+li a span{color:var(--gedempt);font-size:15px;text-align:right}
+.typen{display:flex;flex-wrap:wrap;gap:8px}
+.typen button{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--lijn);background:var(--creme);color:var(--inkt);font-family:inherit;font-size:16px;cursor:pointer}
+.typen button[aria-pressed=true]{background:var(--inkt);color:var(--creme);border-color:var(--inkt)}
+.voet{margin-top:40px;color:var(--gedempt);font-size:15px}
 </style>
 </head>
 <body>
 <main>
 <h1>UPKeepers</h1>
-<p class="sub">Prototype van de app, ronde 80. Voorbeeldgegevens, geen echte klanten. Open op je telefoon voor de juiste maat.</p>
+<p class="sub">Het app-prototype, ronde 81. Alle knoppen werken. Voorbeeldgegevens, geen echte klanten.</p>
 <div class="lijn"></div>
+<a class="start" href="app.html#/GInlog">Begin bij het aanmelden</a>
+
+<h2>Soort woning in de demo</h2>
+<div class="typen" id="typen">
+  <button type="button" data-t="tussenwoning">Tussenwoning</button>
+  <button type="button" data-t="hoekwoning">Hoekwoning</button>
+  <button type="button" data-t="twee-onder-een-kap">Twee-onder-een-kap</button>
+  <button type="button" data-t="vrijstaand">Vrijstaand</button>
+  <button type="button" data-t="appartement">Appartement</button>
+</div>
 
 <h2>Welkom en aanmelden</h2>
 <ul>
-<li><a href="schermen/WWelkomA.html">Welkom A · specblad</a></li>
-<li><a href="schermen/WWelkomB.html">Welkom B · één ding per scherm <span>1/3</span></a></li>
-<li><a href="schermen/WWelkomB--scherm2.html">Welkom B <span>2/3</span></a></li>
-<li><a href="schermen/WWelkomB--scherm3.html">Welkom B <span>3/3</span></a></li>
-<li><a href="schermen/WWelkomC.html">Welkom C · het perceel van boven</a></li>
-<li><a href="schermen/CWelkom.html">Welkom, versie ronde 79 <span>ter vergelijking</span></a></li>
-<li><a href="schermen/GInlog.html">Aanmelden <span>stap 1</span></a></li>
-<li><a href="schermen/GInlog--stap2-woning.html">Aanmelden · je woning <span>stap 2</span></a></li>
-<li><a href="schermen/GInlog--stap3-over-jou.html">Aanmelden · wie ben je <span>stap 3</span></a></li>
-<li><a href="schermen/GInlog--stap4-code.html">Aanmelden · code <span>stap 4</span></a></li>
-<li><a href="schermen/GInlog--stap5-faceid.html">Aanmelden · Face ID <span>stap 5</span></a></li>
-<li><a href="schermen/GBetalen.html">Lidmaatschap kiezen</a></li>
+<li><a href="app.html#/GInlog">Aanmelden <span>4 stappen</span></a></li>
+<li><a href="app.html#/GBetalen">Lidmaatschap kiezen en betalen</a></li>
+<li><a href="app.html#/WWelkomA">Welkom A · specblad</a></li>
+<li><a href="app.html#/WWelkomB">Welkom B · één ding per scherm</a></li>
+<li><a href="app.html#/WWelkomC">Welkom C · het perceel van boven</a></li>
 </ul>
 
 <h2>Klant</h2>
 <ul>
-<li><a href="schermen/CStart.html">Startscherm</a></li>
-<li><a href="schermen/CDossier.html">Woningdossier <span>buiten</span></a></li>
-<li><a href="schermen/CDossier--binnen.html">Woningdossier <span>binnen</span></a></li>
-<li><a href="schermen/CAPK.html">Woning-APK</a></li>
-<li><a href="schermen/CMelden.html">Klus melden <span>stap 1</span></a></li>
-<li><a href="schermen/CMelden--stap2.html">Klus melden <span>stap 2</span></a></li>
-<li><a href="schermen/CMelden--stap3.html">Klus melden <span>stap 3</span></a></li>
-<li><a href="schermen/CMelden--spoed.html">Klus melden · is het spoed?</a></li>
-<li><a href="schermen/CMelden--stap4.html">Klus melden <span>stap 4</span></a></li>
-<li><a href="schermen/CMelden--stap5.html">Klus melden · klopt dit? <span>stap 5</span></a></li>
-<li><a href="schermen/CKlus.html">Lopende klus</a></li>
-<li><a href="schermen/CKlus--vraag-het-upkeepers.html">Lopende klus · vraag het UPKeepers</a></li>
-<li><a href="schermen/CGoedkeuren.html">Goedkeuren</a></li>
-<li><a href="schermen/CGoedkeuren--er-klopt-iets-niet.html">Goedkeuren · er klopt iets niet</a></li>
-<li><a href="schermen/CGoedkeuren--gemeld.html">Goedkeuren · gemeld</a></li>
-<li><a href="schermen/CGoedkeuren--goedgekeurd.html">Goedkeuren · goedgekeurd</a></li>
-<li><a href="schermen/CKlussen.html">Klussen op één plek</a></li>
-<li><a href="schermen/CAccount.html">Account</a></li>
-<li><a href="schermen/GMeldingen.html">Meldingen</a></li>
-<li><a href="schermen/GStanden.html">Laden, wachten, fout, leeg</a></li>
-<li><a href="schermen/GToestemming.html">Toestemming camera en microfoon</a></li>
-<li><a href="schermen/GOpzeggen.html">Opzeggen</a></li>
-<li><a href="schermen/GOpzeggen--opgezegd.html">Opzeggen · opgezegd</a></li>
-<li><a href="schermen/GSpec.html">Spec sheet <span>voor de computer</span></a></li>
+<li><a href="app.html#/CStart">Startscherm</a></li>
+<li><a href="app.html#/CDossier">Woningdossier <span>buiten en binnen</span></a></li>
+<li><a href="app.html#/CAPK">Woning-APK</a></li>
+<li><a href="app.html#/CMelden">Klus melden</a></li>
+<li><a href="app.html#/CMelden?klus=kitnaden">Bekende klus inplannen <span>sneltoets</span></a></li>
+<li><a href="app.html#/CKlus">Lopende klus</a></li>
+<li><a href="app.html#/CGoedkeuren">Goedkeuren</a></li>
+<li><a href="app.html#/CKlussen">Klussen op één plek <span>volgende ronde</span></a></li>
+<li><a href="app.html#/CAccount">Account <span>volgende ronde</span></a></li>
 </ul>
 
-<h2>Vakman</h2>
+<h2>Vakman en admin</h2>
 <ul>
-<li><a href="schermen/CVakmanOpdracht.html">Nieuwe opdracht</a></li>
-<li><a href="schermen/CVakmanKlus.html">Actieve klus en opleveren</a></li>
-<li><a href="schermen/CVakmanKlus--niet-af.html">Opleveren · niet af</a></li>
-<li><a href="schermen/CVakmanKlus--zag-nog-iets.html">Opleveren · zag nog iets</a></li>
-<li><a href="schermen/CVakmanWerk.html">Werkvoorraad</a></li>
-<li><a href="schermen/CVakmanGeld.html">Verdiensten</a></li>
+<li><a href="app.html#/CVakmanWerk">Vakman · werkvoorraad <span>volgende ronde</span></a></li>
+<li><a href="app.html#/CAdmin">Admin · aan de telefoon <span>voor de computer</span></a></li>
 </ul>
 
-<h2>Admin · voor de computer</h2>
-<ul>
-<li><a href="schermen/CAdmin.html">Aan de telefoon</a></li>
-<li><a href="schermen/CAdminToewijzen.html">Vakman toewijzen</a></li>
-<li><a href="schermen/CAdminToewijzen--doorschuiven.html">Vakman toewijzen · doorschuiven</a></li>
-<li><a href="schermen/CAdminAPK.html">APK-planning</a></li>
-<li><a href="schermen/CAdminLeden.html">Ledenlijst</a></li>
-</ul>
-
-<p class="voet">Elk scherm is een momentopname. Knoppen die naar een ander scherm wijzen werken; invullen en wisselen tussen standen werkt alleen in het canvas.</p>
+<p class="voet">Tip: open het startscherm in Safari en kies Deel › Zet op beginscherm. Dan opent het als een app, zonder adresbalk.</p>
 </main>
+<script>
+  const knoppen = document.querySelectorAll('#typen button');
+  let t = 'tussenwoning';
+  try { t = localStorage.getItem('upk-woningtype') || t; } catch (e) {}
+  const zet = (w) => { knoppen.forEach((b) => b.setAttribute('aria-pressed', b.dataset.t === w)); };
+  zet(t);
+  knoppen.forEach((b) => b.addEventListener('click', () => {
+    try { localStorage.setItem('upk-woningtype', b.dataset.t); } catch (e) {}
+    zet(b.dataset.t);
+  }));
+</script>
 </body>
 </html>

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Account</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.op{animation:op 900ms cubic-bezier(.22,.61,.36,1) both}
+.pas{animation:pas 1200ms 100ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes pas{from{opacity:0;transform:perspective(900px) rotateX(14deg) translateY(24px)}to{opacity:1;transform:perspective(900px) rotateX(0)}}
+@media (prefers-reduced-motion:reduce){.op,.pas{animation:none}}
+.lbl{font-size:12px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+.r{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid rgba(10,52,30,0.1);font-size:16px}
+.r i{font-style:normal;font-size:13px;letter-spacing:0.14em;color: rgba(10,52,30,0.62)}
+.m{display:flex;justify-content:space-between;align-items:center;min-height:52px;border-bottom:1px solid rgba(10,52,30,0.1);font-size:17px;text-decoration:none}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif; background: #ECE5D7">
+  <div style="position: absolute; inset: 0 0 104px 0; overflow-y: auto; padding-bottom: 20px">
+    <div class="op" style="padding: 28px 24px 0; display: flex; align-items: center; gap: 16px">
+      <button type="button" aria-label="Wijzig je profielfoto" style="position: relative; flex: 0 0 auto; width: 76px; height: 76px; padding: 0; border-radius: 999px; border: 2px solid #F7F3EB; box-shadow: 0 0 0 1px rgba(203,164,92,0.7); background: linear-gradient(150deg, #C9A88A 0%, #8E6B55 55%, #5A4236 100%); cursor: pointer; overflow: visible">
+        <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true" style="border-radius: 999px; display: block"><circle cx="36" cy="28" r="13" fill="#F3DCC6" opacity=".85"/><path d="M12 72c3-14 12-21 24-21s21 7 24 21z" fill="#F7F3EB" opacity=".75"/><path d="M22 26c0-10 7-15 14-15s15 5 14 16c-3-6-8-8-14-8s-11 2-14 7z" fill="#3B2A22"/></svg>
+        <span style="position: absolute; right: -2px; bottom: -2px; width: 28px; height: 28px; border-radius: 999px; background: #0A341E; color: #F7F3EB; border: 2px solid #ECE5D7; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span>
+      </button>
+      <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+        <span class="lbl" style="font-size: 13px">HOI SANNE</span>
+        <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 28px; line-height: 1.1; letter-spacing: -0.02em">Sanne de Vries</h1>
+        <span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.66)">Lid sinds maart · 4 klussen dit jaar</span>
+      </div>
+    </div>
+
+    <div class="pas" style="margin: 24px 20px 0; padding: 22px; border-radius: 24px; position: relative; overflow: hidden; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); backdrop-filter: blur(24px); box-shadow: 0 24px 48px -30px rgba(0,0,0,0.28)">
+      <div style="display: flex; justify-content: space-between; align-items: center">
+        <a href="CStart.dc.html" aria-label="Naar de startpagina" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 0.32em; color: inherit; text-decoration: none">UPKEEPERS</a>
+        <span class="lbl">LID</span>
+      </div>
+      <div style="margin-top: 34px; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 22px">Kastanjelaan 14</div>
+      <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(10,52,30,0.1); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 11px; letter-spacing: 0.22em; color: rgba(10,52,30,0.62)">LID SINDS</span><span style="font-size: 15px; letter-spacing: 0.08em">MRT 2026</span></span>
+        <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 11px; letter-spacing: 0.22em; color: rgba(10,52,30,0.62)">VOLGENDE APK</span><span style="font-size: 15px; letter-spacing: 0.08em">OKT 2028</span></span>
+      </div>
+    </div>
+
+    <div style="margin: 12px 20px 0; display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center">
+      <a href="#" onClick="{{wallet}}" style="min-height: 48px; border-radius: 999px; background: #0A341E; color: #F7F3EB; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 16px; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/></svg>{{walletTekst}}</a>
+      <span style="font-size: 13px; line-height: 1.4; color: rgba(10,52,30,0.62); max-width: 130px">Bij de deur of een lekkage, zonder de app te openen</span>
+    </div>
+    <div style="padding: 32px 28px 0; display: flex; flex-direction: column">
+      <span class="lbl">AFGERONDE KLUSSEN</span>
+      <div class="r"><span>Kozijnen geschilderd</span><i>17 OKT</i></div>
+      <div class="r"><span>Woning-APK</span><i>14 OKT</i></div>
+      <div class="r"><span>Kitnaden badkamer</span><i>22 SEP</i></div>
+    </div>
+
+    <div style="padding: 30px 28px 0; display: flex; flex-direction: column">
+      <span class="lbl">FACTUREN</span>
+      <div class="r"><span>Kozijnen geschilderd</span><span style="font-size: 15px; letter-spacing: 0.06em">€ 1.240,00</span></div>
+      <div class="r"><span>Kitnaden badkamer</span><span style="font-size: 15px; letter-spacing: 0.06em">€ 185,00</span></div>
+      <a href="CKlussen.dc.html" class="m" style="color: rgba(10,52,30,0.62)">Alle facturen<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
+    </div>
+
+    <div style="padding: 30px 28px 0; display: flex; flex-direction: column">
+      <span class="lbl">INSTELLINGEN</span>
+      <button type="button" onClick="{{t0}}" aria-expanded="{{o0}}" class="m" style="width: 100%; padding: 0; border: 0; border-bottom: 1px solid rgba(10,52,30,0.1); background: transparent; color: #0A341E; font-family: inherit; cursor: pointer; text-align: left"><span style="display: flex; align-items: center; gap: 12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 11l9-7 9 7v9H3z"/></svg>Gegevens en woning</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="{{pijl0}}"><path d="M6 9l6 6 6-6"/></svg></button>
+      <sc-if value="{{o0}}" hint-placeholder-val="{{ false }}"><div class="op" style="padding: 6px 0 12px 32px; border-bottom: 1px solid rgba(10,52,30,0.1)"><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Telefoon</span><span style="text-align: right">06 12 34 56 78</span></div><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">E-mail</span><span style="text-align: right">sanne@voorbeeld.nl</span></div><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Adres</span><span style="text-align: right">Kastanjelaan 14, Hilversum</span></div><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Sleutel bij</span><span style="text-align: right">Buren, nr. 16</span></div><a href="GInlog.dc.html?step=3" style="display: inline-block; margin-top: 6px; font-size: 15px">Wijzig gegevens</a></div></sc-if>
+      <button type="button" onClick="{{t1}}" aria-expanded="{{o1}}" class="m" style="width: 100%; padding: 0; border: 0; border-bottom: 1px solid rgba(10,52,30,0.1); background: transparent; color: #0A341E; font-family: inherit; cursor: pointer; text-align: left"><span style="display: flex; align-items: center; gap: 12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg>Meldingen</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="{{pijl1}}"><path d="M6 9l6 6 6-6"/></svg></button>
+      <sc-if value="{{o1}}" hint-placeholder-val="{{ true }}"><div class="op" style="padding: 6px 0 12px 32px; border-bottom: 1px solid rgba(10,52,30,0.1)"><div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">Herinnering de avond ervoor</span><span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.66)">Wie er komt en hoe laat</span></span><span role="switch" aria-checked="true" style="flex: 0 0 auto; width: 44px; height: 26px; border-radius: 999px; background: #0A341E; position: relative"><span style="position: absolute; top: 3px; left: 21px; width: 20px; height: 20px; border-radius: 999px; background: #F7F3EB"></span></span></div><div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">Vakman is onderweg</span><span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.66)">Met de verwachte aankomst</span></span><span role="switch" aria-checked="true" style="flex: 0 0 auto; width: 44px; height: 26px; border-radius: 999px; background: #0A341E; position: relative"><span style="position: absolute; top: 3px; left: 21px; width: 20px; height: 20px; border-radius: 999px; background: #F7F3EB"></span></span></div><div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 0"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">Seizoenstips</span><span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.66)">Twee keer per jaar, wat je huis nodig heeft</span></span><span role="switch" aria-checked="false" style="flex: 0 0 auto; width: 44px; height: 26px; border-radius: 999px; background: rgba(10,52,30,0.16); position: relative"><span style="position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 999px; background: #F7F3EB"></span></span></div></div></sc-if>
+      <button type="button" onClick="{{t2}}" aria-expanded="{{o2}}" class="m" style="width: 100%; padding: 0; border: 0; border-bottom: 1px solid rgba(10,52,30,0.1); background: transparent; color: #0A341E; font-family: inherit; cursor: pointer; text-align: left"><span style="display: flex; align-items: center; gap: 12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/></svg>Betaling</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="{{pijl2}}"><path d="M6 9l6 6 6-6"/></svg></button>
+      <sc-if value="{{o2}}" hint-placeholder-val="{{ false }}"><div class="op" style="padding: 6px 0 12px 32px; border-bottom: 1px solid rgba(10,52,30,0.1)"><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Lidmaatschap</span><span style="text-align: right">Automatische incasso</span></div><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Rekening</span><span style="text-align: right">NL·· ···· ·· 4821</span></div><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Klussen</span><span style="text-align: right">Per klus, na jouw goedkeuring</span></div><a href="GBetalen.dc.html?view=%22overzicht%22" style="display: inline-block; margin-top: 6px; font-size: 15px">Wijzig rekening</a></div></sc-if>
+      <button type="button" onClick="{{t3}}" aria-expanded="{{o3}}" class="m" style="width: 100%; padding: 0; border: 0; border-bottom: 1px solid rgba(10,52,30,0.1); background: transparent; color: #0A341E; font-family: inherit; cursor: pointer; text-align: left"><span style="display: flex; align-items: center; gap: 12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg>Lidmaatschap</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="{{pijl3}}"><path d="M6 9l6 6 6-6"/></svg></button>
+      <sc-if value="{{o3}}" hint-placeholder-val="{{ false }}"><div class="op" style="padding: 6px 0 12px 32px; border-bottom: 1px solid rgba(10,52,30,0.1)"><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Vorm</span><span style="text-align: right">Maand, € 39,95</span></div><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Loopt tot</span><span style="text-align: right">1 maart 2027</span></div><a href="GOpzeggen.dc.html" style="display: inline-block; margin-top: 6px; font-size: 15px; color: rgba(10,52,30,0.72)">Lidmaatschap opzeggen</a></div></sc-if>
+    </div>
+
+    <div style="margin: 30px 20px 0; padding: 18px 20px; border-radius: 22px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); display: flex; justify-content: space-between; align-items: center; gap: 12px">
+      <span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 17px">Kom je er niet uit?</span><span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.62)">Werkdagen 08:00 tot 18:00</span></span>
+      <a href="tel:0350000000" style="min-height: 40px; padding: 0 16px; border-radius: 999px; background: #0A341E; color: #F7F3EB; display: flex; align-items: center; font-size: 15px; text-decoration: none">Vraag het ons</a>
+    </div>
+  </div>
+
+  <nav aria-label="Hoofdmenu" style="position: absolute; left: 16px; right: 16px; bottom: 26px; height: 64px; border-radius: 999px; background: rgba(247,243,235,0.94); border: 1px solid rgba(10,52,30,0.1); backdrop-filter: blur(24px); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center; padding: 0 6px">
+    <a href="CStart.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: rgba(10,52,30,0.62); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Woning</a>
+    <a href="CDossier.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: rgba(10,52,30,0.62); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg>Dossier</a>
+    <a href="CMelden.dc.html" aria-label="Meld een klus" style="justify-self: center; align-self: start; margin-top: -16px; width: 50px; height: 50px; border-radius: 999px; background: #2F5D45; color: #F7F3EB; border: 3px solid #ECE5D7; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 8px 18px -12px rgba(0,0,0,0.35)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a>
+    <a href="CKlussen.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; color: rgba(10,52,30,0.62); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>Klussen</a>
+    <a href="CAccount.dc.html" aria-current="page" style="height: 52px; border-radius: 999px; background: rgba(10,52,30,0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 12px; text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Account</a>
+    <span style="position: absolute; left: 50%; bottom: 7px; transform: translateX(-50%); font-size: 12px; pointer-events: none">Melden</span>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { open: 1 };
+  }
+  renderVals() {
+    const v = {};
+    [0, 1, 2, 3].forEach((i) => {
+      const on = this.state.open === i;
+      v['o' + i] = on;
+      v['t' + i] = () => this.setState({ open: on ? -1 : i });
+      v['pijl' + i] = 'transition: transform 400ms cubic-bezier(.22,.61,.36,1); transform: rotate(' + (on ? '180' : '0') + 'deg)';
+    });
+    v.wallet = () => this.setState({ inWallet: true });
+    v.walletTekst = this.state.inWallet ? '✓ Staat in Wallet' : 'Zet in je Wallet';
+    return v;
+  }
+}
+</script>
+</body>
+</html>

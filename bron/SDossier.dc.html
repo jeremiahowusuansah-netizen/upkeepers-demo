@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Woningdossier</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#F7F3EB}a:hover{color:#FFFFFF}
+.op{animation:op 900ms cubic-bezier(.22,.61,.36,1) both}
+.huis{animation:huis 1400ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes huis{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+.kaart{transition:opacity 500ms cubic-bezier(.22,.61,.36,1)}
+@media (prefers-reduced-motion:reduce){.op,.huis{animation:none}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #F7F3EB; font-family: 'Nunito Sans', system-ui, sans-serif; background: radial-gradient(120% 60% at 50% 26%, #164A2E 0%, #0A341E 45%, #051A0E 100%)">
+  <div style="position: absolute; inset: 0 0 104px 0; overflow-y: auto">
+    <div class="op" style="padding: 22px 24px 0; display: flex; justify-content: space-between; align-items: flex-start">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 11px; letter-spacing: 0.24em; color: #CBA45C">WONINGDOSSIER</span>
+        <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 30px; letter-spacing: -0.02em">Kastanjelaan 14</h1>
+      </div>
+      <span style="margin-top: 4px; display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: rgba(247,243,235,0.07); border: 1px solid rgba(247,243,235,0.14); font-size: 12px"><span style="width: 6px; height: 6px; border-radius: 999px; background: #9BC7A6"></span>Goede staat</span>
+    </div>
+    <p class="op" style="margin: 8px 24px 0; font-size: 13px; font-weight: 300; color: rgba(247,243,235,0.66)">Tik een punt aan op je huis.</p>
+
+    <div style="position: relative; height: 330px; margin-top: 4px">
+      <svg class="huis" width="390" height="366" viewBox="0 0 320 300" fill="none" aria-hidden="true" style="position: absolute; top: -10px; left: 0">
+        <defs>
+          <linearGradient id="voor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A5B40"/><stop offset="1" stop-color="#123522"/></linearGradient>
+          <linearGradient id="zij" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0F2C1C"/><stop offset="1" stop-color="#0A2114"/></linearGradient>
+          <linearGradient id="dakL" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1C2A22"/><stop offset="1" stop-color="#101A14"/></linearGradient>
+          <linearGradient id="dakR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26362C"/><stop offset="1" stop-color="#141F18"/></linearGradient>
+          <linearGradient id="raam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E3B4"/><stop offset="1" stop-color="#CBA45C"/></linearGradient>
+          <filter id="schaduw" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="12"/></filter>
+        </defs>
+        <ellipse cx="165" cy="292" rx="150" ry="26" fill="#000" opacity=".55" filter="url(#schaduw)"/>
+        <polygon points="60,150 115,105 205,60 150,105" fill="url(#dakL)"/>
+        <polygon points="60,250 60,150 115,105 170,200 170,300" fill="url(#voor)"/>
+        <polygon points="170,200 260,155 260,255 170,300" fill="url(#zij)"/>
+        <polygon points="115,105 170,200 260,155 205,60" fill="url(#dakR)"/>
+        <path d="M115 105L205 60" stroke="#CBA45C" stroke-width="1.2" opacity=".9"/>
+        <polygon points="75,182 103,195 103,229 75,216" fill="url(#raam)" opacity=".55"/>
+        <polygon points="127,206 155,218 155,252 127,240" fill="url(#raam)" opacity=".55"/>
+        <polygon points="105,140 125,149 125,170 105,161" fill="url(#raam)" opacity=".45"/>
+        <polygon points="190,200 220,185 220,219 190,234" fill="url(#raam)" opacity=".55"/>
+        <polygon points="232,199 250,190 250,258 232,267" fill="#071A0F"/>
+      </svg>
+      <sc-for list="{{parts}}" as="p" hint-placeholder-count="6">
+        <button type="button" onClick="{{p.pick}}" aria-label="{{p.naam}}" style="{{p.markerStyle}}"><span style="{{p.dotStyle}}">{{p.nr}}</span></button>
+      </sc-for>
+    </div>
+
+    <div class="kaart" style="margin: 0 20px; padding: 20px; border-radius: 22px; background: rgba(247,243,235,0.07); border: 1px solid rgba(247,243,235,0.14); backdrop-filter: blur(24px); display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px">
+        <span style="font-size: 11px; letter-spacing: 0.22em; color: #CBA45C">{{sel.plek}}</span>
+        <span style="display: flex; align-items: center; gap: 8px; font-size: 13px"><span style="{{sel.statusDot}}"></span>{{sel.oordeel}}</span>
+      </div>
+      <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 26px; letter-spacing: -0.01em">{{sel.naam}}</span>
+      <p style="margin: 0; font-size: 14px; font-weight: 300; line-height: 1.55; color: rgba(247,243,235,0.82)">{{sel.watIs}}</p>
+      <p style="margin: 0; padding-top: 12px; border-top: 1px solid rgba(247,243,235,0.1); font-size: 14px; line-height: 1.55">{{sel.zin}}</p>
+    </div>
+
+    <div style="padding: 30px 24px 12px; display: flex; flex-direction: column">
+      <span style="font-size: 11px; letter-spacing: 0.24em; color: #CBA45C; padding-bottom: 6px">PER KAMER EN ELEMENT</span>
+      <sc-for list="{{parts}}" as="p" hint-placeholder-count="6">
+        <button type="button" onClick="{{p.pick}}" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 60px; padding: 0; border: 0; border-bottom: 1px solid rgba(247,243,235,0.1); background: transparent; color: #F7F3EB; font-family: inherit; text-align: left; cursor: pointer">
+          <span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px">{{p.naam}}</span><span style="font-size: 12px; font-weight: 300; color: rgba(247,243,235,0.6)">{{p.kamer}}</span></span>
+          <span style="display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(247,243,235,0.8)"><span style="{{p.statusDot}}"></span>{{p.oordeel}}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+
+  <nav aria-label="Hoofdmenu" style="position: absolute; left: 20px; right: 20px; bottom: 28px; height: 64px; border-radius: 999px; background: rgba(5,26,14,0.6); border: 1px solid rgba(247,243,235,0.12); backdrop-filter: blur(24px); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center; padding: 0 6px">
+    <a href="SStart.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; letter-spacing: 0.04em; color: rgba(247,243,235,0.7); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Woning</a>
+    <a href="SDossier.dc.html" aria-current="page" style="height: 52px; border-radius: 999px; background: rgba(247,243,235,0.12); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; letter-spacing: 0.04em; text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg>Dossier</a>
+    <a href="SKlus.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; letter-spacing: 0.04em; color: rgba(247,243,235,0.7); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>Klussen</a>
+    <a href="SAccount.dc.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; letter-spacing: 0.04em; color: rgba(247,243,235,0.7); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Account</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { picked: 2 };
+  }
+  renderVals() {
+    const k = 390 / 320;
+    const data = [
+      { nr: 1, naam: 'Dakpannen', kamer: 'Gevel en dak', plek: 'DAK', x: 160, y: 92, oordeel: 'Goed', watIs: 'De pannen die je huis droog houden.', zin: 'Liggen recht en zijn heel. Volgende controle in 2028.' },
+      { nr: 2, naam: 'Dakgoot', kamer: 'Gevel en dak', plek: 'DAKRAND', x: 222, y: 176, oordeel: 'Aandacht', watIs: 'De bak langs de dakrand die het regenwater naar de afvoer leidt.', zin: 'Er ligt blad in. Schoonmaken in november voorkomt water langs de gevel.' },
+      { nr: 3, naam: 'Kozijnen', kamer: 'Woonkamer', plek: 'GEVEL', x: 89, y: 206, oordeel: 'Aandacht', watIs: 'Het houten frame om je ramen.', zin: 'De verf bladdert aan de zuidkant. Schilderen binnen een jaar houdt het hout gezond.' },
+      { nr: 4, naam: 'Cv-ketel', kamer: 'Zolder', plek: 'ZOLDER', x: 115, y: 152, oordeel: 'Goed', watIs: 'Het toestel dat je huis verwarmt en je water warm maakt.', zin: 'Onderhoud staat op 23 oktober. Daarna weer een jaar vooruit.' },
+      { nr: 5, naam: 'Meterkast', kamer: 'Gang', plek: 'HAL', x: 241, y: 232, oordeel: 'Goed', watIs: 'De kast waar stroom, gas en water binnenkomen.', zin: 'Zes groepen met aardlekschakelaar. Ruim genoeg voor inductie.' },
+      { nr: 6, naam: 'Kruipruimte', kamer: 'Onder de vloer', plek: 'ONDER DE VLOER', x: 120, y: 268, oordeel: 'Goed', watIs: 'De lage ruimte onder de begane grond, waar leidingen lopen.', zin: 'Droog en goed geventileerd. Geen houtrot aan de balken.' }
+    ];
+    const dot = (o) => 'flex: 0 0 auto; width: 6px; height: 6px; border-radius: 999px; background: ' + (o === 'Goed' ? '#9BC7A6' : '#CBA45C');
+    const parts = data.map((p) => {
+      const on = this.state.picked === p.nr;
+      return {
+        ...p,
+        statusDot: dot(p.oordeel),
+        pick: () => this.setState({ picked: p.nr }),
+        markerStyle: 'position: absolute; left: ' + Math.round(p.x * k - 22) + 'px; top: ' + Math.round(p.y * k - 32) + 'px; width: 44px; height: 44px; border: 0; padding: 0; background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center',
+        dotStyle: 'width: 26px; height: 26px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-family: inherit; font-size: 11px; transition: background 400ms, color 400ms; backdrop-filter: blur(12px); ' + (on ? 'background: #F7F3EB; color: #0A341E; border: 1px solid #F7F3EB' : 'background: rgba(5,26,14,0.55); color: #F7F3EB; border: 1px solid rgba(203,164,92,0.8)')
+      };
+    });
+    const sel = parts.find((p) => p.nr === this.state.picked) || parts[0];
+    return { parts, sel };
+  }
+}
+</script>
+</body>
+</html>

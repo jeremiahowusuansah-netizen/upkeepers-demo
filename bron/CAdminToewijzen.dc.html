@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Admin, vakman toewijzen</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.lbl{font-size:12px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+.kaart{background:#F7F3EB;border:1px solid rgba(10,52,30,0.08);border-radius:22px}
+.nav a{min-height:40px;display:flex;align-items:center;padding:0 14px;border-radius:999px;font-size:15px;text-decoration:none;color:rgba(10,52,30,0.62)}
+.nav a[aria-current]{background:#F7F3EB;color:#0A341E;border:1px solid rgba(10,52,30,0.1)}
+</style>
+</helmet>
+<div style="min-height: 900px; box-sizing: border-box; background: #ECE5D7; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif">
+  <header style="border-bottom: 1px solid rgba(10,52,30,0.1)">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px">
+      <a href="CAdmin.dc.html" aria-label="Naar de startpagina" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.32em; color: inherit; text-decoration: none">UPKEEPERS <span style="color: rgba(10,52,30,0.62)">· ADMIN</span></a>
+      <nav class="nav" aria-label="Adminmenu" style="display: flex; flex-wrap: wrap; gap: 4px">
+        <a href="CAdmin.dc.html">Klant opzoeken</a>
+        <a href="CAdminToewijzen.dc.html" aria-current="page">Toewijzen</a>
+        <a href="CAdminAPK.dc.html">APK-planning</a>
+        <a href="CAdminLeden.dc.html">Leden</a>
+      </nav>
+      <span style="margin-left: auto; font-size: 15px; color: rgba(10,52,30,0.62)">Lisa · supportdienst</span>
+    </div>
+  </header>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: 28px 24px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+    <aside style="flex: 1 1 300px; max-width: 100%; display: flex; flex-direction: column; gap: 10px">
+      <span class="lbl" style="padding: 0 6px">WACHT OP TOEWIJZING · 3</span>
+      <sc-for list="{{klussen}}" as="k" hint-placeholder-count="3">
+        <button type="button" onClick="{{k.pick}}" style="{{k.style}}">
+          <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><span style="font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 400">{{k.type}}</span><span style="display: flex; align-items: center; gap: 6px; font-size: 13px; white-space: nowrap"><span style="{{k.dot}}"></span>{{k.wacht}}</span></span>
+          <span style="font-size: 14px; letter-spacing: 0.1em; color: rgba(10,52,30,0.62)">{{k.waar}}</span>
+        </button>
+      </sc-for>
+    </aside>
+
+    <section style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span class="lbl" style="font-size: 13px">{{sel.code}}</span>
+        <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 34px; letter-spacing: -0.02em">{{sel.type}}</h1>
+        <span style="font-size: 16px; font-weight: 300; color: rgba(10,52,30,0.72)">{{sel.omschrijving}}</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span class="lbl">KIES DRIE VAKMANNEN, OP VOLGORDE · {{aantalGekozen}} VAN 3</span>
+        <span style="font-size: 15px; font-weight: 300; color: rgba(10,52,30,0.72)">Tik ze aan in de volgorde waarin ze de klus aangeboden krijgen. Beschikbaarheid komt uit hun eigen agenda.</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{rijen}}" as="r" hint-placeholder-count="3">
+          <button type="button" onClick="{{r.pick}}" style="{{r.style}}">
+            <span style="{{r.badge}}">{{r.rang}}</span>
+            <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px; text-align: left"><span style="font-size: 17px">{{r.naam}}</span><span style="font-size: 14px; font-weight: 300; opacity: 0.75">{{r.vak}}</span></span>
+            <span style="font-size: 14px; text-align: right; opacity: 0.8">{{r.vrijTekst}}</span>
+          </button>
+        </sc-for>
+      </div>
+
+      <div class="kaart" style="padding: 18px 22px; display: flex; flex-direction: column; gap: 14px">
+        <sc-if value="{{nogNiet}}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px">
+            <span style="flex: 1 1 360px; font-size: 16px; line-height: 1.55">Reageert de 1e keus niet binnen <strong style="font-weight: 600">4 uur</strong>, of zegt die nee, dan gaat het aanbod vanzelf naar de 2e en daarna naar de 3e. Pas als alle drie nee zeggen, komt de klus terug bij jou.</span>
+            <button type="button" onClick="{{bevestig}}" style="{{bevestigStyle}}">Stuur naar 1e keus</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{klaar}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column">
+            <span class="lbl" style="padding-bottom: 8px">LOOPT VANZELF · JE HOEFT NIETS TE DOEN</span>
+            <sc-for list="{{tijdlijn}}" as="t" hint-placeholder-count="3">
+              <div style="display: flex; gap: 14px; align-items: baseline; padding: 10px 0; border-top: 1px solid rgba(10,52,30,0.08)">
+                <span style="flex: 0 0 auto; width: 52px; font-size: 13px; letter-spacing: 0.14em; color: rgba(10,52,30,0.62)">{{t.rang}}</span>
+                <span style="flex: 1 1 auto; font-size: 16px">{{t.naam}}</span>
+                <span style="font-size: 15px; color: rgba(10,52,30,0.72); text-align: right">{{t.stand}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.62)">De reactietijd van 4 uur is een voorbeeld en nog niet besloten. Zegt een vakman ja, dan krijgen de vakman en de klant meteen bericht.</span>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { k: 0, volg: [0, 2], klaar: false };
+  }
+  renderVals() {
+    const st = this.state;
+    const klussen = [
+      { code: 'KL-2026-0418 · SCHILDERWERK', type: 'Kozijnen schilderen', waar: 'HILVERSUM · 1 DAG', omschrijving: 'Vier houten kozijnen zuidgevel, dekverf bladdert, lokaal houtrot. Uit de Woning-APK van 14 oktober.', wacht: 'Wacht 2 dagen', urgent: true,
+        slots: ['MA 27 OKT · OCHTEND', 'WO 29 OKT · MIDDAG', 'DO 30 OKT · OCHTEND'],
+        vakmensen: [ { naam: 'Marco B.', vak: 'Schilder · 11 jaar', vrij: [true, false, true] }, { naam: 'Dennis K.', vak: 'Schilder · 6 jaar', vrij: [false, true, true] }, { naam: 'Youssef A.', vak: 'Timmerman en schilder · 9 jaar', vrij: [true, true, false] } ] },
+      { code: 'KL-2026-0421 · SANITAIR', type: 'Kraan lekt', waar: 'BUSSUM · 1 UUR', omschrijving: 'Keukenkraan druppelt, ook dicht. Klant stuurde een video van 20 seconden.', wacht: 'Wacht 1 dag', urgent: false,
+        slots: ['DI 21 OKT · MIDDAG', 'WO 22 OKT · OCHTEND', 'VR 24 OKT · OCHTEND'],
+        vakmensen: [ { naam: 'Ahmed R.', vak: 'Installateur · 14 jaar', vrij: [true, true, false] }, { naam: 'Kees V.', vak: 'Loodgieter · 22 jaar', vrij: [false, true, true] } ] },
+      { code: 'KL-2026-0422 · ELEKTRA', type: 'Stopcontact zonder stroom', waar: 'AMSTELVEEN · 1 UUR', omschrijving: 'Twee stopcontacten in de woonkamer doen het niet. Aardlekschakelaar staat aan.', wacht: 'Vandaag', urgent: false,
+        slots: ['DO 23 OKT · AVOND', 'VR 24 OKT · MIDDAG', 'MA 27 OKT · OCHTEND'],
+        vakmensen: [ { naam: 'Rick de W.', vak: 'Elektricien · 8 jaar', vrij: [false, true, true] } ] }
+    ];
+    const sel = klussen[st.k];
+    const volg = st.volg || [];
+    const vrijTekst = (v) => { const d = sel.slots.filter((x, i) => v.vrij[i]).map((x) => x.split(' · ')[0].slice(0, 2) + ' ' + x.split(' · ')[1].toLowerCase()); return d.length ? 'Kan: ' + d.join(', ') : 'Kan op geen moment'; };
+    const max = Math.min(3, sel.vakmensen.length);
+    return {
+      klussen: klussen.map((k, i) => ({
+        ...k,
+        pick: () => this.setState({ k: i, volg: [], klaar: false }),
+        dot: 'width: 6px; height: 6px; border-radius: 999px; background: ' + (k.urgent ? '#CBA45C' : 'rgba(10,52,30,0.35)'),
+        style: 'display: flex; flex-direction: column; gap: 6px; text-align: left; padding: 16px 18px; border-radius: 20px; cursor: pointer; font-family: inherit; color: #0A341E; transition: background 400ms; ' + (i === st.k ? 'background: #F7F3EB; border: 1px solid #0A341E' : 'background: transparent; border: 1px solid rgba(10,52,30,0.12)')
+      })),
+      sel,
+      aantalGekozen: volg.length,
+      rijen: sel.vakmensen.map((v, vi) => {
+        const pos = volg.indexOf(vi);
+        const on = pos >= 0;
+        return {
+          ...v,
+          rang: on ? (pos + 1) + 'e' : '',
+          vrijTekst: vrijTekst(v),
+          pick: () => {
+            if (st.klaar) return;
+            const n = volg.slice();
+            if (on) n.splice(pos, 1); else if (n.length < 3) n.push(vi);
+            this.setState({ volg: n });
+          },
+          badge: 'flex: 0 0 auto; width: 34px; height: 34px; border-radius: 999px; display: flex; align-items: center; justify-content: center; font-size: 14px; ' + (on ? 'background: #F7F3EB; color: #0A341E' : 'border: 1px dashed rgba(10,52,30,0.3)'),
+          style: 'display: flex; align-items: center; gap: 14px; min-height: 64px; padding: 0 18px; border-radius: 18px; cursor: pointer; font-family: inherit; transition: background 400ms, color 400ms; ' + (on ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: #F7F3EB; color: #0A341E; border: 1px solid rgba(10,52,30,0.12)')
+        };
+      }),
+      nogNiet: !st.klaar, klaar: !!st.klaar,
+      bevestigStyle: 'min-height: 48px; padding: 0 26px; border-radius: 999px; font-family: inherit; font-size: 17px; ' + (volg.length === max ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E; cursor: pointer' : 'background: transparent; color: rgba(10,52,30,0.5); border: 1px solid rgba(10,52,30,0.2); cursor: default'),
+      bevestig: () => { if (volg.length === max) this.setState({ klaar: true }); },
+      tijdlijn: volg.map((vi, i) => ({
+        rang: (i + 1) + 'E KEUS',
+        naam: sel.vakmensen[vi].naam,
+        stand: i === 0 ? 'Aanbod verstuurd 09:12, reageert vóór 13:12' : (i === 1 ? 'Krijgt het als de 1e nee zegt' : 'Krijgt het als de 2e nee zegt')
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
