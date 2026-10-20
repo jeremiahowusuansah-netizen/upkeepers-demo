@@ -80,7 +80,7 @@ a{color:#0A341E}a:hover{color:#14492c}
           <h1 class="kop">Laat zien wat er is</h1>
         </div>
         <sc-if value="{{risico}}" hint-placeholder-val="{{ true }}">
-          <div style="display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border-radius: 18px; background: #F7F3EB; border: 1px solid rgba(138,46,31,0.25); border-left: 5px solid #8A2E1F">
+          <div style="display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border-radius: 18px; background: #F7F3EB; border: 1.5px solid #8A2E1F">
             <span style="font-size: 18px; font-weight: 600; color: #8A2E1F">{{risico.kop}}</span>
             <span style="font-size: 17px; line-height: 1.45">{{risico.tekst}}</span>
             <sc-if value="{{risico.tel}}" hint-placeholder-val="{{ false }}"><a href="{{risico.telHref}}" style="margin-top: 6px; min-height: 48px; border-radius: 999px; background: #8A2E1F; color: #F7F3EB; display: flex; align-items: center; justify-content: center; font-size: 17px; text-decoration: none">Bel {{risico.tel}}</a></sc-if>
@@ -328,7 +328,7 @@ class Component extends DCLogic {
       toonVerder: !st.klaar && (step === 3 || step === 4),
       verderTekst: step === 4 && !verderOk ? 'Kies minstens één moment' : 'Verder',
       verderStyle: verderOk ? '' : 'opacity: 0.4; pointer-events: none',
-      barStyle: 'position: absolute; left: 0; top: -0.5px; height: 2px; background: #CBA45C; transition: width 560ms cubic-bezier(.22,.61,.36,1); width: ' + Math.round((st.i + 1) / st.pad.length * 100) + '%',
+      barStyle: 'position: absolute; left: 0; top: -0.5px; width: 100%; height: 2px; background: #CBA45C; transform-origin: left; transition: transform 560ms cubic-bezier(.22,.61,.36,1); transform: scaleX(' + ((st.i + 1) / st.pad.length).toFixed(3) + ')',
       ruimtes: R.map((r, i) => ({ ...r, style: tile(st.rGekozen === i), pick: () => kiesEnDoor({ r: i, rGekozen: i, e: -1 }) })),
       elementen: els.map((n, i) => ({ naam: n, hint: E[n] ? E[n][0] : '', icon: E[n] ? E[n][1] : '', style: kies(st.e === i), pick: () => kiesEnDoor({ e: i }) })),
       ruimteCaps: ruimteNaam.toUpperCase(),
