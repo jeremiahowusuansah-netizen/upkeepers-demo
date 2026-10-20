@@ -1,0 +1,133 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><style>*{animation:none!important;transition:none!important}</style></head><body style="margin:0">
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.op{animation:op 900ms cubic-bezier(.22,.61,.36,1) both}
+.op2{animation:op 900ms 120ms cubic-bezier(.22,.61,.36,1) both}
+.op3{animation:op 900ms 240ms cubic-bezier(.22,.61,.36,1) both}
+.huis{animation:huis 1400ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes huis{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.op,.op2,.op3,.huis{animation:none}}
+.lbl{font-size:10px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+.kaart{background:#F7F3EB;border:1px solid rgba(10,52,30,0.06);border-radius:22px}
+.plus{width:36px;height:36px;border-radius:999px;background:#2F5D45;color:#F7F3EB;display:flex;align-items:center;justify-content:center;text-decoration:none;flex:0 0 auto;transition:transform 120ms}
+.plus:active{transform:scale(.94)}
+</style>
+
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif; background: #ECE5D7">
+  <div style="position: absolute; inset: 0 0 104px 0; overflow-y: auto; padding-bottom: 20px">
+    <div style="padding: 20px 20px 0; display: flex; justify-content: space-between; align-items: center">
+      <span style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 12px; letter-spacing: 0.32em">UPKEEPERS</span>
+      <span style="display: flex; gap: 8px">
+        <a href="GMeldingen.html" aria-label="Meldingen, 2 nieuw" style="position: relative; width: 40px; height: 40px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 20a2 2 0 0 0 4 0"/></svg>
+          <span style="position: absolute; top: 7px; right: 8px; width: 7px; height: 7px; border-radius: 999px; background: #CBA45C; border: 1.5px solid #F7F3EB"></span></a>
+        <a href="CAccount.html" aria-label="Account" style="width: 40px; height: 40px; border-radius: 999px; display: flex; align-items: center; justify-content: center; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); font-family: 'Montserrat', sans-serif; font-size: 13px; text-decoration: none">SV</a>
+      </span>
+    </div>
+
+    <div class="op" style="padding: 22px 24px 0; display: flex; flex-direction: column; gap: 6px">
+      <span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.72)">Goedemorgen,</span>
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 42px; line-height: 1; letter-spacing: -0.025em">Sanne</h1>
+      <span style="margin-top: 6px; display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(10,52,30,0.72)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 21s-7-6.1-7-11a7 7 0 0 1 14 0c0 4.9-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Kastanjelaan 14 · bereikbaar tot 18:00</span>
+    </div>
+
+    <div class="huis" style="position: relative; height: 250px; margin-top: 4px">
+            <svg width="250" height="234" viewBox="0 0 320 300" fill="none" role="img" aria-label="Jouw woning" style="position: absolute; left: 70px; top: 8px">
+        <defs>
+          <linearGradient id="voor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A5B40"/><stop offset="1" stop-color="#123522"/></linearGradient>
+          <linearGradient id="zij" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0F2C1C"/><stop offset="1" stop-color="#0A2114"/></linearGradient>
+          <linearGradient id="dakR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26362C"/><stop offset="1" stop-color="#141F18"/></linearGradient>
+          <linearGradient id="raam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E3B4"/><stop offset="1" stop-color="#CBA45C"/></linearGradient>
+          <filter id="schaduw" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="12"/></filter>
+        </defs>
+        <ellipse cx="165" cy="292" rx="150" ry="26" fill="#0A341E" opacity=".28" filter="url(#schaduw)"/>
+        <polygon points="60,150 115,105 205,60 150,105" fill="#141F18"/>
+        <polygon points="60,250 60,150 115,105 170,200 170,300" fill="url(#voor)"/>
+        <polygon points="170,200 260,155 260,255 170,300" fill="url(#zij)"/>
+        <polygon points="115,105 170,200 260,155 205,60" fill="url(#dakR)"/>
+        <path d="M115 105L205 60" stroke="#CBA45C" stroke-width="1.2"/>
+        <polygon points="75,182 103,195 103,229 75,216" fill="url(#raam)"/>
+        <polygon points="127,206 155,218 155,252 127,240" fill="url(#raam)"/>
+        <polygon points="105,140 125,149 125,170 105,161" fill="url(#raam)" opacity=".8"/>
+        <polygon points="190,200 220,185 220,219 190,234" fill="url(#raam)"/>
+        <polygon points="232,199 250,190 250,258 232,267" fill="#071A0F"/>
+      </svg>
+      <a href="CAPK.html" style="position: absolute; right: 20px; top: 6px; display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 14px; border-radius: 999px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); font-size: 12px; text-decoration: none"><span style="width: 6px; height: 6px; border-radius: 999px; background: #0A341E"></span>Goede staat</a>
+    </div>
+
+    <a href="CGoedkeuren.html" class="op2" style="margin: 4px 16px 0; padding: 14px 16px 14px 18px; border-radius: 20px; background: #2F5D45; color: #F7F3EB; display: flex; justify-content: space-between; align-items: center; gap: 12px; text-decoration: none">
+      <span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 10px; letter-spacing: 0.2em; color: rgba(247,243,235,0.7)">NU TE DOEN</span><span style="font-size: 15px">Keur het werk van Marco goed</span></span>
+      <span style="min-height: 36px; padding: 0 14px; border-radius: 999px; background: #F7F3EB; color: #0A341E; display: flex; align-items: center; font-size: 13px">Bekijk</span>
+    </a>
+
+    <div class="op2 kaart" style="margin: 10px 16px 0; padding: 16px 18px; display: flex; align-items: center; gap: 14px">
+      <span style="flex: 0 0 auto; width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(160deg, #2E6446, #123522); display: flex; align-items: center; justify-content: center; color: #F7F3EB"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16M6 8a6 6 0 0 0 12 0M12 14v3"/></svg></span>
+      <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 3px; min-width: 0">
+        <span class="lbl">WEER HETZELFDE?</span>
+        <span style="font-size: 15px">Rookmelders testen</span>
+        <span style="font-size: 12px; color: rgba(10,52,30,0.62)">Vorig jaar 3 november, elk najaar</span>
+      </span>
+      <a href="CMelden.html" class="plus" aria-label="Plan opnieuw in"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a>
+    </div>
+
+    <div class="op3" style="padding: 26px 16px 0; display: flex; flex-direction: column; gap: 10px">
+      <span style="padding: 0 8px; display: flex; justify-content: space-between; align-items: baseline"><span class="lbl">DIT KUN JE NU PLANNEN · 2</span><a href="CAPK.html" style="font-size: 12px; color: rgba(10,52,30,0.72)">Waarom</a></span>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 20px; background: #F7F3EB; border: 1.5px solid #CBA45C">
+          <span style="flex: 0 0 auto; width: 42px; height: 42px; border-radius: 12px; background: #F1E4C6; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/></svg></span>
+          <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-size: 15px">Kitnaden badkamer</span><span style="font-size: 12px; color: rgba(10,52,30,0.7)">Houdt water uit de vloer eronder</span><span style="font-size: 10px; letter-spacing: 0.16em; color: #8A6D32">BINNEN 3 MAANDEN</span></span>
+          <a href="CMelden.html" style="flex: 0 0 auto; min-height: 38px; padding: 0 14px; border-radius: 999px; background: #2F5D45; color: #F7F3EB; display: flex; align-items: center; font-size: 13px; text-decoration: none">Plan in</a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 20px; background: #F7F3EB; border: 1.5px solid #CBA45C">
+          <span style="flex: 0 0 auto; width: 42px; height: 42px; border-radius: 12px; background: #F1E4C6; display: flex; align-items: center; justify-content: center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-7 9 7M2 11h20v2.5H2zM19 13.5v4"/></svg></span>
+          <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 3px; min-width: 0"><span style="font-size: 15px">Dakgoot schoonmaken</span><span style="font-size: 12px; color: rgba(10,52,30,0.7)">Voorkomt water langs de gevel</span><span style="font-size: 10px; letter-spacing: 0.16em; color: #8A6D32">NOVEMBER</span></span>
+          <a href="CMelden.html" style="flex: 0 0 auto; min-height: 38px; padding: 0 14px; border-radius: 999px; background: #2F5D45; color: #F7F3EB; display: flex; align-items: center; font-size: 13px; text-decoration: none">Plan in</a>
+        </div>
+    </div>
+
+    <div class="op3" style="padding: 26px 24px 0; display: flex; flex-direction: column; gap: 12px">
+      <span class="lbl">JE HUIS DIT JAAR</span>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+        <div class="kaart" style="padding: 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 26px">4</span><span style="font-size: 12px">klussen af</span><span style="font-size: 11px; color: rgba(10,52,30,0.62)">alle goedgekeurd</span></div>
+        <div class="kaart" style="padding: 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 26px">2</span><span style="font-size: 12px">naar goed</span><span style="font-size: 11px; color: rgba(10,52,30,0.62)">dak en kozijnen</span></div>
+        <div class="kaart" style="padding: 14px; display: flex; flex-direction: column; gap: 2px"><span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 26px">23</span><span style="font-size: 12px">oktober</span><span style="font-size: 11px; color: rgba(10,52,30,0.62)">volgende bezoek</span></div>
+      </div>
+    </div>
+
+    <div class="op3" style="padding: 26px 0 0; display: flex; flex-direction: column; gap: 12px">
+      <span style="padding: 0 24px; display: flex; justify-content: space-between; align-items: baseline"><span class="lbl">VOOR DEZE HERFST</span><a href="CAPK.html" style="font-size: 12px; color: rgba(10,52,30,0.72)">Alles</a></span>
+      <div style="display: flex; gap: 10px; overflow-x: auto; padding: 0 24px 4px">
+        <div class="kaart" style="flex: 0 0 200px; padding: 10px; display: flex; flex-direction: column; gap: 8px">
+          <span style="height: 96px; border-radius: 14px; background: linear-gradient(160deg, #3B5C45, #123522); display: flex; align-items: center; justify-content: center; color: #F7F3EB"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10h8a3 3 0 0 1 3 3v1M9 10V6M6 6h6M15 17v.5M15 20v.5M4 10v4h4"/></svg></span>
+          <span style="display: flex; justify-content: space-between; align-items: flex-end; gap: 8px; padding: 0 4px 4px"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">Buitenkraan aftappen</span><span style="font-size: 11px; color: rgba(10,52,30,0.62)">Vóór de eerste vorst</span></span><a href="CMelden.html" class="plus" aria-label="Plan buitenkraan aftappen in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a></span>
+        </div>
+        <div class="kaart" style="flex: 0 0 200px; padding: 10px; display: flex; flex-direction: column; gap: 8px">
+          <span style="height: 96px; border-radius: 14px; background: linear-gradient(160deg, #2E6446, #0E2A1B); display: flex; align-items: center; justify-content: center; color: #F7F3EB"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7v12M9 6v13M13 6v13M17 6v13M3 10h18M3 16h18"/></svg></span>
+          <span style="display: flex; justify-content: space-between; align-items: flex-end; gap: 8px; padding: 0 4px 4px"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">Radiatoren ontluchten</span><span style="font-size: 11px; color: rgba(10,52,30,0.62)">Als het stookseizoen begint</span></span><a href="CMelden.html" class="plus" aria-label="Plan radiatoren ontluchten in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a></span>
+        </div>
+        <div class="kaart" style="flex: 0 0 200px; padding: 10px; display: flex; flex-direction: column; gap: 8px">
+          <span style="height: 96px; border-radius: 14px; background: linear-gradient(160deg, #26362C, #141F18); display: flex; align-items: center; justify-content: center; color: #F7F3EB"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 21V11l8-6 8 6v10M15 7V3h3v6"/></svg></span>
+          <span style="display: flex; justify-content: space-between; align-items: flex-end; gap: 8px; padding: 0 4px 4px"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 14px">Schoorsteen vegen</span><span style="font-size: 11px; color: rgba(10,52,30,0.62)">Eens per jaar</span></span><a href="CMelden.html" class="plus" aria-label="Plan schoorsteen vegen in"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav aria-label="Hoofdmenu" style="position: absolute; left: 16px; right: 16px; bottom: 26px; height: 64px; border-radius: 999px; background: rgba(247,243,235,0.94); border: 1px solid rgba(10,52,30,0.1); backdrop-filter: blur(24px); display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center; padding: 0 6px">
+    <a href="CStart.html" aria-current="page" style="height: 52px; border-radius: 999px; background: rgba(10,52,30,0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Woning</a>
+    <a href="CDossier.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; color: rgba(10,52,30,0.62); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/></svg>Dossier</a>
+    <a href="CMelden.html" aria-label="Meld een klus" style="justify-self: center; align-self: start; margin-top: -16px; width: 50px; height: 50px; border-radius: 999px; background: #2F5D45; color: #F7F3EB; border: 3px solid #ECE5D7; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 8px 18px -12px rgba(0,0,0,0.35)">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></a>
+    <a href="CKlussen.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; color: rgba(10,52,30,0.62); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>Klussen</a>
+    <a href="CAccount.html" style="height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; font-size: 10px; color: rgba(10,52,30,0.62); text-decoration: none">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>Account</a>
+    <span style="position: absolute; left: 50%; bottom: 7px; transform: translateX(-50%); font-size: 10px; pointer-events: none">Melden</span>
+  </nav>
+</div>
+</body></html>
