@@ -185,7 +185,7 @@ class Component extends DCLogic {
     const views = ['kies', 'overzicht', 'bank', 'wacht', 'welkom'];
     const terug = () => {
       const i = views.indexOf(st.view);
-      if (i <= 0) { if (typeof history !== 'undefined' && history.length > 1) history.back(); return; }
+      if (i <= 0) { if (typeof window !== 'undefined' && window.UPK && history.length > 1) history.back(); return; }
       this.setState({ view: views[st.view === 'wacht' ? 2 : i - 1] });
     };
     return {

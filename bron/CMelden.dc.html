@@ -289,7 +289,7 @@ class Component extends DCLogic {
     const plan = st.plan ? PLAN[st.plan] : null;
     const ga = (delta) => {
       const i = st.i + delta;
-      if (i < 0) { if (typeof history !== 'undefined' && history.length > 1) history.back(); return; }
+      if (i < 0) { if (typeof window !== 'undefined' && window.UPK && history.length > 1) history.back(); return; }
       this.setState({ i: Math.min(st.pad.length - 1, i), spoed: false });
     };
     const kiesEnDoor = (patch) => {
