@@ -53,12 +53,13 @@ a{color:#0A341E}a:hover{color:#14492c}
       <div style="display: flex; flex-direction: column; gap: 6px">
         <span class="lbl">KIES DRIE VAKMANNEN, OP VOLGORDE · {{aantalGekozen}} VAN 3</span>
         <span style="font-size: 15px; font-weight: 300; color: rgba(10,52,30,0.72)">Tik ze aan in de volgorde waarin ze de klus aangeboden krijgen. Beschikbaarheid komt uit hun eigen agenda.</span>
+        <span style="font-size: 15px; color: rgba(10,52,30,0.72)"><strong style="font-weight: 600">Zo kiezen we nu:</strong> past bij de klus, kan op een moment van de klant, ervaring, beoordeling. Een vakman <em>in opbouw</em> mag op een eenvoudige klus ook 1e keus zijn.</span>
       </div>
       <div style="display: flex; flex-direction: column; gap: 8px">
         <sc-for list="{{rijen}}" as="r" hint-placeholder-count="3">
           <button type="button" onClick="{{r.pick}}" style="{{r.style}}">
             <span style="{{r.badge}}">{{r.rang}}</span>
-            <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px; text-align: left"><span style="font-size: 17px">{{r.naam}}</span><span style="font-size: 14px; font-weight: 300; opacity: 0.75">{{r.vak}}</span></span>
+            <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px; text-align: left"><span style="font-size: 17px">{{r.naam}}</span><span style="font-size: 14px; font-weight: 300; opacity: 0.75">{{r.vak}}</span><span style="font-size: 14px; opacity: 0.85">{{r.meta}}</span></span>
             <span style="font-size: 14px; text-align: right; opacity: 0.8">{{r.vrijTekst}}</span>
           </button>
         </sc-for>
@@ -84,6 +85,12 @@ a{color:#0A341E}a:hover{color:#14492c}
           </div>
         </sc-if>
       </div>
+      <div class="kaart" style="padding: 18px 22px; display: flex; flex-direction: column; gap: 4px">
+        <span class="lbl" style="padding-bottom: 6px">KLACHTEN EN SIGNALEN · LAATSTE 90 DAGEN</span>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; padding: 10px 0; border-top: 1px solid rgba(10,52,30,0.08); font-size: 15px"><span><strong style="font-weight: 600">Over Dennis K.</strong> · van de klant: verfspatten op de vensterbank</span><span style="color: rgba(10,52,30,0.62)">Opgelost 3 okt</span></div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; padding: 10px 0; border-top: 1px solid rgba(10,52,30,0.08); font-size: 15px"><span><strong style="font-weight: 600">Over Kees V.</strong> · van de klant: twee keer later dan het tijdvak</span><span style="color: #8A6D32">Gesprek gepland</span></div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; padding: 10px 0; border-top: 1px solid rgba(10,52,30,0.08); font-size: 15px"><span><strong style="font-weight: 600">Van Youssef A.</strong> · klant niet thuis op het afgesproken moment</span><span style="color: rgba(10,52,30,0.62)">Genoteerd, 12 sep</span></div>
+      </div>
       <span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.62)">De reactietijd van 4 uur is een voorbeeld en nog niet besloten. Zegt een vakman ja, dan krijgen de vakman en de klant meteen bericht.</span>
     </section>
   </main>
@@ -100,13 +107,13 @@ class Component extends DCLogic {
     const klussen = [
       { code: 'KL-2026-0418 · SCHILDERWERK', type: 'Kozijnen schilderen', waar: 'HILVERSUM · 1 DAG', omschrijving: 'Vier houten kozijnen zuidgevel, dekverf bladdert, lokaal houtrot. Uit de Woning-APK van 14 oktober.', wacht: 'Wacht 2 dagen', urgent: true,
         slots: ['MA 27 OKT · OCHTEND', 'WO 29 OKT · MIDDAG', 'DO 30 OKT · OCHTEND'],
-        vakmensen: [ { naam: 'Marco B.', vak: 'Schilder · 11 jaar', vrij: [true, false, true] }, { naam: 'Dennis K.', vak: 'Schilder · 6 jaar', vrij: [false, true, true] }, { naam: 'Youssef A.', vak: 'Timmerman en schilder · 9 jaar', vrij: [true, true, false] } ] },
+        vakmensen: [ { naam: 'Marco B.', vak: 'Schilder · 11 jaar', vrij: [true, false, true], score: '4,9', klachten: 0 }, { naam: 'Dennis K.', vak: 'Schilder · 6 jaar', vrij: [false, true, true], score: '4,6', klachten: 1 }, { naam: 'Youssef A.', vak: 'Timmerman en schilder · 9 jaar', vrij: [true, true, false], score: '4,8', klachten: 0 }, { naam: 'Sem T.', vak: 'Schilder · 2 jaar', vrij: [true, true, true], score: '4,7', klachten: 0, groeit: true } ] },
       { code: 'KL-2026-0421 · SANITAIR', type: 'Kraan lekt', waar: 'BUSSUM · 1 UUR', omschrijving: 'Keukenkraan druppelt, ook dicht. Klant stuurde een video van 20 seconden.', wacht: 'Wacht 1 dag', urgent: false,
         slots: ['DI 21 OKT · MIDDAG', 'WO 22 OKT · OCHTEND', 'VR 24 OKT · OCHTEND'],
-        vakmensen: [ { naam: 'Ahmed R.', vak: 'Installateur · 14 jaar', vrij: [true, true, false] }, { naam: 'Kees V.', vak: 'Loodgieter · 22 jaar', vrij: [false, true, true] } ] },
+        vakmensen: [ { naam: 'Ahmed R.', vak: 'Installateur · 14 jaar', vrij: [true, true, false], score: '4,9', klachten: 0 }, { naam: 'Kees V.', vak: 'Loodgieter · 22 jaar', vrij: [false, true, true], score: '4,5', klachten: 2 } ] },
       { code: 'KL-2026-0422 · ELEKTRA', type: 'Stopcontact zonder stroom', waar: 'AMSTELVEEN · 1 UUR', omschrijving: 'Twee stopcontacten in de woonkamer doen het niet. Aardlekschakelaar staat aan.', wacht: 'Vandaag', urgent: false,
         slots: ['DO 23 OKT · AVOND', 'VR 24 OKT · MIDDAG', 'MA 27 OKT · OCHTEND'],
-        vakmensen: [ { naam: 'Rick de W.', vak: 'Elektricien · 8 jaar', vrij: [false, true, true] } ] }
+        vakmensen: [ { naam: 'Rick de W.', vak: 'Elektricien · 8 jaar', vrij: [false, true, true], score: '4,8', klachten: 0 } ] }
     ];
     const sel = klussen[st.k];
     const volg = st.volg || [];
@@ -128,6 +135,7 @@ class Component extends DCLogic {
           ...v,
           rang: on ? (pos + 1) + 'e' : '',
           vrijTekst: vrijTekst(v),
+          meta: (v.groeit ? 'In opbouw · ' : '') + 'beoordeling ' + v.score + ' · ' + (v.klachten === 0 ? 'geen klachten' : v.klachten + (v.klachten === 1 ? ' klacht' : ' klachten') + ', bekijk hieronder'),
           pick: () => {
             if (st.klaar) return;
             const n = volg.slice();

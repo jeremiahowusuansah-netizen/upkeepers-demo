@@ -144,6 +144,7 @@
     if (!root) return;
     const phone = /width:\s*390px/.test(root.getAttribute('style') || '');
     root.classList.add(phone ? 'dc-tel' : 'dc-desk');
+    root.classList.toggle('groter', phone && (window.UPK || {}).tekst === 'groter');
     const want = phone ? 'width=device-width, initial-scale=1, viewport-fit=cover' : 'width=1280';
     if (viewport.getAttribute('content') !== want) viewport.setAttribute('content', want);
   }
@@ -201,5 +202,6 @@
 
   window.addEventListener('hashchange', go);
   window.UPKnaar = (to) => { location.hash = '#/' + to; };
+  window.UPKfit = fit;
   go();
 })();

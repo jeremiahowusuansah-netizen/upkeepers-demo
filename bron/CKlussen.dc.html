@@ -25,18 +25,18 @@ a{color:#0A341E}a:hover{color:#14492c}
       <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 34px; letter-spacing: -0.02em">Klussen</h1>
     </div>
 
-    <div style="padding: 18px 16px 0">
-      <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 0 8px 10px"><span class="lbl">OKTOBER · WEEK 43</span><span style="font-size: 14px; color: rgba(10,52,30,0.62)">Vandaag ma 20</span></div>
-      <div style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px">
-        <sc-for list="{{dagen}}" as="d" hint-placeholder-count="7">
-          <button type="button" onClick="{{d.pick}}" style="{{d.style}}">
-            <span style="font-size: 12px; letter-spacing: 0.12em; opacity: 0.75">{{d.dag}}</span>
-            <span style="font-family: 'Montserrat', sans-serif; font-size: 19px; font-weight: 400">{{d.nr}}</span>
-            <span style="{{d.stip}}"></span>
-          </button>
-        </sc-for>
-      </div>
-    </div>
+    <a href="CKlus.dc.html" class="op" style="margin: 18px 16px 0; padding: 16px 18px; border-radius: 22px; background: #0A341E; color: #F7F3EB; display: flex; gap: 16px; align-items: center; text-decoration: none">
+      <span style="flex: 0 0 auto; width: 64px; padding: 8px 0; border-radius: 14px; background: rgba(247,243,235,0.1); display: flex; flex-direction: column; align-items: center; gap: 2px">
+        <span style="font-size: 13px; letter-spacing: 0.16em; color: #CBA45C">DO</span>
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 28px; line-height: 1">23</span>
+        <span style="font-size: 13px; letter-spacing: 0.12em; opacity: 0.8">OKT</span>
+      </span>
+      <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 3px; min-width: 0">
+        <span style="font-size: 13px; letter-spacing: 0.22em; color: rgba(247,243,235,0.7)">VOLGEND BEZOEK</span>
+        <span style="font-size: 18px">Ahmed komt voor je cv-ketel</span>
+        <span style="font-size: 15px; color: rgba(247,243,235,0.8)">09:00 tot 11:00 · je hoeft alleen thuis te zijn</span>
+      </span>
+    </a>
 
     <div style="padding: 18px 16px 0">
       <div role="tablist" aria-label="Soort" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; padding: 4px; border-radius: 999px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.08)">
@@ -84,11 +84,10 @@ a{color:#0A341E}a:hover{color:#14492c}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { tab: 0, dag: 3 };
+    this.state = { tab: 0 };
   }
   renderVals() {
     const st = this.state;
-    const dagen = [['MA', 20, false], ['DI', 21, false], ['WO', 22, false], ['DO', 23, true], ['VR', 24, false], ['ZA', 25, false], ['ZO', 26, false]];
     const lijsten = [
       [
         { wat: 'Cv-ketel onderhoud', uitleg: 'Zolder · Ahmed komt · ongeveer 2 uur', wanneer: 'DO 23 OKT', stand: 'Bevestigd, 09:00 tot 11:00', k: 'goed', link: 'CKlus.dc.html', g: '#2E6446, #123522' },
@@ -107,12 +106,6 @@ class Component extends DCLogic {
     const dot = (k) => 'width: 6px; height: 6px; border-radius: 999px; box-sizing: border-box; ' + (k === 'goed' ? 'background: #0A341E' : k === 'aandacht' ? 'background: #CBA45C' : 'border: 1px solid #0A341E');
     const lijst = lijsten[st.tab];
     return {
-      dagen: dagen.map((d, i) => ({
-        dag: d[0], nr: d[1],
-        pick: () => this.setState({ dag: i }),
-        stip: 'width: 5px; height: 5px; border-radius: 999px; background: ' + (d[2] ? (i === st.dag ? '#CBA45C' : '#0A341E') : 'transparent'),
-        style: 'min-height: 70px; border-radius: 18px; cursor: pointer; font-family: inherit; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; transition: background 300ms, color 300ms; ' + (i === st.dag ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: #F7F3EB; color: #0A341E; border: 1px solid rgba(10,52,30,0.08)')
-      })),
       tabs: ['Gepland', 'Loopt nu', 'Afgerond'].map((n, i) => ({
         naam: n + ' · ' + lijsten[i].length, aan: i === st.tab ? 'true' : 'false',
         pick: () => this.setState({ tab: i }),

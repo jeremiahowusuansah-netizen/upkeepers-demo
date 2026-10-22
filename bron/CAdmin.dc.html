@@ -20,12 +20,25 @@ a{color:#0A341E}a:hover{color:#14492c}
       <a href="CAdmin.dc.html" aria-label="Naar de startpagina" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 0.32em; color: inherit; text-decoration: none">UPKEEPERS <span style="color: rgba(10,52,30,0.62)">· ADMIN</span></a>
       <label style="flex: 1 1 320px; display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px; border-radius: 999px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); color: #0A341E">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
-        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Zoek op naam, adres of postcode en huisnummer</span>
-        <input type="search" value="1213 AB 14" placeholder="Naam, adres of postcode + huisnummer" style="flex: 1 1 auto; min-width: 0; border: 0; background: transparent; font-family: inherit; font-size: 17px; color: #0A341E; outline: none">
+        <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Zoek op naam, telefoonnummer, adres, postcode en huisnummer, e-mail of klusnummer</span>
+        <input type="search" value="{{zoek}}" onChange="{{zetZoek}}" placeholder="Naam, telefoon, adres, postcode, e-mail of klusnummer" style="flex: 1 1 auto; min-width: 0; border: 0; background: transparent; font-family: inherit; font-size: 17px; color: #0A341E; outline: none">
       </label>
       <span style="font-size: 15px; color: rgba(10,52,30,0.62)">Lisa · supportdienst</span>
     </div>
   </header>
+
+  <div style="max-width: 1280px; margin: 0 auto; padding: 16px 24px 0">
+    <div style="{{belStyle}}">
+      <span style="display: flex; align-items: center; gap: 12px; min-width: 0">
+        <span style="{{belDot}}"></span>
+        <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-size: 17px; font-weight: 600">{{belKop}}</span><span style="font-size: 15px; opacity: 0.85">{{belSub}}</span></span>
+      </span>
+      <span style="display: flex; gap: 8px; flex-wrap: wrap">
+        <sc-if value="{{belRinkelt}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{neemOp}}" style="min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: #F7F3EB; color: #0A341E; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">Neem op</button></sc-if>
+        <sc-if value="{{belBezig}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{hangOp}}" style="min-height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: #F7F3EB; color: #0A341E; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer">Hang op</button></sc-if>
+      </span>
+    </div>
+  </div>
 
   <main style="max-width: 1280px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
     <aside style="flex: 1 1 300px; max-width: 100%; display: flex; flex-direction: column; gap: 16px">
@@ -52,11 +65,20 @@ a{color:#0A341E}a:hover{color:#14492c}
         <div style="display: flex; justify-content: space-between; gap: 8px; font-size: 16px"><span>Kitnaden badkamer</span><span style="font-size: 14px; font-weight: 600; padding: 3px 8px; border-radius: 999px; border: 1px solid rgba(203,164,92,0.6); color: rgba(10,52,30,0.62)">Aandacht</span></div>
       </div>
       <div style="background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); border-radius: 22px; backdrop-filter: blur(24px); padding: 16px 20px; display: flex; flex-direction: column; gap: 4px">
-        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; color: rgba(10,52,30,0.62)">EERDERE GESPREKKEN MET KLANTENSERVICE · 3</span>
+        <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.08em; color: rgba(10,52,30,0.62)">EERDERE GESPREKKEN MET KLANTENSERVICE · {{aantalGesprekken}}</span>
+        <sc-if value="{{samenvatting}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; gap: 6px; padding: 12px 14px; margin: 6px 0; border-radius: 14px; border: 1px solid #CBA45C; background: rgba(203,164,92,0.1)">
+            <span style="font-size: 13px; font-weight: 600; letter-spacing: 0.06em">VANDAAG · LISA · TELEFOON · SAMENVATTING, NOG TE CONTROLEREN</span>
+            <span style="font-size: 15px; line-height: 1.5">Sanne vraagt of Ahmed donderdag ook naar de radiator op de overloop kan kijken; die wordt bovenaan niet warm. Afgesproken: Ahmed kijkt mee, geen extra afspraak nodig.</span>
+            <span style="font-size: 15px; line-height: 1.5"><strong style="font-weight: 600">Actie:</strong> notitie bij de klus van donderdag voor Ahmed.</span>
+            <span style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center"><button type="button" onClick="{{bewaar}}" style="min-height: 40px; padding: 0 14px; border: 0; border-radius: 999px; background: #0A341E; color: #F7F3EB; font-family: inherit; font-size: 14px; cursor: pointer">{{bewaarTekst}}</button><span style="font-size: 13px; color: rgba(10,52,30,0.62)">Gemaakt uit de opname. De beller hoorde vooraf dat het gesprek wordt opgenomen.</span></span>
+          </div>
+        </sc-if>
         <div style="display: flex; flex-direction: column; gap: 3px; padding: 10px 0; border-bottom: 1px solid rgba(10,52,30,0.1)"><span style="font-size: 14px; font-weight: 600; letter-spacing: 0.06em">3 OKT · LISA · TELEFOON</span><span style="font-size: 16px; line-height: 1.45">Vroeg wanneer het APK-rapport komt. Uitgelegd: binnen twee werkdagen in de app.</span></div>
         <div style="display: flex; flex-direction: column; gap: 3px; padding: 10px 0; border-bottom: 1px solid rgba(10,52,30,0.1)"><span style="font-size: 14px; font-weight: 600; letter-spacing: 0.06em">24 SEP · DAAN · BERICHT</span><span style="font-size: 16px; line-height: 1.45">Kitnaden: vond de kleur te wit. Afgesproken: volgende keer kleur vooraf laten kiezen.</span></div>
         <div style="display: flex; flex-direction: column; gap: 3px; padding: 10px 0"><span style="font-size: 14px; font-weight: 600; letter-spacing: 0.06em">2 MRT · DAAN · TELEFOON</span><span style="font-size: 16px; line-height: 1.45">Welkomstgesprek. Sleutel ligt bij de buren, nr. 16.</span></div>
-        <a href="#" style="min-height: 40px; display: flex; align-items: center; font-size: 15px; font-weight: 600">+ Notitie van dit gesprek</a>
+        <a href="#" onClick="{{notitie}}" style="min-height: 40px; display: flex; align-items: center; font-size: 15px; font-weight: 600">+ Notitie van dit gesprek</a>
+        <sc-if value="{{notitieOpen}}" hint-placeholder-val="{{ false }}"><textarea rows="3" aria-label="Notitie" placeholder="Wat is er besproken?" style="border-radius: 12px; border: 1px solid rgba(10,52,30,0.16); background: #FFFFFF; padding: 10px 12px; font-family: inherit; font-size: 15px; color: #0A341E; resize: vertical"></textarea></sc-if>
       </div>
     </aside>
 
@@ -68,8 +90,8 @@ a{color:#0A341E}a:hover{color:#14492c}
           <span style="font-size: 17px; line-height: 1.5; color: rgba(10,52,30,0.62)">Marco (schilder) leverde op om 10:40. Kozijnen schoven van aandacht naar goed. Uitbetaling aan Marco staat klaar. Marco meldde: rechterraam boven klemt licht, hang- en sluitwerk.</span>
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap">
-          <a href="#" style="min-height: 44px; display: flex; align-items: center; padding: 0 16px; border-radius: 999px; background: #0A341E; color: #F7F3EB; font-weight: 500; font-size: 16px; text-decoration: none">Plan vervolgklus</a>
-          <a href="#" style="min-height: 44px; display: flex; align-items: center; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.1); color: #0A341E; font-weight: 600; font-size: 16px; text-decoration: none">Open klus</a>
+          <a href="CAdminToewijzen.dc.html" style="min-height: 44px; display: flex; align-items: center; padding: 0 16px; border-radius: 999px; background: #0A341E; color: #F7F3EB; font-weight: 500; font-size: 16px; text-decoration: none">Plan vervolgklus</a>
+          <a href="CAdminToewijzen.dc.html" style="min-height: 44px; display: flex; align-items: center; padding: 0 16px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.1); color: #0A341E; font-weight: 600; font-size: 16px; text-decoration: none">Open klus</a>
         </div>
       </div>
 
@@ -96,8 +118,30 @@ a{color:#0A341E}a:hover{color:#14492c}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":900}}'>
 class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { bel: 'rinkelt', bewaard: false, zoek: '06 12 34 56 78' };
+  }
   renderVals() {
-    return {};
+    const st = this.state;
+    const kleur = st.bel === 'rinkelt' ? '#0A341E' : '#2F5D45';
+    return {
+      zoek: st.zoek,
+      zetZoek: (e) => this.setState({ zoek: e && e.target ? e.target.value : st.zoek }),
+      belStyle: 'display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 18px; border-radius: 20px; ' + (st.bel === 'klaar' ? 'background: #F7F3EB; color: #0A341E; border: 1px solid rgba(10,52,30,0.1)' : 'background: ' + kleur + '; color: #F7F3EB'),
+      belDot: 'flex: 0 0 auto; width: 10px; height: 10px; border-radius: 999px; background: ' + (st.bel === 'klaar' ? '#0A341E' : '#CBA45C'),
+      belKop: st.bel === 'rinkelt' ? 'Sanne de Vries belt' : st.bel === 'bezig' ? 'In gesprek met Sanne de Vries' : 'Gesprek met Sanne afgelopen',
+      belSub: st.bel === 'rinkelt' ? '06 12 34 56 78 · herkend, haar dossier staat hieronder al open' : st.bel === 'bezig' ? 'Wordt opgenomen en meteen samengevat' : 'De samenvatting staat bij de eerdere gesprekken',
+      belRinkelt: st.bel === 'rinkelt', belBezig: st.bel === 'bezig',
+      neemOp: () => this.setState({ bel: 'bezig' }),
+      hangOp: () => this.setState({ bel: 'klaar' }),
+      samenvatting: st.bel === 'klaar',
+      aantalGesprekken: st.bel === 'klaar' ? 4 : 3,
+      notitie: () => this.setState({ notitieOpen: !st.notitieOpen }),
+      notitieOpen: !!st.notitieOpen,
+      bewaar: () => this.setState({ bewaard: true }),
+      bewaarTekst: st.bewaard ? '✓ Bewaard bij de klant' : 'Klopt, bewaar'
+    };
   }
 }
 </script>

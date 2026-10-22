@@ -51,26 +51,66 @@ tr{border-bottom:1px solid rgba(10,52,30,0.1)}
       <span style="font-size: 16px; line-height: 1.5"><strong style="font-weight: 600">Hoe je het aanpakt, bepaal jij.</strong> Zie je ter plekke dat er meer aan de hand is, meld het in de app en stel voor wat jij zou doen.</span>
     </div>
 
-    <div style="margin: 16px 16px 0; padding: 16px 18px; border-radius: 22px; border: 1px solid rgba(10,52,30,0.1); display: flex; justify-content: space-between; align-items: center; gap: 10px">
-      <span style="font-size: 16px">Weet je al wat je nodig hebt?</span>
-      <span style="display: flex; gap: 6px">
-        <button type="button" style="min-width: 56px; min-height: 44px; border-radius: 999px; border: 1px solid #0A341E; background: #0A341E; color: #F7F3EB; font-family: inherit; font-size: 16px; cursor: pointer">Ja</button>
-        <button type="button" style="min-width: 56px; min-height: 44px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.1); background: transparent; color: #0A341E; font-family: inherit; font-size: 16px; cursor: pointer">Nee</button>
-      </span>
+    <div style="margin: 16px 16px 0; padding: 16px 18px; border-radius: 22px; border: 1px solid rgba(10,52,30,0.1); display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px">
+        <span style="font-size: 17px">Is dit genoeg om in te schatten?</span>
+        <span style="display: flex; gap: 6px">
+          <button type="button" onClick="{{zegJa}}" style="{{jaStyle}}">Ja</button>
+          <button type="button" onClick="{{zegNee}}" style="{{neeStyle}}">Nee</button>
+        </span>
+      </div>
+      <sc-if value="{{nee}}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span style="font-size: 16px; color: rgba(10,52,30,0.72)">Wat mis je?</span>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{missen}}" as="m" hint-placeholder-count="5"><button type="button" onClick="{{m.pick}}" style="{{m.style}}">{{m.naam}}</button></sc-for>
+          </div>
+          <sc-if value="{{gemist}}" hint-placeholder-val="{{ false }}"><span style="font-size: 16px; line-height: 1.45">We vragen het de klant en zetten het voortaan bij dit soort klussen standaard in de opdracht.</span></sc-if>
+        </div>
+      </sc-if>
+      <sc-if value="{{ja}}" hint-placeholder-val="{{ false }}"><span style="font-size: 16px; color: rgba(10,52,30,0.72)">Dank je. Dat telt mee: bij dit soort klussen vragen we dan niet meer uit.</span></sc-if>
     </div>
+    <sc-if value="{{weiger}}" hint-placeholder-val="{{ false }}">
+      <div style="margin: 16px 16px 0; padding: 16px 18px; border-radius: 22px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 17px">Geen probleem. Waarom niet?</span>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px">
+          <sc-for list="{{weigerRedenen}}" as="w" hint-placeholder-count="4"><button type="button" onClick="{{w.pick}}" style="{{w.style}}">{{w.naam}}</button></sc-for>
+        </div>
+        <span style="font-size: 15px; color: rgba(10,52,30,0.66)">De opdracht gaat vanzelf naar de volgende vakman.</span>
+      </div>
+    </sc-if>
     <p style="margin: 14px 24px 20px; font-size: 14px; font-weight: 300; line-height: 1.5; color: rgba(10,52,30,0.62)">Past geen van de drie momenten? Stuur er drie terug, de klant kiest opnieuw.</p>
   </div>
 
   <div style="position: absolute; left: 16px; right: 16px; bottom: 30px; display: grid; grid-template-columns: 1fr 2fr; gap: 10px">
-    <button type="button" style="min-height: 64px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.1); background: #F7F3EB; color: #0A341E; font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 17px; cursor: pointer">Weiger</button>
+    <button type="button" onClick="{{zegWeiger}}" style="min-height: 64px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.1); background: #F7F3EB; color: #0A341E; font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 17px; cursor: pointer">Weiger</button>
     <a href="CVakmanKlus.dc.html" style="min-height: 64px; border-radius: 999px; background: #0A341E; color: #F7F3EB; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 18px; text-decoration: none">Neem aan</a>
   </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { antwoord: '', mis: [], weiger: false, reden: -1 };
+  }
   renderVals() {
-    return {};
+    const st = this.state;
+    const pil = (on) => 'min-height: 42px; padding: 0 14px; border-radius: 999px; cursor: pointer; font-family: inherit; font-size: 15px; ' + (on ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: transparent; color: #0A341E; border: 1px solid rgba(10,52,30,0.16)');
+    const knop = (on) => 'min-width: 60px; min-height: 46px; border-radius: 999px; cursor: pointer; font-family: inherit; font-size: 16px; ' + (on ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: transparent; color: #0A341E; border: 1px solid rgba(10,52,30,0.16)');
+    return {
+      zegJa: () => this.setState({ antwoord: 'ja' }),
+      zegNee: () => this.setState({ antwoord: 'nee' }),
+      jaStyle: knop(st.antwoord === 'ja'), neeStyle: knop(st.antwoord === 'nee'),
+      ja: st.antwoord === 'ja', nee: st.antwoord === 'nee', gemist: st.mis.length > 0,
+      missen: ['Foto van dichtbij', 'Maten', 'Merk of type', 'Bereikbaarheid', 'Iets anders'].map((n, i) => ({
+        naam: n, style: pil(st.mis.indexOf(i) >= 0),
+        pick: () => { const m = st.mis.slice(); const j = m.indexOf(i); if (j >= 0) m.splice(j, 1); else m.push(i); this.setState({ mis: m }); }
+      })),
+      weiger: st.weiger,
+      zegWeiger: () => this.setState({ weiger: true }),
+      weigerRedenen: ['Geen tijd', 'Niet mijn vak', 'Te ver', 'Iets anders'].map((n, i) => ({ naam: n, style: pil(st.reden === i), pick: () => this.setState({ reden: i }) }))
+    };
   }
 }
 </script>

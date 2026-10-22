@@ -16,11 +16,14 @@ a,button{-webkit-tap-highlight-color:transparent}
 button{touch-action:manipulation}
 .dc-tel{width:100%!important;max-width:430px!important;height:100vh!important;height:100dvh!important;max-height:none!important;margin:0 auto!important}
 @media (min-width:600px){.dc-tel{max-width:390px!important;max-height:844px!important;margin:24px auto!important;border-radius:36px;box-shadow:0 30px 80px -40px rgba(10,52,30,.45)}}
-.dc-desk{min-width:1280px}
+.dc-tel.groter{zoom:1.1;width:calc(100% / 1.1)!important;height:calc(100vh / 1.1)!important;height:calc(100dvh / 1.1)!important}
+@media (min-width:600px){.dc-tel.groter{max-width:calc(390px / 1.1)!important;max-height:calc(844px / 1.1)!important}}
 </style>
 <script>
   window.UPK = { woningtype: 'tussenwoning' };
   try { const t = localStorage.getItem('upk-woningtype'); if (t) window.UPK.woningtype = t; } catch (e) {}
+  try { const g = localStorage.getItem('upk-tekst'); if (g) window.UPK.tekst = g; } catch (e) {}
+  try { const l = localStorage.getItem('upk-lid'); if (l) window.UPK.lid = l; } catch (e) {}
 </script>
 </head>
 <body>

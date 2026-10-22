@@ -16,7 +16,10 @@ a{color:#0A341E}a:hover{color:#14492c}
 .pas{animation:pas 1200ms 100ms cubic-bezier(.22,.61,.36,1) both}
 @keyframes op{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes pas{from{opacity:0;transform:perspective(900px) rotateX(14deg) translateY(24px)}to{opacity:1;transform:perspective(900px) rotateX(0)}}
-@media (prefers-reduced-motion:reduce){.op,.pas{animation:none}}
+.glans{position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,0.14) 45%,transparent 60%);background-size:250% 100%;animation:glans 3.6s 800ms ease-in-out infinite}
+@keyframes glans{0%{background-position:130% 0}60%,100%{background-position:-30% 0}}
+.keus{min-height:44px;padding:0 14px;border-radius:999px;font-family:inherit;font-size:15px;cursor:pointer}
+@media (prefers-reduced-motion:reduce){.op,.pas,.glans{animation:none}}
 .lbl{font-size:12px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
 .r{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid rgba(10,52,30,0.1);font-size:16px}
 .r i{font-style:normal;font-size:13px;letter-spacing:0.14em;color: rgba(10,52,30,0.62)}
@@ -26,7 +29,7 @@ a{color:#0A341E}a:hover{color:#14492c}
 <div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif; background: #ECE5D7">
   <div style="position: absolute; inset: 0 0 104px 0; overflow-y: auto; padding-bottom: 20px">
     <div class="op" style="padding: 28px 24px 0; display: flex; align-items: center; gap: 16px">
-      <button type="button" aria-label="Wijzig je profielfoto" style="position: relative; flex: 0 0 auto; width: 76px; height: 76px; padding: 0; border-radius: 999px; border: 2px solid #F7F3EB; box-shadow: 0 0 0 1px rgba(203,164,92,0.7); background: linear-gradient(150deg, #C9A88A 0%, #8E6B55 55%, #5A4236 100%); cursor: pointer; overflow: visible">
+      <button type="button" onClick="{{fotoWijzig}}" aria-label="Wijzig je profielfoto" style="position: relative; flex: 0 0 auto; width: 76px; height: 76px; padding: 0; border-radius: 999px; border: 2px solid #F7F3EB; box-shadow: 0 0 0 1px rgba(203,164,92,0.7); background: linear-gradient(150deg, #C9A88A 0%, #8E6B55 55%, #5A4236 100%); cursor: pointer; overflow: visible">
         <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true" style="border-radius: 999px; display: block"><circle cx="36" cy="28" r="13" fill="#F3DCC6" opacity=".85"/><path d="M12 72c3-14 12-21 24-21s21 7 24 21z" fill="#F7F3EB" opacity=".75"/><path d="M22 26c0-10 7-15 14-15s15 5 14 16c-3-6-8-8-14-8s-11 2-14 7z" fill="#3B2A22"/></svg>
         <span style="position: absolute; right: -2px; bottom: -2px; width: 28px; height: 28px; border-radius: 999px; background: #0A341E; color: #F7F3EB; border: 2px solid #ECE5D7; display: flex; align-items: center; justify-content: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span>
       </button>
@@ -37,15 +40,16 @@ a{color:#0A341E}a:hover{color:#14492c}
       </div>
     </div>
 
-    <div class="pas" style="margin: 24px 20px 0; padding: 22px; border-radius: 24px; position: relative; overflow: hidden; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); backdrop-filter: blur(24px); box-shadow: 0 24px 48px -30px rgba(0,0,0,0.28)">
+    <div class="pas" style="{{pasStyle}}">
+      <sc-if value="{{founding}}" hint-placeholder-val="{{ true }}"><span class="glans"></span></sc-if>
       <div style="display: flex; justify-content: space-between; align-items: center">
         <a href="CStart.dc.html" aria-label="Naar de startpagina" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 0.32em; color: inherit; text-decoration: none">UPKEEPERS</a>
-        <span class="lbl">LID</span>
+        <span style="{{pasLabelStyle}}">{{pasLabel}}</span>
       </div>
       <div style="margin-top: 34px; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 22px">Kastanjelaan 14</div>
-      <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid rgba(10,52,30,0.1); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
-        <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 11px; letter-spacing: 0.22em; color: rgba(10,52,30,0.62)">LID SINDS</span><span style="font-size: 15px; letter-spacing: 0.08em">MRT 2026</span></span>
-        <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-size: 11px; letter-spacing: 0.22em; color: rgba(10,52,30,0.62)">VOLGENDE APK</span><span style="font-size: 15px; letter-spacing: 0.08em">OKT 2028</span></span>
+      <div style="{{pasRijStyle}}">
+        <span style="display: flex; flex-direction: column; gap: 4px"><span style="{{pasKleinStyle}}">LID SINDS</span><span style="font-size: 15px; letter-spacing: 0.08em">MRT 2026</span></span>
+        <span style="display: flex; flex-direction: column; gap: 4px"><span style="{{pasKleinStyle}}">{{pasRechtsLabel}}</span><span style="font-size: 15px; letter-spacing: 0.08em">{{pasRechts}}</span></span>
       </div>
     </div>
 
@@ -69,6 +73,15 @@ a{color:#0A341E}a:hover{color:#14492c}
 
     <div style="padding: 30px 28px 0; display: flex; flex-direction: column">
       <span class="lbl">INSTELLINGEN</span>
+      <button type="button" onClick="{{t4}}" aria-expanded="{{o4}}" class="m" style="width: 100%; padding: 0; border: 0; border-bottom: 1px solid rgba(10,52,30,0.1); background: transparent; color: #0A341E; font-family: inherit; cursor: pointer; text-align: left"><span style="display: flex; align-items: center; gap: 12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/></svg>Zo wil je het</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="{{pijl4}}"><path d="M6 9l6 6 6-6"/></svg></button>
+      <sc-if value="{{o4}}" hint-placeholder-val="{{ false }}"><div class="op" style="padding: 8px 0 16px 32px; border-bottom: 1px solid rgba(10,52,30,0.1); display: flex; flex-direction: column; gap: 16px">
+        <sc-for list="{{voorkeuren}}" as="v" hint-placeholder-count="4">
+          <div style="display: flex; flex-direction: column; gap: 8px">
+            <span style="font-size: 16px">{{v.vraag}}</span>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px"><sc-for list="{{v.opties}}" as="o" hint-placeholder-count="3"><button type="button" class="keus" onClick="{{o.pick}}" style="{{o.style}}">{{o.naam}}</button></sc-for></div>
+          </div>
+        </sc-for>
+      </div></sc-if>
       <button type="button" onClick="{{t0}}" aria-expanded="{{o0}}" class="m" style="width: 100%; padding: 0; border: 0; border-bottom: 1px solid rgba(10,52,30,0.1); background: transparent; color: #0A341E; font-family: inherit; cursor: pointer; text-align: left"><span style="display: flex; align-items: center; gap: 12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M3 11l9-7 9 7v9H3z"/></svg>Gegevens en woning</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="{{pijl0}}"><path d="M6 9l6 6 6-6"/></svg></button>
       <sc-if value="{{o0}}" hint-placeholder-val="{{ false }}"><div class="op" style="padding: 6px 0 12px 32px; border-bottom: 1px solid rgba(10,52,30,0.1)"><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Telefoon</span><span style="text-align: right">06 12 34 56 78</span></div><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">E-mail</span><span style="text-align: right">sanne@voorbeeld.nl</span></div><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Adres</span><span style="text-align: right">Kastanjelaan 14, Hilversum</span></div><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Sleutel bij</span><span style="text-align: right">Buren, nr. 16</span></div><a href="GInlog.dc.html?step=3" style="display: inline-block; margin-top: 6px; font-size: 15px">Wijzig gegevens</a></div></sc-if>
       <button type="button" onClick="{{t1}}" aria-expanded="{{o1}}" class="m" style="width: 100%; padding: 0; border: 0; border-bottom: 1px solid rgba(10,52,30,0.1); background: transparent; color: #0A341E; font-family: inherit; cursor: pointer; text-align: left"><span style="display: flex; align-items: center; gap: 12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4zM10 21h4"/></svg>Meldingen</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="{{pijl1}}"><path d="M6 9l6 6 6-6"/></svg></button>
@@ -76,12 +89,16 @@ a{color:#0A341E}a:hover{color:#14492c}
       <button type="button" onClick="{{t2}}" aria-expanded="{{o2}}" class="m" style="width: 100%; padding: 0; border: 0; border-bottom: 1px solid rgba(10,52,30,0.1); background: transparent; color: #0A341E; font-family: inherit; cursor: pointer; text-align: left"><span style="display: flex; align-items: center; gap: 12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18"/></svg>Betaling</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="{{pijl2}}"><path d="M6 9l6 6 6-6"/></svg></button>
       <sc-if value="{{o2}}" hint-placeholder-val="{{ false }}"><div class="op" style="padding: 6px 0 12px 32px; border-bottom: 1px solid rgba(10,52,30,0.1)"><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Lidmaatschap</span><span style="text-align: right">Automatische incasso</span></div><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Rekening</span><span style="text-align: right">NL·· ···· ·· 4821</span></div><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Klussen</span><span style="text-align: right">Per klus, na jouw goedkeuring</span></div><a href="GBetalen.dc.html?view=%22overzicht%22" style="display: inline-block; margin-top: 6px; font-size: 15px">Wijzig rekening</a></div></sc-if>
       <button type="button" onClick="{{t3}}" aria-expanded="{{o3}}" class="m" style="width: 100%; padding: 0; border: 0; border-bottom: 1px solid rgba(10,52,30,0.1); background: transparent; color: #0A341E; font-family: inherit; cursor: pointer; text-align: left"><span style="display: flex; align-items: center; gap: 12px"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z"/></svg>Lidmaatschap</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" style="{{pijl3}}"><path d="M6 9l6 6 6-6"/></svg></button>
-      <sc-if value="{{o3}}" hint-placeholder-val="{{ false }}"><div class="op" style="padding: 6px 0 12px 32px; border-bottom: 1px solid rgba(10,52,30,0.1)"><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Vorm</span><span style="text-align: right">Maand, € 39,95</span></div><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">Loopt tot</span><span style="text-align: right">1 maart 2027</span></div><a href="GOpzeggen.dc.html" style="display: inline-block; margin-top: 6px; font-size: 15px; color: rgba(10,52,30,0.72)">Lidmaatschap opzeggen</a></div></sc-if>
+      <sc-if value="{{o3}}" hint-placeholder-val="{{ false }}"><div class="op" style="padding: 6px 0 14px 32px; border-bottom: 1px solid rgba(10,52,30,0.1); display: flex; flex-direction: column">
+        <sc-for list="{{lidRijen}}" as="r" hint-placeholder-count="3"><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: 16px"><span style="font-weight: 300; color: rgba(10,52,30,0.66)">{{r.k}}</span><span style="text-align: right">{{r.v}}</span></div></sc-for>
+        <sc-if value="{{founding}}" hint-placeholder-val="{{ true }}"><div style="margin: 6px 0 4px; padding: 14px 16px; border-radius: 16px; background: #0A341E; color: #F7F3EB; display: flex; flex-direction: column; gap: 6px"><span style="font-size: 12px; letter-spacing: 0.24em; color: #CBA45C">FOUNDING MEMBER · Nº 038</span><span style="font-size: 16px; line-height: 1.45">Je prijs staat vast zolang je lid bent. Je bent een van de eerste honderd die UPKeepers mogelijk maakten.</span></div></sc-if>
+        <a href="GOpzeggen.dc.html" style="margin-top: 8px; font-size: 15px; color: rgba(10,52,30,0.72)">Lidmaatschap opzeggen</a>
+      </div></sc-if>
     </div>
 
-    <div style="margin: 30px 20px 0; padding: 18px 20px; border-radius: 22px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); display: flex; justify-content: space-between; align-items: center; gap: 12px">
-      <span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 17px">Kom je er niet uit?</span><span style="font-size: 14px; font-weight: 300; color: rgba(10,52,30,0.62)">Werkdagen 08:00 tot 18:00</span></span>
-      <a href="tel:0350000000" style="min-height: 40px; padding: 0 16px; border-radius: 999px; background: #0A341E; color: #F7F3EB; display: flex; align-items: center; font-size: 15px; text-decoration: none">Vraag het ons</a>
+    <div style="margin: 30px 20px 0; padding: 20px; border-radius: 22px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); display: flex; flex-direction: column; gap: 14px">
+      <span style="display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 22px">Kom je er niet uit?</span><span style="font-size: 16px; color: rgba(10,52,30,0.66)">Je belt meteen met ons. Werkdagen 08:00 tot 18:00.</span></span>
+      <a href="tel:0350000000" style="min-height: 54px; border-radius: 999px; background: #0A341E; color: #F7F3EB; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 17px; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>Bel UPKeepers</a>
     </div>
   </div>
 
@@ -108,12 +125,42 @@ class Component extends DCLogic {
   }
   renderVals() {
     const v = {};
-    [0, 1, 2, 3].forEach((i) => {
+    [0, 1, 2, 3, 4].forEach((i) => {
       const on = this.state.open === i;
       v['o' + i] = on;
       v['t' + i] = () => this.setState({ open: on ? -1 : i });
       v['pijl' + i] = 'transition: transform 400ms cubic-bezier(.22,.61,.36,1); transform: rotate(' + (on ? '180' : '0') + 'deg)';
     });
+    const lid = (this.props && this.props.lid) || 'founding';
+    const founding = lid === 'founding';
+    const st = this.state;
+    v.founding = founding;
+    v.pasStyle = 'margin: 24px 20px 0; padding: 22px; border-radius: 24px; position: relative; overflow: hidden; ' + (founding ? 'background: radial-gradient(120% 140% at 0% 0%, #1D4A33 0%, #0A341E 55%, #072515 100%); color: #F7F3EB; border: 1px solid #CBA45C; box-shadow: 0 22px 36px -24px rgba(0,0,0,0.35)' : 'background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); box-shadow: 0 24px 48px -30px rgba(0,0,0,0.28)');
+    v.pasLabel = founding ? 'FOUNDING · Nº 038' : 'LID';
+    v.pasLabelStyle = 'font-size: 12px; letter-spacing: 0.22em; ' + (founding ? 'color: #CBA45C' : 'color: rgba(10,52,30,0.62)');
+    v.pasRijStyle = 'margin-top: 18px; padding-top: 14px; border-top: 1px solid ' + (founding ? 'rgba(203,164,92,0.4)' : 'rgba(10,52,30,0.1)') + '; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px';
+    v.pasKleinStyle = 'font-size: 11px; letter-spacing: 0.22em; ' + (founding ? 'color: rgba(247,243,235,0.7)' : 'color: rgba(10,52,30,0.62)');
+    v.pasRechtsLabel = founding ? 'JOUW PRIJS' : 'VOLGENDE APK';
+    v.pasRechts = founding ? 'VOOR ALTIJD' : 'OKT 2028';
+    v.lidRijen = founding
+      ? [{ k: 'Vorm', v: 'Founding Member, € 179 per halfjaar' }, { k: 'Volgende APK', v: 'oktober 2028' }, { k: 'Loopt minimaal tot', v: '1 maart 2027' }]
+      : lid === 'jaar' ? [{ k: 'Vorm', v: 'Jaar, € 399' }, { k: 'Loopt tot', v: '1 maart 2027' }] : [{ k: 'Vorm', v: 'Maand, € 39,95' }, { k: 'Loopt tot', v: '1 maart 2027' }];
+    const keus = (on) => on ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: #F7F3EB; color: #0A341E; border: 1px solid rgba(10,52,30,0.14)';
+    const vk = st.vk || { aanspreek: 0, bereik: 0, moment: 0, tekst: (this.props && this.props.tekst === 'groter') ? 1 : 0 };
+    const vraag = (key, vraagTekst, opties) => ({ vraag: vraagTekst, opties: opties.map((n, i) => ({ naam: n, style: keus(vk[key] === i), pick: () => {
+      this.setState({ vk: Object.assign({}, vk, { [key]: i }) });
+      if (key === 'tekst' && typeof window !== 'undefined') {
+        try { localStorage.setItem('upk-tekst', i ? 'groter' : 'normaal'); } catch (e) {}
+        if (window.UPK) { window.UPK.tekst = i ? 'groter' : 'normaal'; if (window.UPKfit) window.UPKfit(); }
+      }
+    } })) });
+    v.voorkeuren = [
+      vraag('aanspreek', 'Hoe spreken we je aan?', ['Met je', 'Met u']),
+      vraag('bereik', 'Hoe bereiken we je het liefst?', ['In de app', 'Sms', 'Bellen']),
+      vraag('moment', 'Wanneer ben je meestal thuis?', ['Ochtend', 'Middag', 'Avond', 'Wisselt']),
+      vraag('tekst', 'Lettergrootte', ['Normaal', 'Groter'])
+    ];
+    v.fotoWijzig = () => { if (typeof window !== 'undefined' && window.UPK) location.hash = '#/GToestemming'; };
     v.wallet = () => this.setState({ inWallet: true });
     v.walletTekst = this.state.inWallet ? '✓ Staat in Wallet' : 'Zet in je Wallet';
     return v;

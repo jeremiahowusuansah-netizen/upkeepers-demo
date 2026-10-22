@@ -218,7 +218,11 @@ class Component extends DCLogic {
       betaal: () => this.setState({ view: st.wijze === 0 ? 'bank' : 'wacht', bank: st.wijze === 0 ? '' : 'bank' }),
       banken: ['ING', 'Rabobank', 'ABN AMRO', 'SNS', 'ASN Bank', 'Triodos'].map((b) => ({ naam: b, pick: () => this.setState({ view: 'wacht', bank: b }) })),
       bank: st.bank || 'bank',
-      bevestig: () => this.setState({ view: 'welkom' }),
+      bevestig: () => {
+        this.setState({ view: 'welkom' });
+        const lid = ['maand', 'jaar', 'founding'][st.plan];
+        if (typeof window !== 'undefined') { try { localStorage.setItem('upk-lid', lid); } catch (e) {} if (window.UPK) window.UPK.lid = lid; }
+      },
       welkomKop: founding ? 'Welkom, Sanne. Je bent lid nummer 38.' : 'Welkom, Sanne.',
       welkomZin: founding ? 'Je prijs staat vast zolang je lid bent. Je pas staat in de app, en in Wallet als je wilt.' : 'Je pas staat in de app, en in Wallet als je wilt.',
       wallet: () => this.setState({ wallet: true }),

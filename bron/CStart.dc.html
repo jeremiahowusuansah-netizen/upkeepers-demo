@@ -156,6 +156,12 @@ a{color:#0A341E}a:hover{color:#14492c}
       <a href="CAPK.dc.html" style="position: absolute; right: 20px; top: 6px; display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 14px; border-radius: 999px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); font-size: 14px; text-decoration: none"><span style="width: 6px; height: 6px; border-radius: 999px; background: #0A341E"></span>Goede staat</a>
     </div>
 
+    <sc-if value="{{concept}}" hint-placeholder-val="{{ false }}">
+      <a href="{{concept.href}}" class="op2" style="margin: 4px 16px 10px; padding: 14px 16px 14px 18px; border-radius: 20px; background: #F7F3EB; border: 1.5px solid #CBA45C; color: #0A341E; display: flex; justify-content: space-between; align-items: center; gap: 12px; text-decoration: none">
+        <span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 13px; letter-spacing: 0.2em; color: #8A6D32">NOG NIET AF</span><span style="font-size: 17px">Ga verder met je melding</span><span style="font-size: 15px; color: rgba(10,52,30,0.66)">{{concept.wat}}</span></span>
+        <span style="min-height: 40px; padding: 0 14px; border-radius: 999px; background: #0A341E; color: #F7F3EB; display: flex; align-items: center; font-size: 15px">Verder</span>
+      </a>
+    </sc-if>
     <a href="CGoedkeuren.dc.html" class="op2" style="margin: 4px 16px 0; padding: 14px 16px 14px 18px; border-radius: 20px; background: #2F5D45; color: #F7F3EB; display: flex; justify-content: space-between; align-items: center; gap: 12px; text-decoration: none">
       <span style="display: flex; flex-direction: column; gap: 3px"><span style="font-size: 12px; letter-spacing: 0.2em; color: rgba(247,243,235,0.7)">NU TE DOEN</span><span style="font-size: 17px">Keur het werk van Marco goed</span></span>
       <span style="min-height: 36px; padding: 0 14px; border-radius: 999px; background: #F7F3EB; color: #0A341E; display: flex; align-items: center; font-size: 15px">Bekijk</span>
@@ -227,7 +233,15 @@ class Component extends DCLogic {
   renderVals() {
     const t = (this.props && this.props.woningtype) || 'tussenwoning';
     const foto = (id) => 'https://images.unsplash.com/photo-' + id + '?w=600&h=400&fit=crop&q=70';
+    let concept = null;
+    if (typeof window !== 'undefined' && window.UPK) {
+      try {
+        const c = JSON.parse(localStorage.getItem('upk-concept') || 'null');
+        if (c && c.ruimte) concept = { wat: c.ruimte + (c.element ? ', ' + c.element.toLowerCase() : '') + ' · stap ' + c.stap + ' van 5', href: 'CMelden.dc.html?ruimte=' + encodeURIComponent(c.ruimte) + (c.element ? '&element=' + encodeURIComponent(c.element) : '') + '&hervat=' + c.stap };
+      } catch (e) {}
+    }
     return {
+      concept,
       isVrijstaand: t === 'vrijstaand', isTussen: t === 'tussenwoning', isHoek: t === 'hoekwoning', isTwee: t === 'twee-onder-een-kap', isApp: t === 'appartement',
       herfst: [
         { naam: 'Buitenkraan aftappen', wanneer: 'Vóór de eerste vorst', foto: foto('1593523474914-2a4fd54075dc'), href: 'CMelden.dc.html?klus=buitenkraan' },

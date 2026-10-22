@@ -31,7 +31,7 @@ a{color:#0A341E}a:hover{color:#14492c}
       </div>
       <div style="margin-top: 16px">
         <div class="r"><span style="flex: 0 0 auto; width: 6px; height: 6px; margin-top: 8px; border-radius: 999px; background: #0A341E"></span><span>Je lidmaatschap loopt door tot <strong style="font-weight: 600">1 maart 2027</strong>, het einde van je eerste jaar. Tot dan blijft alles werken.</span></div>
-        <div class="r"><span style="flex: 0 0 auto; width: 6px; height: 6px; margin-top: 8px; border-radius: 999px; background: #0A341E"></span><span>Je woningdossier blijft van jou. Je krijgt het als PDF, ook voor een volgende koper.</span></div>
+        <div class="r"><span style="flex: 0 0 auto; width: 6px; height: 6px; margin-top: 8px; border-radius: 999px; background: #0A341E"></span><span>Verhuis je? Je lidmaatschap kan mee naar je nieuwe huis. Daar beginnen we met een nieuwe APK.</span></div>
         <div class="r"><span style="flex: 0 0 auto; width: 6px; height: 6px; margin-top: 8px; border-radius: 999px; background: #0A341E"></span><span>De afspraak van 23 oktober voor je cv-ketel gaat gewoon door.</span></div>
       </div>
       <div style="margin-top: 22px; display: flex; flex-direction: column; gap: 10px">
@@ -39,6 +39,13 @@ a{color:#0A341E}a:hover{color:#14492c}
         <div style="display: flex; flex-wrap: wrap; gap: 8px">
           <sc-for list="{{redenen}}" as="r" hint-placeholder-count="4"><button type="button" onClick="{{r.pick}}" style="{{r.style}}">{{r.naam}}</button></sc-for>
         </div>
+        <sc-if value="{{verhuist}}" hint-placeholder-val="{{ false }}">
+          <div class="op" style="margin-top: 12px; padding: 16px 18px; border-radius: 18px; background: #0A341E; color: #F7F3EB; display: flex; flex-direction: column; gap: 10px">
+            <span style="font-size: 18px">Neem je lidmaatschap mee</span>
+            <span style="font-size: 16px; line-height: 1.45; color: rgba(247,243,235,0.85)">Je houdt je lidmaatschap en je prijs. Op je nieuwe adres beginnen we met een nieuwe APK.</span>
+            <a href="GInlog.dc.html?step=2" style="min-height: 50px; border-radius: 999px; background: #F7F3EB; color: #0A341E; display: flex; align-items: center; justify-content: center; font-size: 16px; text-decoration: none">Verhuizen in plaats van opzeggen</a>
+          </div>
+        </sc-if>
       </div>
     </div>
 
@@ -81,6 +88,7 @@ class Component extends DCLogic {
     const redenen = ['Ik verhuis', 'Te duur', 'Ik regel het zelf', 'Iets anders'];
     return {
       open: !st.klaar, klaar: st.klaar,
+      verhuist: st.reden === 0,
       redenen: redenen.map((n, i) => ({
         naam: n, pick: () => this.setState({ reden: st.reden === i ? -1 : i }),
         style: 'min-height: 40px; padding: 0 14px; border-radius: 999px; cursor: pointer; font-family: inherit; font-size: 15px; ' + (st.reden === i ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: #F7F3EB; color: #0A341E; border: 1px solid rgba(10,52,30,0.12)')

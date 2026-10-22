@@ -12,163 +12,269 @@
 <style>
 body{margin:0}
 a{color:#0A341E}a:hover{color:#14492c}
-.lbl{font-size:12px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+.lbl{font-size:13px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+.op{animation:op 600ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.scanlijn{animation:scan 1.1s ease-in-out infinite alternate}
+@keyframes scan{from{transform:translateY(-40px)}to{transform:translateY(40px)}}
+.pols{animation:pols 1.2s ease-in-out infinite}
+@keyframes pols{0%,100%{opacity:1}50%{opacity:.4}}
+@media (prefers-reduced-motion:reduce){.op,.scanlijn,.pols{animation:none}}
+.blok{border-radius:20px;background:#F7F3EB;border:1px solid rgba(10,52,30,0.1)}
+.rij{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid rgba(10,52,30,0.08);font-size:16px}
+.rij > span:first-child{color:rgba(10,52,30,0.66)}
+.rij > span:last-child{text-align:right}
+.knop2{min-height:50px;border-radius:999px;border:1px solid rgba(10,52,30,0.16);background:transparent;color:#0A341E;font-family:inherit;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
 </style>
 </helmet>
 <div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif; background: #ECE5D7">
   <div style="position: absolute; inset: 0 0 116px 0; overflow-y: auto">
     <div style="padding: 22px 24px 0; display: flex; justify-content: space-between; align-items: center">
-      <a href="CVakmanWerk.dc.html" aria-label="Naar de startpagina" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 0.32em; color: inherit; text-decoration: none">UPKEEPERS <span style="color: rgba(10,52,30,0.62)">· VAKMAN</span></a>
-      <span style="font-size: 12px; letter-spacing: 0.2em; color: rgba(10,52,30,0.62)">KL-2026-0418</span>
-    </div>
-
-    <div style="margin: 18px 16px 0; padding: 14px 18px; border-radius: 18px; border: 1px solid #CBA45C; background: rgba(203,164,92,0.1); display: flex; flex-direction: column; gap: 4px">
-      <span class="lbl">INSTRUCTIE VAN DE KLANT</span>
-      <span style="font-size: 17px">Niet aanbellen, de baby slaapt tot 10:00. Sleutel ligt bij nr. 12.</span>
-    </div>
-
-    <div style="padding: 22px 24px 0; display: flex; flex-direction: column; gap: 4px">
-      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 28px; letter-spacing: -0.02em">Kastanjelaan 14</h1>
-      <span style="font-size: 15px; font-weight: 300; color: rgba(10,52,30,0.62)">Hilversum · parkeren voor de deur, vergunning op het dashboard</span>
+      <a href="CVakmanWerk.dc.html" aria-label="Naar de startpagina" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 0.32em; color: inherit; text-decoration: none; white-space: nowrap">UPKEEPERS <span style="color: rgba(10,52,30,0.62)">· VAKMAN</span></a>
+      <span style="font-size: 13px; letter-spacing: 0.12em; color: rgba(10,52,30,0.62); white-space: nowrap">KL-0418</span>
     </div>
 
     <div style="margin: 18px 16px 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
       <sc-for list="{{fases}}" as="f" hint-placeholder-count="3">
-        <button type="button" onClick="{{f.pick}}" style="{{f.style}}">
-          <span style="font-size: 11px; letter-spacing: 0.2em; opacity: 0.8">{{f.nr}}</span>
-          <span style="font-size: 16px">{{f.naam}}</span>
+        <button type="button" onClick="{{f.pick}}" aria-pressed="{{f.aan}}" style="{{f.style}}">
+          <span style="font-size: 12px; letter-spacing: 0.2em; opacity: 0.8">{{f.nr}}</span>
+          <span style="font-size: 17px">{{f.naam}}</span>
         </button>
       </sc-for>
     </div>
-    <p style="margin: 10px 24px 0; font-size: 14px; font-weight: 300; line-height: 1.5; color: rgba(10,52,30,0.62)">{{uitleg}}</p>
 
-    <div style="padding: 24px 16px 0; display: flex; flex-direction: column; gap: 10px">
-      <span class="lbl" style="padding: 0 8px">FOTO'S PER KOZIJN · ZOVEEL ALS JE WILT</span>
-      <div style="border-radius: 20px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); padding: 0 14px">
-        <sc-for list="{{kozijnen}}" as="k" hint-placeholder-count="4">
-          <div style="{{k.rij}}">
-            <span style="flex: 0 0 auto; width: 34px; font-size: 13px; letter-spacing: 0.14em">{{k.nr}}</span>
-            <span style="flex: 1 1 auto; display: flex; gap: 4px; align-items: center">
-              <span style="{{k.t1}}"></span><span style="{{k.t2}}"></span><span style="{{k.t3}}"></span>
-              <span style="font-size: 14px; color: rgba(10,52,30,0.66); margin-left: 6px">{{k.tel}}</span>
-            </span>
-            <button type="button" onClick="{{k.plus}}" aria-label="{{k.label}}" style="flex: 0 0 auto; min-height: 40px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.16); background: transparent; color: #0A341E; font-family: inherit; font-size: 15px; display: flex; align-items: center; gap: 6px; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>+ foto</button>
-          </div>
-        </sc-for>
+    <sc-if value="{{onderweg}}" hint-placeholder-val="{{ false }}">
+    <div class="op" style="padding: 20px 16px 0; display: flex; flex-direction: column; gap: 14px">
+      <div style="padding: 22px 20px; border-radius: 22px; background: #0A341E; color: #F7F3EB; display: flex; flex-direction: column; gap: 10px">
+        <span style="font-size: 13px; letter-spacing: 0.22em; color: #CBA45C">DE KLANT VRAAGT</span>
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 26px; line-height: 1.25">Niet aanbellen, de baby slaapt tot 10:00.</span>
+        <span style="font-size: 18px; color: rgba(247,243,235,0.85)">Sleutel ligt bij nr. 12.</span>
       </div>
+      <div class="blok" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 6px">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 26px">Kastanjelaan 14</span>
+        <span style="font-size: 16px; color: rgba(10,52,30,0.7)">Hilversum · parkeren voor de deur, vergunning op het dashboard</span>
+        <span style="font-size: 16px; margin-top: 4px">Je wordt verwacht <strong style="font-weight: 600">tussen 09:00 en 11:00</strong></span>
+        <a href="https://maps.apple.com/?q=Kastanjelaan+14+Hilversum" class="knop2" style="margin-top: 10px">Navigeer</a>
+      </div>
+      <span style="padding: 0 6px; font-size: 16px; color: rgba(10,52,30,0.66)">Vier kozijnen schilderen, zuidgevel. De rest zie je als je begint.</span>
     </div>
+    </sc-if>
 
-    <div style="padding: 20px 16px 0; display: flex; flex-direction: column; gap: 10px">
-      <span class="lbl" style="padding: 0 8px">ZEG WAT JE ZAG EN DEED · {{aantalOpnames}} OPNAMES</span>
-      <div style="display: flex; flex-direction: column; gap: 6px">
+    <sc-if value="{{gestart}}" hint-placeholder-val="{{ true }}">
+    <div class="op" style="display: flex; flex-direction: column">
+      <div style="margin: 16px 16px 0; padding: 12px 16px; border-radius: 16px; border: 1px solid #CBA45C; background: rgba(203,164,92,0.1); font-size: 16px">Niet aanbellen tot 10:00 · sleutel bij nr. 12</div>
+
+      <div style="padding: 22px 16px 0; display: flex; flex-direction: column; gap: 10px">
+        <span class="lbl" style="padding: 0 8px">FOTO'S PER KOZIJN · ZOVEEL ALS JE WILT</span>
+        <div class="blok" style="padding: 0 14px">
+          <sc-for list="{{kozijnen}}" as="k" hint-placeholder-count="4">
+            <div style="{{k.rij}}">
+              <span style="flex: 0 0 auto; width: 34px; font-size: 14px; letter-spacing: 0.14em">{{k.nr}}</span>
+              <span style="flex: 1 1 auto; display: flex; gap: 4px; align-items: center">
+                <span style="{{k.t1}}"></span><span style="{{k.t2}}"></span><span style="{{k.t3}}"></span>
+                <span style="font-size: 15px; color: rgba(10,52,30,0.66); margin-left: 6px">{{k.tel}}</span>
+              </span>
+              <button type="button" onClick="{{k.plus}}" aria-label="{{k.label}}" style="flex: 0 0 auto; min-height: 42px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.16); background: transparent; color: #0A341E; font-family: inherit; font-size: 15px; cursor: pointer">+ Foto</button>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="padding: 22px 16px 0; display: flex; flex-direction: column; gap: 10px">
+        <span class="lbl" style="padding: 0 8px">ZEG WAT JE ZAG EN DEED · {{aantalOpnames}} OPNAMES</span>
         <sc-for list="{{opnames}}" as="o" hint-placeholder-count="2">
-          <div style="display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 14px; border-radius: 16px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.08)">
-            <span style="flex: 0 0 auto; width: 30px; height: 30px; border-radius: 999px; background: #0A341E; color: #F7F3EB; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg></span>
-            <span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 1px"><span style="font-size: 16px">{{o.wat}}</span><span style="font-size: 13px; color: rgba(10,52,30,0.62)">{{o.duur}}</span></span>
-            <svg width="70" height="18" viewBox="0 0 70 18" aria-hidden="true"><path d="M2 9h2M7 5v8M12 3v12M17 6v6M22 2v14M27 7v4M32 4v10M37 6v6M42 3v12M47 7v4M52 5v8M57 8v2M62 6v6M67 8v2" stroke="rgba(10,52,30,0.4)" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <div class="blok" style="padding: 12px 14px; display: flex; flex-direction: column; gap: 6px">
+            <span style="display: flex; justify-content: space-between; gap: 10px; align-items: baseline"><span style="font-size: 17px; font-weight: 600">{{o.titel}}</span><span style="font-size: 14px; color: rgba(10,52,30,0.62); white-space: nowrap">{{o.duur}}</span></span>
+            <span style="{{o.tekstStyle}}">{{o.tekst}}</span>
           </div>
         </sc-for>
+        <button type="button" onClick="{{toggleRec}}" style="{{recStyle}}">
+          <span style="{{recDot}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F7F3EB" stroke-width="1.6" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
+          <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><span style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 18px">{{recLabel}}</span><span style="font-size: 15px; opacity: 0.8">{{recSub}}</span></span>
+        </button>
       </div>
-      <button type="button" onClick="{{toggleRec}}" style="{{recStyle}}">
-        <span style="{{recDot}}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F7F3EB" stroke-width="1.6" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span>
-        <span style="display: flex; flex-direction: column; align-items: flex-start; gap: 2px"><span style="font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: 18px">{{recLabel}}</span><span style="font-size: 14px; opacity: 0.8">{{recSub}}</span></span>
-      </button>
-    </div>
 
-    <div style="padding: 20px 16px 0; display: flex; flex-direction: column; gap: 10px">
-      <span class="lbl" style="padding: 0 8px">WAT JE HEBT GEBRUIKT</span>
-      <div style="border-radius: 20px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.1); padding: 4px 16px">
-        <div style="display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid rgba(10,52,30,0.08); font-size: 16px"><span style="color: rgba(10,52,30,0.66)">Verf</span><span style="text-align: right">Alkyd zijdeglans, RAL 9010</span></div>
-        <div style="display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-bottom: 1px solid rgba(10,52,30,0.08); font-size: 16px"><span style="color: rgba(10,52,30,0.66)">Houtreparatie</span><span style="text-align: right">2K-houtvuller, 2 plekken</span></div>
-        <div style="display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; font-size: 16px"><span style="color: rgba(10,52,30,0.66)">Maat</span><span style="text-align: right">Onderdorpel K1: 92 cm</span></div>
+      <div style="padding: 22px 16px 0; display: flex; flex-direction: column; gap: 10px">
+        <span class="lbl" style="padding: 0 8px">WAT JE HEBT GEBRUIKT</span>
+        <div class="blok" style="padding: 4px 16px">
+          <sc-for list="{{materiaal}}" as="m" hint-placeholder-count="3">
+            <div class="rij"><span>{{m.soort}}</span><span>{{m.wat}}</span></div>
+          </sc-for>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+          <button type="button" class="knop2" onClick="{{scanOpen}}" style="background: #0A341E; color: #F7F3EB; border-color: #0A341E"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 7V5a1 1 0 0 1 1-1h2M17 4h2a1 1 0 0 1 1 1v2M20 17v2a1 1 0 0 1-1 1h-2M7 20H5a1 1 0 0 1-1-1v-2M8 8v8M11 8v8M14 8v8M17 8v8"/></svg>Scan barcode</button>
+          <button type="button" class="knop2" onClick="{{toggleRec}}">Spreek het in</button>
+        </div>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
-        <button type="button" style="min-height: 48px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.16); background: transparent; color: #0A341E; font-family: inherit; font-size: 15px; cursor: pointer">Spreek het in</button>
-        <button type="button" style="min-height: 48px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.16); background: transparent; color: #0A341E; font-family: inherit; font-size: 15px; cursor: pointer">Foto van het etiket</button>
-      </div>
-      <p style="margin: 0 8px; font-size: 14px; font-weight: 300; line-height: 1.5; color: rgba(10,52,30,0.62)">Zo weet de volgende vakman precies wat er in dit huis zit, tot op de kleurcode.</p>
-    </div>
 
-    <div style="padding: 20px 16px 20px; display: flex; flex-direction: column; gap: 8px">
-      <span class="lbl" style="padding: 0 8px">HOE IS HET GEGAAN</span>
-      <sc-for list="{{keuzes}}" as="k" hint-placeholder-count="3">
-        <button type="button" onClick="{{k.pick}}" style="{{k.style}}">{{k.label}}</button>
-      </sc-for>
-      <div style="margin-top: 4px; padding: 14px 16px; border-radius: 18px; border: 1px solid rgba(203,164,92,0.6); background: rgba(203,164,92,0.08); display: flex; flex-direction: column; gap: 8px">
+      <div style="padding: 22px 16px 20px; display: flex; flex-direction: column; gap: 10px">
+        <span class="lbl" style="padding: 0 8px">DE CASUS TOT NU TOE</span>
+        <div class="blok" style="padding: 14px 16px; display: flex; flex-direction: column; gap: 8px">
+          <sc-for list="{{casus}}" as="c" hint-placeholder-count="3"><span style="display: flex; gap: 10px; font-size: 16px; line-height: 1.45"><span style="flex: 0 0 auto; width: 6px; height: 6px; margin-top: 9px; border-radius: 999px; background: #CBA45C"></span>{{c}}</span></sc-for>
+          <span style="font-size: 14px; color: rgba(10,52,30,0.62)">Gemaakt uit je opnames, foto's en scans. De klant ziet alleen wat je oplevert.</span>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{afgerond}}" hint-placeholder-val="{{ false }}">
+    <div class="op" style="padding: 20px 16px 20px; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span class="lbl" style="padding: 0 8px">DE KLANT HAD GEVRAAGD · CHECK</span>
+        <sc-for list="{{check}}" as="c" hint-placeholder-count="3">
+          <button type="button" role="checkbox" aria-checked="{{c.aan}}" onClick="{{c.pick}}" style="{{c.style}}"><span style="{{c.vak}}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F7F3EB" stroke-width="2.6" aria-hidden="true" style="{{c.vink}}"><path d="M5 12l5 5 9-10"/></svg></span><span>{{c.tekst}}</span></button>
+        </sc-for>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span class="lbl" style="padding: 0 8px">HOE IS HET GEGAAN</span>
+        <sc-for list="{{keuzes}}" as="k" hint-placeholder-count="3">
+          <button type="button" onClick="{{k.pick}}" style="{{k.style}}">{{k.label}}</button>
+        </sc-for>
+      </div>
+      <div style="padding: 16px; border-radius: 18px; border: 1px solid rgba(203,164,92,0.6); background: rgba(203,164,92,0.08); display: flex; flex-direction: column; gap: 10px">
         <span class="lbl">WAT ER NU GEBEURT</span>
-        <span style="font-size: 16px; line-height: 1.5">{{gevolg}}</span>
+        <span style="font-size: 17px; line-height: 1.5">{{gevolg}}</span>
         <sc-if value="{{nietAf}}" hint-placeholder-val="{{ false }}">
-          <div style="display: flex; flex-wrap: wrap; gap: 6px">
-            <span style="min-height: 34px; padding: 0 12px; border-radius: 999px; background: #0A341E; color: #F7F3EB; display: inline-flex; align-items: center; font-size: 14px">Droogtijd</span>
-            <span style="min-height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.16); display: inline-flex; align-items: center; font-size: 14px">Materiaal ontbreekt</span>
-            <span style="min-height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.16); display: inline-flex; align-items: center; font-size: 14px">Meer werk dan gedacht</span>
-            <span style="min-height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.16); display: inline-flex; align-items: center; font-size: 14px">Weer</span>
+          <div style="display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <sc-for list="{{redenen}}" as="r" hint-placeholder-count="4"><button type="button" onClick="{{r.pick}}" style="{{r.style}}">{{r.naam}}</button></sc-for>
+            </div>
+            <span style="font-size: 15px; color: rgba(10,52,30,0.7)">Nieuw moment voorstellen</span>
+            <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+              <sc-for list="{{momenten}}" as="m" hint-placeholder-count="3"><button type="button" onClick="{{m.pick}}" style="{{m.style}}">{{m.naam}}</button></sc-for>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{zagIets}}" hint-placeholder-val="{{ false }}">
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+            <button type="button" class="knop2" onClick="{{vondstFoto}}">{{vondstFotoTekst}}</button>
+            <button type="button" class="knop2" onClick="{{toggleRec}}">{{vondstOpnameTekst}}</button>
           </div>
         </sc-if>
       </div>
     </div>
+    </sc-if>
   </div>
 
   <div style="position: absolute; left: 16px; right: 16px; bottom: 30px">
     <button type="button" onClick="{{volgende}}" style="width: 100%; min-height: 64px; border: 0; border-radius: 999px; background: #0A341E; color: #F7F3EB; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 18px; cursor: pointer">{{knop}}</button>
   </div>
+
+  <sc-if value="{{scan}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; inset: 0; background: #0B0F0D; color: #F7F3EB; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px; z-index: 5">
+      <div style="position: relative; width: 260px; height: 160px; border-radius: 18px; border: 2px solid rgba(247,243,235,0.8); display: flex; align-items: center; justify-content: center; overflow: hidden">
+        <svg width="160" height="70" viewBox="0 0 160 70" aria-hidden="true"><path d="M10 5v60M18 5v60M22 5v60M30 5v60M38 5v60M41 5v60M50 5v60M58 5v60M62 5v60M70 5v60M78 5v60M84 5v60M90 5v60M98 5v60M102 5v60M110 5v60M118 5v60M121 5v60M130 5v60M138 5v60M142 5v60M150 5v60" stroke="#F7F3EB" stroke-width="3" opacity=".75"/></svg>
+        <span class="scanlijn" style="position: absolute; left: 10px; right: 10px; top: 50%; height: 2px; background: #CBA45C"></span>
+      </div>
+      <span style="font-size: 18px">{{scanTekst}}</span>
+      <button type="button" onClick="{{scanDicht}}" style="min-height: 48px; padding: 0 22px; border-radius: 999px; border: 1px solid rgba(247,243,235,0.4); background: transparent; color: #F7F3EB; font-family: inherit; font-size: 16px; cursor: pointer">{{scanKnop}}</button>
+    </div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { fase: 1, fotos: [3, 2, 1, 0], opnames: [['Wat ik zag bij K1', '0:42'], ['Rot uitgefreesd, gevuld', '0:18']], rec: false, keuze: 0 };
+    this.state = {
+      fase: 1, fotos: [3, 2, 1, 0], rec: false, keuze: 0, reden: 0, moment: -1, scan: '', vondstFotos: 0,
+      gescand: false, check: [true, false, false],
+      opnames: [
+        { titel: 'Onderdorpel K1 zacht', duur: '0:42', tekst: 'Linksonder rot over 12 cm. Uitgefreesd tot gezond hout.' },
+        { titel: 'K1 hersteld', duur: '0:18', tekst: 'Gevuld met 2K-houtvuller, morgen schuren en gronden.' }
+      ]
+    };
   }
+  componentWillUnmount() { clearTimeout(this.t); clearTimeout(this.s); }
   renderVals() {
     const st = this.state;
     const namen = ['Onderweg', 'Gestart', 'Afgerond'];
-    const uitleg = [
-      'De klant ziet dat je onderweg bent, met je verwachte aankomsttijd.',
-      'De klant ziet dat je aan het werk bent. Je foto\u2019s ziet de klant pas bij de oplevering.',
-      'De klant krijgt je foto\u2019s en keurt goed. Daarna volgt je uitbetaling.'
-    ];
     const keuzes = ['Alles volgens opdracht', 'Klaar, maar ik zag nog iets', 'Niet af, ik kom terug'];
     const gevolg = [
-      'De klant krijgt je foto\u2019s van voor en na en keurt het werk goed. Daarna volgt je uitbetaling.',
-      'Leg vast wat je zag, met een foto en een opname. UPKeepers bekijkt het en legt het als voorstel aan de klant voor. Deze klus lever je gewoon op.',
-      'Kies waarom, en stuur een nieuw moment. De klant krijgt bericht vóór het afgesproken tijdvak, met de nieuwe tijd.'
+      'De klant krijgt je foto’s van voor en na en keurt het werk goed. Daarna volgt je uitbetaling.',
+      'Leg vast wat je zag. Wij leggen het als voorstel aan de klant voor. Deze klus lever je gewoon op.',
+      'Kies waarom en stel een nieuw moment voor. De klant krijgt bericht vóór het afgesproken tijdvak.'
     ];
-    const knopGestart = ['Lever op aan de klant', 'Leg de vondst vast', 'Stuur een nieuw moment'];
-    const knoppen = ['Ik ben er, start de klus', knopGestart[st.keuze], 'Opgeleverd'];
+    const knopAf = ['Lever op aan de klant', 'Lever op en stuur de vondst', st.moment >= 0 ? 'Stuur het nieuwe moment' : 'Kies eerst een moment'];
+    const knoppen = ['Ik ben er, begin', 'Klaar, naar opleveren', knopAf[st.keuze]];
     const thumb = (on, g) => on ? 'width: 34px; height: 34px; border-radius: 8px; background: linear-gradient(160deg, ' + g + ')' : 'display: none';
+    const pil = (on) => 'min-height: 38px; padding: 0 14px; border-radius: 999px; cursor: pointer; font-family: inherit; font-size: 15px; ' + (on ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: transparent; color: #0A341E; border: 1px solid rgba(10,52,30,0.16)');
+    const nieuweOpname = () => {
+      const n = st.opnames.length + 1;
+      const lijst = st.opnames.concat([{ titel: 'Wordt uitgeschreven', duur: '0:09', tekst: '', bezig: true }]);
+      this.setState({ rec: false, opnames: lijst });
+      clearTimeout(this.t);
+      this.t = setTimeout(() => {
+        const l = this.state.opnames.slice();
+        l[l.length - 1] = st.fase === 2
+          ? { titel: 'Vondst: rechterraam boven klemt', duur: '0:09', tekst: 'Hang- en sluitwerk versleten. Voorstel: scharnieren vervangen, half uur.' }
+          : { titel: 'Opname ' + n + ': grondverf K2', duur: '0:09', tekst: 'K2 en K3 geschuurd en gegrond, droogt tot 14:00.' };
+        this.setState({ opnames: l });
+      }, 1300);
+    };
+    const materiaal = [
+      { soort: 'Verf', wat: 'Alkyd zijdeglans, RAL 9010' },
+      { soort: 'Houtreparatie', wat: '2K-houtvuller' },
+      { soort: 'Maat', wat: 'Onderdorpel K1: 92 cm' }
+    ];
+    if (st.gescand) materiaal.push({ soort: 'Gescand', wat: 'Sikkens Rubbol BL Satura, RAL 9010, 1 L' });
+    const casus = [
+      'Onderdorpel K1 rot over 12 cm, uitgefreesd en gevuld',
+      'Geschilderd in RAL 9010, alkyd zijdeglans' + (st.gescand ? ' (Sikkens Rubbol BL Satura)' : ''),
+      st.fotos.reduce((a, b) => a + b, 0) + ' foto’s bij ' + st.fotos.filter((f) => f > 0).length + ' van de 4 kozijnen'
+    ];
+    const checkTeksten = ['Weer wit, zoals nu: RAL 9010', 'Ventilatieroosters bovenkozijn niet overschilderd', 'Rommel opgeruimd, ladder weg van de gevel'];
     return {
       fases: namen.map((n, i) => ({
-        naam: n, nr: '0' + (i + 1),
+        naam: n, nr: '0' + (i + 1), aan: i === st.fase ? 'true' : 'false',
         pick: () => this.setState({ fase: i }),
-        style: 'min-height: 64px; border-radius: 18px; cursor: pointer; font-family: inherit; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; padding: 0 14px; transition: background 400ms, color 400ms; ' + (i === st.fase ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : (i < st.fase ? 'background: #F7F3EB; color: rgba(10,52,30,0.62); border: 1px solid rgba(10,52,30,0.1)' : 'background: transparent; color: rgba(10,52,30,0.62); border: 1px solid rgba(10,52,30,0.1)'))
+        style: 'min-height: 66px; border-radius: 18px; cursor: pointer; font-family: inherit; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; padding: 0 14px; transition: background 400ms, color 400ms; ' + (i === st.fase ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : (i < st.fase ? 'background: #F7F3EB; color: rgba(10,52,30,0.62); border: 1px solid rgba(10,52,30,0.1)' : 'background: transparent; color: rgba(10,52,30,0.62); border: 1px solid rgba(10,52,30,0.1)'))
       })),
-      uitleg: uitleg[st.fase],
+      onderweg: st.fase === 0, gestart: st.fase === 1, afgerond: st.fase === 2,
       knop: knoppen[st.fase],
-      volgende: () => this.setState({ fase: Math.min(2, st.fase + 1) }),
+      volgende: () => { if (st.fase < 2) this.setState({ fase: st.fase + 1 }); else if (typeof window !== 'undefined' && window.UPK) location.hash = '#/CVakmanWerk'; },
       kozijnen: st.fotos.map((n, i) => ({
         nr: 'K' + (i + 1), label: 'Foto toevoegen bij kozijn ' + (i + 1),
-        tel: n === 0 ? 'nog geen foto' : (n === 1 ? '1 foto' : n + ' foto\u2019s'),
+        tel: n === 0 ? 'nog geen foto' : (n === 1 ? '1 foto' : n + ' foto’s'),
         t1: thumb(n >= 1, '#2E6446, #123522'), t2: thumb(n >= 2, '#3B5C45, #1B3526'), t3: thumb(n >= 3, '#4A4636, #262418'),
         plus: () => { const f = st.fotos.slice(); f[i] = Math.min(3, f[i] + 1); this.setState({ fotos: f }); },
-        rij: 'display: flex; align-items: center; gap: 10px; min-height: 58px; ' + (i < st.fotos.length - 1 ? 'border-bottom: 1px solid rgba(10,52,30,0.08)' : '')
+        rij: 'display: flex; align-items: center; gap: 10px; min-height: 60px; ' + (i < st.fotos.length - 1 ? 'border-bottom: 1px solid rgba(10,52,30,0.08)' : '')
       })),
-      opnames: st.opnames.map((o) => ({ wat: o[0], duur: o[1] })),
+      opnames: st.opnames.map((o) => ({ ...o, tekst: o.bezig ? 'Even geduld, wordt uitgeschreven…' : o.tekst, tekstStyle: 'font-size: 16px; line-height: 1.45; ' + (o.bezig ? 'color: rgba(10,52,30,0.5)' : 'color: rgba(10,52,30,0.8)') })),
       aantalOpnames: st.opnames.length,
-      toggleRec: () => {
-        if (st.rec) this.setState({ rec: false, opnames: st.opnames.concat([['Opname ' + (st.opnames.length + 1), '0:09']]) });
-        else this.setState({ rec: true });
-      },
+      toggleRec: () => { if (st.rec) nieuweOpname(); else this.setState({ rec: true }); },
       recLabel: st.rec ? 'Tik om te stoppen' : (st.opnames.length ? 'Nog een opname' : 'Tik en praat'),
-      recSub: st.rec ? 'Ik luister. Noem wat je zag.' : 'Per onderdeel een opname mag ook',
-      recStyle: 'display: flex; align-items: center; gap: 14px; min-height: 68px; padding: 0 16px; border-radius: 20px; cursor: pointer; font-family: inherit; text-align: left; ' + (st.rec ? 'background: #CBA45C; color: #0A341E; border: 1px solid #CBA45C' : 'background: transparent; color: #0A341E; border: 1px dashed rgba(10,52,30,0.3)'),
-      recDot: 'flex: 0 0 auto; width: 40px; height: 40px; border-radius: 999px; background: #0A341E; display: flex; align-items: center; justify-content: center',
+      recSub: st.rec ? 'Ik luister. Noem wat je zag en deed.' : 'Wordt meteen uitgeschreven',
+      recStyle: 'display: flex; align-items: center; gap: 14px; min-height: 70px; padding: 0 16px; border-radius: 20px; cursor: pointer; font-family: inherit; text-align: left; color: #0A341E; ' + (st.rec ? 'background: #CBA45C; border: 1px solid #CBA45C' : 'background: transparent; border: 1px dashed rgba(10,52,30,0.3)'),
+      recDot: 'flex: 0 0 auto; width: 42px; height: 42px; border-radius: 999px; background: #0A341E; display: flex; align-items: center; justify-content: center',
+      materiaal, casus,
+      scan: !!st.scan,
+      scanOpen: () => {
+        this.setState({ scan: 'zoekt' });
+        clearTimeout(this.s);
+        this.s = setTimeout(() => this.setState({ scan: 'gevonden', gescand: true }), 1200);
+      },
+      scanDicht: () => this.setState({ scan: '' }),
+      scanTekst: st.scan === 'gevonden' ? 'Sikkens Rubbol BL Satura, RAL 9010, 1 L' : 'Richt op de barcode van het blik',
+      scanKnop: st.scan === 'gevonden' ? 'Toegevoegd, terug' : 'Annuleer',
+      check: checkTeksten.map((t, i) => ({
+        tekst: t, aan: st.check[i] ? 'true' : 'false',
+        pick: () => { const c = st.check.slice(); c[i] = !c[i]; this.setState({ check: c }); },
+        style: 'display: flex; gap: 12px; align-items: center; min-height: 58px; padding: 0 16px; border-radius: 18px; border: 1px solid rgba(10,52,30,0.1); background: #F7F3EB; color: #0A341E; font-family: inherit; font-size: 17px; text-align: left; cursor: pointer',
+        vak: 'flex: 0 0 auto; width: 24px; height: 24px; border-radius: 7px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; ' + (st.check[i] ? 'background: #2F5D45; border: 1px solid #2F5D45' : 'background: #FFFFFF; border: 1.5px solid rgba(10,52,30,0.35)'),
+        vink: st.check[i] ? '' : 'opacity: 0'
+      })),
       keuzes: keuzes.map((l, i) => ({
         label: l, pick: () => this.setState({ keuze: i }),
         style: 'min-height: 58px; padding: 0 20px; border-radius: 18px; cursor: pointer; font-family: inherit; font-size: 17px; text-align: left; transition: background 400ms, color 400ms; ' + (st.keuze === i ? 'background: #0A341E; color: #F7F3EB; border: 1px solid #0A341E' : 'background: transparent; color: #0A341E; border: 1px solid rgba(10,52,30,0.1)')
       })),
       gevolg: gevolg[st.keuze],
-      nietAf: st.keuze === 2
+      nietAf: st.keuze === 2, zagIets: st.keuze === 1,
+      redenen: ['Droogtijd', 'Materiaal ontbreekt', 'Meer werk dan gedacht', 'Weer'].map((n, i) => ({ naam: n, pick: () => this.setState({ reden: i }), style: pil(st.reden === i) })),
+      momenten: ['DO 23 · ocht.', 'VR 24 · ocht.', 'MA 27 · midd.'].map((n, i) => ({ naam: n, pick: () => this.setState({ moment: i }), style: pil(st.moment === i) + '; min-height: 46px; padding: 0 8px' })),
+      vondstFoto: () => this.setState({ vondstFotos: st.vondstFotos + 1 }),
+      vondstFotoTekst: st.vondstFotos ? st.vondstFotos + ' foto' + (st.vondstFotos === 1 ? '' : '’s') : '+ Foto van de vondst',
+      vondstOpnameTekst: st.rec ? 'Stop opname' : 'Spreek het in'
     };
   }
 }
