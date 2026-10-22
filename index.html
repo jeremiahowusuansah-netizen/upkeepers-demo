@@ -24,6 +24,9 @@ li a span{color:var(--gedempt);font-size:15px;text-align:right}
 .typen{display:flex;flex-wrap:wrap;gap:8px}
 .typen button{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--lijn);background:var(--creme);color:var(--inkt);font-family:inherit;font-size:16px;cursor:pointer}
 .typen button[aria-pressed=true]{background:var(--inkt);color:var(--creme);border-color:var(--inkt)}
+details.ronde{background:var(--creme);border-radius:16px;margin-bottom:10px;overflow:hidden}
+details.ronde summary{cursor:pointer;padding:15px 16px;font-size:17px;list-style-position:inside}
+details.ronde ul{border-radius:0;border-top:1px solid var(--lijn)}
 .voet{margin-top:40px;color:var(--gedempt);font-size:15px}
 </style>
 </head>
@@ -33,6 +36,42 @@ li a span{color:var(--gedempt);font-size:15px;text-align:right}
 <p class="sub">Het app-prototype, ronde 82. Alle knoppen werken. Voorbeeldgegevens, geen echte klanten.</p>
 <div class="lijn"></div>
 <a class="start" href="app.html#/GInlog">Begin bij het aanmelden</a>
+
+<h2>Wat er veranderd is</h2>
+<details class="ronde" open>
+<summary>Ronde 82 · 22 oktober · klussen tot en met admin</summary>
+<ul>
+<li><a href="app.html#/CKlussen">Klussen: <em>volgend bezoek</em> in plaats van de weekstrip</a></li>
+<li><a href="app.html#/CAccount?open=3">Account: founding-pas, <em>Zo wil je het</em>, belknop</a></li>
+<li><a href="app.html#/CStart">Melding die niet af is: <em>Ga verder</em> op het startscherm</a></li>
+<li><a href="app.html#/GMeldingen">Meldingen: <em>Plan in</em> netjes, als sneltoets</a></li>
+<li><a href="app.html#/GStanden">Laden: het huis tekent zich</a></li>
+<li><a href="app.html#/GToestemming">Opname: weg 30 dagen na goedkeuring, tekst blijft</a></li>
+<li><a href="app.html#/GOpzeggen?reden=0">Opzeggen: verhuizen in plaats van opzeggen</a></li>
+<li><a href="app.html#/GInlog?step=2">Aanmelden: alleen eigenaren, woningtype zichtbaar</a></li>
+<li><a href="app.html#/CVakmanOpdracht">Vakman: <em>Is dit genoeg?</em> en weigeren</a></li>
+<li><a href="app.html#/CVakmanKlus?fase=0">Vakman: onderweg, gestart, afgerond elk eigen</a></li>
+<li><a href="app.html#/CVakmanKlus?fase=1">Vakman: opnames uitgeschreven, barcode, casus</a></li>
+<li><a href="app.html#/CVakmanWerk">Vakman: agenda bevestigen en wijzigen</a></li>
+<li><a href="app.html#/CVakmanGeld">Vakman: kwartaal, jaar, boekhouder, <em>Vraag ons ernaar</em></a></li>
+<li><a href="app.html#/CAdmin">Admin: beller herkend, gesprek samengevat</a></li>
+<li><a href="app.html#/CAdminToewijzen">Admin: beoordeling, groei, klachten</a></li>
+</ul>
+</details>
+<details class="ronde">
+<summary>Ronde 81 · 20 oktober · welkom tot en met goedkeuren</summary>
+<ul>
+<li><a href="app.html#/CStart">Startscherm: woning volgt het type, echte foto's, <em>Plan in</em> als sneltoets</a></li>
+<li><a href="app.html#/WWelkomC">Welkom: knoppen overlappen niet meer</a></li>
+<li><a href="app.html#/GInlog?step=3">Aanmelden: Apple en Google met logo</a></li>
+<li><a href="app.html#/GBetalen">Betalen: de pas, het overzicht, het welkom</a></li>
+<li><a href="app.html#/CMelden">Melden: direct door, advies per risico, spoed rood, lenscheck</a></li>
+<li><a href="app.html#/CMelden?klus=kitnaden">Melden: bekende klus in twee stappen</a></li>
+<li><a href="app.html#/CDossier?kant=%22binnen%22">Dossier binnen: per verdieping en ruimte</a></li>
+<li><a href="app.html#/CAPK">APK: hoe lang het nog meegaat</a></li>
+<li><a href="app.html#/CGoedkeuren">Goedkeuren: echte foto's, per foto wat er gebeurde</a></li>
+</ul>
+</details>
 
 <h2>Soort woning in de demo</h2>
 <div class="typen" id="typen">
