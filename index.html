@@ -34,6 +34,7 @@ details.ronde ul{border-radius:0;border-top:1px solid var(--lijn)}
 <main>
 <h1>UPKeepers</h1>
 <p class="sub">Het app-prototype, ronde 82. Alle knoppen werken. Voorbeeldgegevens, geen echte klanten.</p>
+<p class="sub" id="versie" style="margin-top:-14px;font-size:15px"></p>
 <div class="lijn"></div>
 <a class="start" href="app.html#/GInlog">Begin bij het aanmelden</a>
 
@@ -130,6 +131,11 @@ details.ronde ul{border-radius:0;border-top:1px solid var(--lijn)}
 <p class="voet">Tip: open het startscherm in Safari en kies Deel › Zet op beginscherm. Dan opent het als een app, zonder adresbalk.</p>
 </main>
 <script>
+  fetch('versie.json?' + Date.now()).then((r) => r.json()).then((v) => {
+    const d = new Date(v.bijgewerkt);
+    const t = d.toLocaleString('nl-NL', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Amsterdam' });
+    document.getElementById('versie').textContent = 'Bijgewerkt ' + t + (v.ronde ? ' · ' + v.ronde : '') + '. De link blijft altijd dezelfde.';
+  }).catch(() => {});
   const knoppen = document.querySelectorAll('#typen button');
   let t = 'tussenwoning';
   try { t = localStorage.getItem('upk-woningtype') || t; } catch (e) {}
