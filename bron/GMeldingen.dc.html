@@ -34,7 +34,13 @@ a{color:#0A341E}a:hover{color:#14492c}
     </div>
 
     <div style="padding: 24px 16px 0; display: flex; flex-direction: column; gap: 10px">
-      <span class="lbl" style="padding: 0 8px">NU TE DOEN · 2</span>
+      <span class="lbl" style="padding: 0 8px">NU TE DOEN · 3</span>
+      <div class="kaart" style="border-color: rgba(203,164,92,0.6)">
+        <span style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-size: 18px">Hoort Tom bij je huis?</span><span style="font-size: 12px; letter-spacing: 0.16em; color: rgba(10,52,30,0.62)">KASTANJELAAN 14</span></span>
+        <span style="font-size: 15px; font-weight: 300; color: rgba(10,52,30,0.72)">Tom van Dijk wil zich aanmelden voor jouw adres.</span>
+        <sc-if value="{{tomOpen}}" hint-placeholder-val="{{ true }}"><span style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 6px"><button type="button" onClick="{{tomJa}}" style="min-height: 46px; border: 0; border-radius: 999px; background: #0A341E; color: #F7F3EB; font-family: inherit; font-size: 16px; cursor: pointer">Ja, hoort erbij</button><button type="button" onClick="{{tomNee}}" style="min-height: 46px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.16); background: transparent; color: #0A341E; font-family: inherit; font-size: 16px; cursor: pointer">Ken ik niet</button></span></sc-if>
+        <sc-if value="{{tomKlaar}}" hint-placeholder-val="{{ false }}"><span style="font-size: 16px">{{tomTekst}}</span></sc-if>
+      </div>
       <a href="CGoedkeuren.dc.html" class="kaart" style="border-color: rgba(203,164,92,0.6)">
         <span style="display: flex; justify-content: space-between; align-items: baseline"><span style="font-size: 18px">Keur het werk van Marco goed</span><span style="font-size: 12px; letter-spacing: 0.16em; color: rgba(10,52,30,0.62)">KOZIJNEN</span></span>
         <span style="font-size: 15px; font-weight: 300; color: rgba(10,52,30,0.72)">Opgeleverd om 10:40. Twee foto's en zijn toelichting staan klaar.</span>
@@ -79,8 +85,18 @@ a{color:#0A341E}a:hover{color:#14492c}
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
 class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tom: '' };
+  }
   renderVals() {
-    return {};
+    const st = this.state;
+    return {
+      tomOpen: !st.tom, tomKlaar: !!st.tom,
+      tomJa: () => this.setState({ tom: 'ja' }),
+      tomNee: () => this.setState({ tom: 'nee' }),
+      tomTekst: st.tom === 'ja' ? '✓ Tom kan nu meekijken. Jij blijft de eigenaar van het account.' : 'Dank je. Tom komt er niet in; wij kijken wie het is.'
+    };
   }
 }
 </script>

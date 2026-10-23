@@ -96,6 +96,18 @@ a{color:#0A341E}a:hover{color:#14492c}
           <button type="button" class="media" onClick="{{toonTekst}}" style="{{tekstStyle}}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>Tekst</button>
         </div>
         <span style="margin-top: -10px; font-size: 15px; color: rgba(10,52,30,0.62)">Tikt, zoemt of piept er iets? Neem het geluid op.</span>
+        <sc-if value="{{heeftMedia}}" hint-placeholder-val="{{ false }}">
+          <div style="display: flex; flex-direction: column; border-radius: 18px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.08); padding: 0 12px">
+            <sc-for list="{{mediaLijst}}" as="m" hint-placeholder-count="2">
+              <div style="display: flex; align-items: center; gap: 12px; min-height: 60px; border-bottom: 1px solid rgba(10,52,30,0.06)">
+                <span style="flex: 0 0 auto; width: 40px; height: 40px; border-radius: 10px; background: #3A3F3B; color: #F7F3EB; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="{{m.icoon}}"/></svg></span>
+                <span style="flex: 1 1 auto; font-size: 16px">{{m.naam}}</span>
+                <button type="button" onClick="{{m.opnieuw}}" style="min-height: 40px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.16); background: transparent; color: #0A341E; font-family: inherit; font-size: 15px; cursor: pointer">Opnieuw</button>
+                <button type="button" onClick="{{m.weg}}" aria-label="Verwijder {{m.naam}}" style="width: 40px; height: 40px; border-radius: 999px; border: 0; background: transparent; color: rgba(10,52,30,0.7); cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 7h14M10 7V5h4v2M7 7l1 13h8l1-13"/></svg></button>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
         <sc-if value="{{tekst}}" hint-placeholder-val="{{ true }}">
           <textarea rows="3" aria-label="In je eigen woorden" placeholder="In je eigen woorden" style="border-radius: 18px; border: 1px solid rgba(10,52,30,0.1); background: #F7F3EB; padding: 14px 16px; font-family: inherit; font-size: 17px; line-height: 1.5; color: #0A341E; resize: none">{{tekstVoorbeeld}}</textarea>
         </sc-if>
@@ -246,6 +258,7 @@ a{color:#0A341E}a:hover{color:#14492c}
         </div>
       </sc-if>
       <div style="padding: 22px 0 40px; display: flex; flex-direction: column; align-items: center; gap: 10px">
+        <div style="display: flex; gap: 6px; padding: 4px; border-radius: 999px; background: rgba(247,243,235,0.12)"><button type="button" onClick="{{naarFoto}}" style="{{fotoModus}}">FOTO</button><button type="button" onClick="{{naarVideo}}" style="{{videoModus}}">VIDEO</button></div>
         <button type="button" onClick="{{camKlik}}" aria-label="{{camKnopLabel}}" style="width: 76px; height: 76px; border-radius: 999px; border: 4px solid #F7F3EB; background: transparent; padding: 5px; cursor: pointer"><span style="{{sluiterStyle}}"></span></button>
         <span style="font-size: 15px; opacity: 0.8">{{camOnder}}</span>
       </div>
@@ -279,7 +292,7 @@ class Component extends DCLogic {
       e0 = p.element ? Component.elementenVoor(r).indexOf(p.element) : -1;
       if (e0 < 0 && i0 > 1) i0 = 1;
     }
-    this.state = { pad, i: i0, hervat, r, e: e0, rGekozen: ruimteIdx, plan, custom, dag: 0, spoed: false, voorkeur: true, momenten: plan ? [] : ['MA 27 OKT-Ochtend', 'WO 29 OKT-Middag', 'DO 30 OKT-Ochtend'], fotos: 0, videos: 0, geluid: 0, opname: false, tekst: hervat, cam: '', lensVies: true, filmt: false, klaar: false };
+    this.state = { pad, i: i0, hervat, r, e: e0, rGekozen: ruimteIdx, plan, custom, dag: 0, spoed: false, voorkeur: true, momenten: plan ? [] : ['MA 27 OKT-Ochtend', 'WO 29 OKT-Middag', 'DO 30 OKT-Ochtend'], media: [], opname: false, tekst: hervat, cam: '', lensVies: true, filmt: false, klaar: false };
   }
   static elementenVoor(r) {
     const per = {
@@ -323,10 +336,13 @@ class Component extends DCLogic {
     const risico = step === 3 ? RISICO[E[elementType] ? E[elementType][2] : ''] : null;
     const vakKey = plan ? plan.vak : (E[elementType] ? E[elementType][3] : '');
     const vak = VAKMAN[vakKey];
+    const tel = (soort) => st.media.filter((m) => m.soort === soort).length;
+    const nFoto = tel('foto'), nVideo = tel('video'), nGeluid = tel('geluid');
+    const voegToe = (m, extra) => this.setState(Object.assign({ media: st.media.concat([Object.assign({ id: Date.now() + Math.random() }, m)]) }, extra || {}));
     const meegafDelen = [];
-    if (st.fotos) meegafDelen.push(st.fotos + (st.fotos === 1 ? ' foto' : " foto's"));
-    if (st.videos) meegafDelen.push(st.videos + (st.videos === 1 ? ' video' : " video's"));
-    if (st.geluid) meegafDelen.push(st.geluid + (st.geluid === 1 ? ' opname' : ' opnames'));
+    if (nFoto) meegafDelen.push(nFoto + (nFoto === 1 ? ' foto' : " foto's"));
+    if (nVideo) meegafDelen.push(nVideo + (nVideo === 1 ? ' video' : " video's"));
+    if (nGeluid) meegafDelen.push(nGeluid + (nGeluid === 1 ? ' opname' : ' opnames'));
     if (st.tekst) meegafDelen.push('tekst');
     const camOpen = (soort) => () => this.setState({ cam: soort, filmt: false });
     const knopAan = 'background: #0A341E; color: #F7F3EB; border-color: #0A341E';
@@ -354,15 +370,33 @@ class Component extends DCLogic {
       ruimteCaps: ruimteNaam.toUpperCase(),
       elementCaps: elementNaam.toUpperCase(),
       risico: risico ? { ...risico, telHref: risico.tel ? 'tel:' + risico.tel.replace(/-/g, '') : '' } : null,
-      fotoLabel: st.fotos ? st.fotos + (st.fotos === 1 ? ' foto' : " foto's") : 'Foto',
-      videoLabel: st.videos ? st.videos + (st.videos === 1 ? ' video' : " video's") : 'Video',
-      geluidLabel: st.opname ? '● 0:04' : (st.geluid ? st.geluid + ' opname' + (st.geluid === 1 ? '' : 's') : 'Geluid'),
-      geluidStyle: st.opname ? 'background: #8A2E1F; color: #F7F3EB; border-color: #8A2E1F' : (st.geluid ? knopAan : ''),
+      fotoLabel: nFoto ? nFoto + (nFoto === 1 ? ' foto' : " foto's") : 'Foto',
+      videoLabel: nVideo ? nVideo + (nVideo === 1 ? ' video' : " video's") : 'Video',
+      geluidLabel: st.opname ? '● 0:04' : (nGeluid ? nGeluid + ' opname' + (nGeluid === 1 ? '' : 's') : 'Geluid'),
+      geluidStyle: st.opname ? 'background: #8A2E1F; color: #F7F3EB; border-color: #8A2E1F' : (nGeluid ? knopAan : ''),
       tekstStyle: st.tekst ? knopAan : '',
       tekst: st.tekst,
       tekstVoorbeeld: elementType === 'Kraan' ? 'De kraan blijft druppelen, ook als hij helemaal dicht is.' : '',
       camFoto: camOpen('foto'), camVideo: camOpen('video'),
-      neemOp: () => st.opname ? this.setState({ opname: false, geluid: st.geluid + 1 }) : this.setState({ opname: true }),
+      heeftMedia: st.media.length > 0,
+      mediaLijst: st.media.map((m, i) => {
+        const nr = st.media.slice(0, i + 1).filter((x) => x.soort === m.soort).length;
+        return {
+          naam: m.soort === 'foto' ? 'Foto ' + nr : m.soort === 'video' ? 'Video ' + nr + ' · ' + m.duur : 'Opname ' + nr + ' · ' + m.duur,
+          icoon: m.soort === 'foto' ? 'M4 8h3l2-3h6l2 3h3v11H4zM12 16.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z' : m.soort === 'video' ? 'M3 6h13v12H3zM16 10l5-3v10l-5-3' : 'M9 3h6v11H9zM5 11a7 7 0 0 0 14 0M12 18v3',
+          weg: () => this.setState({ media: st.media.filter((x) => x.id !== m.id) }),
+          opnieuw: () => {
+            const rest = st.media.filter((x) => x.id !== m.id);
+            if (m.soort === 'geluid') this.setState({ media: rest, opname: true });
+            else this.setState({ media: rest, cam: m.soort, filmt: false });
+          }
+        };
+      }),
+      naarFoto: () => this.setState({ cam: 'foto', filmt: false }),
+      naarVideo: () => this.setState({ cam: 'video', filmt: false }),
+      fotoModus: 'min-height: 36px; padding: 0 14px; border-radius: 999px; border: 0; font-family: inherit; font-size: 15px; letter-spacing: 0.1em; cursor: pointer; ' + (st.cam === 'foto' ? 'background: rgba(247,243,235,0.92); color: #0B0F0D' : 'background: transparent; color: #F7F3EB'),
+      videoModus: 'min-height: 36px; padding: 0 14px; border-radius: 999px; border: 0; font-family: inherit; font-size: 15px; letter-spacing: 0.1em; cursor: pointer; ' + (st.cam === 'video' ? 'background: rgba(247,243,235,0.92); color: #0B0F0D' : 'background: transparent; color: #F7F3EB'),
+      neemOp: () => st.opname ? voegToe({ soort: 'geluid', duur: '0:04' }, { opname: false }) : this.setState({ opname: true }),
       toonTekst: () => this.setState({ tekst: !st.tekst }),
       spoed: st.spoed,
       spoedOpen: () => this.setState({ spoed: !st.spoed }),
@@ -412,12 +446,12 @@ class Component extends DCLogic {
       zoekerStyle: 'flex: 1 1 auto; margin: 16px 0 0; overflow: hidden; transition: filter 600ms; filter: ' + (st.lensVies ? 'blur(3px) contrast(0.85)' : 'none'),
       camKnopLabel: st.cam === 'video' ? (st.filmt ? 'Stop met filmen' : 'Begin met filmen') : 'Maak een foto',
       sluiterStyle: 'display: block; width: 100%; height: 100%; border-radius: ' + (st.filmt ? '10px' : '999px') + '; transition: border-radius 200ms; background: ' + (st.cam === 'video' ? '#8A2E1F' : '#F7F3EB'),
-      camOnder: st.cam === 'video' ? (st.filmt ? 'Tik om te stoppen' : 'Tik om te filmen') : (st.fotos ? st.fotos + ' gemaakt · tik voor nog een' : 'Tik voor een foto'),
+      camOnder: st.cam === 'video' ? (st.filmt ? 'Tik om te stoppen' : 'Tik om te filmen') : (nFoto ? nFoto + ' gemaakt · tik voor nog een' : 'Tik voor een foto'),
       camKlik: () => {
         if (st.cam === 'video') {
-          if (st.filmt) this.setState({ filmt: false, videos: st.videos + 1, cam: '' });
+          if (st.filmt) voegToe({ soort: 'video', duur: '0:06' }, { filmt: false, cam: '' });
           else this.setState({ filmt: true });
-        } else this.setState({ fotos: st.fotos + 1 });
+        } else voegToe({ soort: 'foto' });
       }
     };
   }

@@ -48,7 +48,9 @@ a{color:#0A341E}a:hover{color:#14492c}
       <div style="padding: 22px 20px; border-radius: 22px; background: #0A341E; color: #F7F3EB; display: flex; flex-direction: column; gap: 10px">
         <span style="font-size: 13px; letter-spacing: 0.22em; color: #CBA45C">DE KLANT VRAAGT</span>
         <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 26px; line-height: 1.25">Niet aanbellen, de baby slaapt tot 10:00.</span>
-        <span style="font-size: 18px; color: rgba(247,243,235,0.85)">Sleutel ligt bij nr. 12.</span>
+        <span style="font-size: 18px; color: rgba(247,243,235,0.85)">Sleutel ligt bij de buren, nr. 16. <strong style="font-weight: 600; color: #F7F3EB">Alleen voor deze klus, vandaag tussen 09:00 en 11:00.</strong></span>
+        <span style="font-size: 15px; color: rgba(247,243,235,0.7)">Haal hem op als je er bent en breng hem terug als je weggaat.</span>
+        <button type="button" onClick="{{sleutelStap}}" style="margin-top: 6px; min-height: 48px; border-radius: 999px; border: 1px solid rgba(247,243,235,0.4); background: transparent; color: #F7F3EB; font-family: inherit; font-size: 16px; cursor: pointer">{{sleutelTekst}}</button>
       </div>
       <div class="blok" style="padding: 18px 20px; display: flex; flex-direction: column; gap: 6px">
         <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 26px">Kastanjelaan 14</span>
@@ -62,7 +64,7 @@ a{color:#0A341E}a:hover{color:#14492c}
 
     <sc-if value="{{gestart}}" hint-placeholder-val="{{ true }}">
     <div class="op" style="display: flex; flex-direction: column">
-      <div style="margin: 16px 16px 0; padding: 12px 16px; border-radius: 16px; border: 1px solid #CBA45C; background: rgba(203,164,92,0.1); font-size: 16px">Niet aanbellen tot 10:00 · sleutel bij nr. 12</div>
+      <div style="margin: 16px 16px 0; padding: 12px 16px; border-radius: 16px; border: 1px solid #CBA45C; background: rgba(203,164,92,0.1); font-size: 16px">Niet aanbellen tot 10:00 · sleutel bij nr. 16, alleen vandaag · {{sleutelStand}}</div>
 
       <div style="padding: 22px 16px 0; display: flex; flex-direction: column; gap: 10px">
         <span class="lbl" style="padding: 0 8px">FOTO'S PER KOZIJN · ZOVEEL ALS JE WILT</span>
@@ -86,6 +88,7 @@ a{color:#0A341E}a:hover{color:#14492c}
           <div class="blok" style="padding: 12px 14px; display: flex; flex-direction: column; gap: 6px">
             <span style="display: flex; justify-content: space-between; gap: 10px; align-items: baseline"><span style="font-size: 17px; font-weight: 600">{{o.titel}}</span><span style="font-size: 14px; color: rgba(10,52,30,0.62); white-space: nowrap">{{o.duur}}</span></span>
             <span style="{{o.tekstStyle}}">{{o.tekst}}</span>
+            <span style="display: flex; gap: 8px; justify-content: flex-end"><button type="button" onClick="{{o.opnieuw}}" style="min-height: 38px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.16); background: transparent; color: #0A341E; font-family: inherit; font-size: 14px; cursor: pointer">Opnieuw</button><button type="button" onClick="{{o.weg}}" style="min-height: 38px; padding: 0 12px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.16); background: transparent; color: #0A341E; font-family: inherit; font-size: 14px; cursor: pointer">Verwijder</button></span>
           </div>
         </sc-for>
         <button type="button" onClick="{{toggleRec}}" style="{{recStyle}}">
@@ -178,7 +181,7 @@ class Component extends DCLogic {
     super(props);
     this.state = {
       fase: 1, fotos: [3, 2, 1, 0], rec: false, keuze: 0, reden: 0, moment: -1, scan: '', vondstFotos: 0,
-      gescand: false, check: [true, false, false],
+      gescand: false, check: [true, false, false, false], sleutel: 0,
       opnames: [
         { titel: 'Onderdorpel K1 zacht', duur: '0:42', tekst: 'Linksonder rot over 12 cm. Uitgefreesd tot gezond hout.' },
         { titel: 'K1 hersteld', duur: '0:18', tekst: 'Gevuld met 2K-houtvuller, morgen schuren en gronden.' }
@@ -223,7 +226,7 @@ class Component extends DCLogic {
       'Geschilderd in RAL 9010, alkyd zijdeglans' + (st.gescand ? ' (Sikkens Rubbol BL Satura)' : ''),
       st.fotos.reduce((a, b) => a + b, 0) + ' foto’s bij ' + st.fotos.filter((f) => f > 0).length + ' van de 4 kozijnen'
     ];
-    const checkTeksten = ['Weer wit, zoals nu: RAL 9010', 'Ventilatieroosters bovenkozijn niet overschilderd', 'Rommel opgeruimd, ladder weg van de gevel'];
+    const checkTeksten = ['Weer wit, zoals nu: RAL 9010', 'Ventilatieroosters bovenkozijn niet overschilderd', 'Rommel opgeruimd, ladder weg van de gevel', 'Sleutel teruggebracht bij nr. 16'];
     return {
       fases: namen.map((n, i) => ({
         naam: n, nr: '0' + (i + 1), aan: i === st.fase ? 'true' : 'false',
@@ -240,7 +243,7 @@ class Component extends DCLogic {
         plus: () => { const f = st.fotos.slice(); f[i] = Math.min(3, f[i] + 1); this.setState({ fotos: f }); },
         rij: 'display: flex; align-items: center; gap: 10px; min-height: 60px; ' + (i < st.fotos.length - 1 ? 'border-bottom: 1px solid rgba(10,52,30,0.08)' : '')
       })),
-      opnames: st.opnames.map((o) => ({ ...o, tekst: o.bezig ? 'Even geduld, wordt uitgeschreven…' : o.tekst, tekstStyle: 'font-size: 16px; line-height: 1.45; ' + (o.bezig ? 'color: rgba(10,52,30,0.5)' : 'color: rgba(10,52,30,0.8)') })),
+      opnames: st.opnames.map((o, oi) => ({ ...o, weg: () => this.setState({ opnames: st.opnames.filter((x, j) => j !== oi) }), opnieuw: () => this.setState({ opnames: st.opnames.filter((x, j) => j !== oi), rec: true }), tekst: o.bezig ? 'Even geduld, wordt uitgeschreven…' : o.tekst, tekstStyle: 'font-size: 16px; line-height: 1.45; ' + (o.bezig ? 'color: rgba(10,52,30,0.5)' : 'color: rgba(10,52,30,0.8)') })),
       aantalOpnames: st.opnames.length,
       toggleRec: () => { if (st.rec) nieuweOpname(); else this.setState({ rec: true }); },
       recLabel: st.rec ? 'Tik om te stoppen' : (st.opnames.length ? 'Nog een opname' : 'Tik en praat'),
@@ -248,6 +251,9 @@ class Component extends DCLogic {
       recStyle: 'display: flex; align-items: center; gap: 14px; min-height: 70px; padding: 0 16px; border-radius: 20px; cursor: pointer; font-family: inherit; text-align: left; color: #0A341E; ' + (st.rec ? 'background: #CBA45C; border: 1px solid #CBA45C' : 'background: transparent; border: 1px dashed rgba(10,52,30,0.3)'),
       recDot: 'flex: 0 0 auto; width: 42px; height: 42px; border-radius: 999px; background: #0A341E; display: flex; align-items: center; justify-content: center',
       materiaal, casus,
+      sleutelStap: () => this.setState({ sleutel: Math.min(2, st.sleutel + 1) }),
+      sleutelTekst: ['Ik heb de sleutel opgehaald', 'Ik heb hem teruggebracht', '✓ Sleutel teruggebracht'][st.sleutel],
+      sleutelStand: ['sleutel nog bij de buren', 'sleutel bij jou', 'sleutel terug'][st.sleutel],
       scan: !!st.scan,
       scanOpen: () => {
         this.setState({ scan: 'zoekt' });

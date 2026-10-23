@@ -39,28 +39,18 @@ a{color:#0A341E}a:hover{color:#14492c}
     </div>
 
     <sc-if value="{{buiten}}" hint-placeholder-val="{{ true }}">
-    <div style="position: relative; height: 330px; margin-top: 4px">
-      <svg class="huis" width="390" height="366" viewBox="0 0 320 300" fill="none" aria-hidden="true" style="position: absolute; top: -10px; left: 0">
-        <defs>
-          <linearGradient id="voor" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A5B40"/><stop offset="1" stop-color="#123522"/></linearGradient>
-          <linearGradient id="zij" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0F2C1C"/><stop offset="1" stop-color="#0A2114"/></linearGradient>
-          <linearGradient id="dakL" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1C2A22"/><stop offset="1" stop-color="#101A14"/></linearGradient>
-          <linearGradient id="dakR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#26362C"/><stop offset="1" stop-color="#141F18"/></linearGradient>
-          <linearGradient id="raam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E3B4"/><stop offset="1" stop-color="#CBA45C"/></linearGradient>
-          <filter id="schaduw" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="12"/></filter>
-        </defs>
-        <ellipse cx="165" cy="292" rx="150" ry="26" fill="#0A341E" opacity=".28" filter="url(#schaduw)"/>
-        <polygon points="60,150 115,105 205,60 150,105" fill="url(#dakL)"/>
-        <polygon points="60,250 60,150 115,105 170,200 170,300" fill="url(#voor)"/>
-        <polygon points="170,200 260,155 260,255 170,300" fill="url(#zij)"/>
-        <polygon points="115,105 170,200 260,155 205,60" fill="url(#dakR)"/>
-        <path d="M115 105L205 60" stroke="#CBA45C" stroke-width="1.2" opacity=".9"/>
-        <polygon points="75,182 103,195 103,229 75,216" fill="url(#raam)" opacity=".55"/>
-        <polygon points="127,206 155,218 155,252 127,240" fill="url(#raam)" opacity=".55"/>
-        <polygon points="105,140 125,149 125,170 105,161" fill="url(#raam)" opacity=".45"/>
-        <polygon points="190,200 220,185 220,219 190,234" fill="url(#raam)" opacity=".55"/>
-        <polygon points="232,199 250,190 250,258 232,267" fill="#071A0F"/>
-      </svg>
+    <div style="position: relative; height: 370px; margin-top: 4px">
+      <svg class="huis" width="390" height="366" viewBox="0 0 320 300" fill="none" aria-hidden="true" style="position: absolute; top: -10px; left: 0"><defs>
+<pattern id="dobv" width="14" height="10" patternUnits="userSpaceOnUse" patternTransform="skewY(24.44)"><rect width="14" height="10" fill="#A85B41"/><path d="M0 4.6h14M0 9.6h14M3 0v4.6M10 5v4.6" stroke="#D9C6B4" stroke-width="0.7" opacity=".7"/></pattern>
+<pattern id="dobz" width="14" height="10" patternUnits="userSpaceOnUse" patternTransform="skewY(-26.57)"><rect width="14" height="10" fill="#7C412F"/><path d="M0 4.6h14M0 9.6h14M3 0v4.6M10 5v4.6" stroke="#D9C6B4" stroke-width="0.7" opacity=".45"/></pattern>
+<pattern id="dopan" width="9" height="7" patternUnits="userSpaceOnUse" patternTransform="skewY(-26.57)"><rect width="9" height="7" fill="#45423F"/><path d="M0 6.4h9M4.5 0v6.4" stroke="#2E2C2A" stroke-width="1"/></pattern>
+<linearGradient id="dolicht" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF5E6" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity=".12"/></linearGradient>
+<linearGradient id="doschaduwzij" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".05"/><stop offset="1" stop-color="#000" stop-opacity=".22"/></linearGradient>
+<linearGradient id="dodakglans" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".14"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></linearGradient>
+<linearGradient id="doglas" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8FA6AF"/><stop offset="1" stop-color="#3E5660"/></linearGradient>
+<linearGradient id="dowarm" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E3B4"/><stop offset="1" stop-color="#CBA45C"/></linearGradient>
+<filter id="dozacht" x="-30%" y="-100%" width="160%" height="300%"><feGaussianBlur stdDeviation="11"/></filter>
+</defs><ellipse cx="165" cy="276" rx="158" ry="32" fill="#D9D0BD" opacity=".55"/><ellipse cx="165" cy="286" rx="150" ry="22" fill="#3A2E22" opacity=".2" filter="url(#dozacht)"/><polygon points="60,150 115,105 205,60 150,105" fill="#33302E"/><polygon points="60,250 60,150 115,105 170,200 170,300" fill="url(#dobv)"/><polygon points="60,250 60,150 115,105 170,200 170,300" fill="url(#dolicht)"/><polygon points="60,250 170,300 170,294 60,244" fill="#5A4034" opacity=".55"/><polygon points="170,200 260,155 260,255 170,300" fill="url(#dobz)"/><polygon points="170,200 260,155 260,255 170,300" fill="url(#doschaduwzij)"/><polygon points="170,300 260,255 260,249 170,294" fill="#4A352B" opacity=".55"/><polygon points="115,105 170,200 260,155 205,60" fill="url(#dopan)"/><polygon points="115,105 170,200 260,155 205,60" fill="url(#dodakglans)"/><path d="M170 200L260 155" stroke="#2A2826" stroke-width="2.6" stroke-linecap="round"/><path d="M60 150L115 105L170 200" stroke="#F4F1EA" stroke-width="2.2" stroke-linejoin="round" fill="none"/><polygon points="205,96 215,100.5 215,76 205,71.5" fill="#8E4A35"/><polygon points="215,100.5 223,96.5 223,72 215,76" fill="#6A3526"/><polygon points="203,70.5 215,76 225,71 213,65.5" fill="#3B3836"/><polygon points="75.0,182.0 103.0,194.7 103.0,228.7 75.0,216.0" fill="#F4F1EA"/><polygon points="77.4,185.5 100.6,196.0 100.6,225.2 77.4,214.7" fill="url(#doglas)"/><path d="M89.0 190.8V220.0M77.4 197.4L100.6 207.9" stroke="#F4F1EA" stroke-width="1.6"/><polygon points="78.4,186.9 83.4,189.2 79.4,197.6 78.4,197.1" fill="#fff" opacity=".28"/><path d="M73.5 215.9L104.5 230.0" stroke="#F4F1EA" stroke-width="2.4" stroke-linecap="round"/><polygon points="127.0,206.0 155.0,218.7 155.0,252.7 127.0,240.0" fill="#F4F1EA"/><polygon points="129.4,209.5 152.6,220.0 152.6,249.2 129.4,238.7" fill="url(#doglas)"/><path d="M141.0 214.8V244.0M129.4 221.4L152.6 231.9" stroke="#F4F1EA" stroke-width="1.6"/><polygon points="130.4,210.9 135.4,213.2 131.4,221.6 130.4,221.1" fill="#fff" opacity=".28"/><path d="M125.5 239.9L156.5 254.0" stroke="#F4F1EA" stroke-width="2.4" stroke-linecap="round"/><polygon points="103.0,141.0 125.0,151.0 125.0,173.0 103.0,163.0" fill="#F4F1EA"/><polygon points="105.4,144.5 122.6,152.3 122.6,169.5 105.4,161.7" fill="url(#doglas)"/><path d="M114.0 148.4V165.6M105.4 151.3L122.6 159.1" stroke="#F4F1EA" stroke-width="1.6"/><polygon points="106.4,145.9 111.4,148.2 107.4,151.8 106.4,151.3" fill="#fff" opacity=".28"/><path d="M101.5 162.9L126.5 174.3" stroke="#F4F1EA" stroke-width="2.4" stroke-linecap="round"/><polygon points="186.0,202.0 216.0,187.0 216.0,217.0 186.0,232.0" fill="#F4F1EA"/><polygon points="188.2,203.1 213.8,190.3 213.8,215.9 188.2,228.7" fill="url(#doglas)" opacity=".9"/><path d="M201.0 196.7V222.3" stroke="#F4F1EA" stroke-width="1.4"/><polygon points="229,200.5 251,189.5 251,257.5 229,268.5" fill="#F4F1EA"/><polygon points="231.5,201.8 248.5,193.3 248.5,256.8 231.5,265.3" fill="#2F5D45"/><circle cx="245" cy="230" r="1.3" fill="#CBA45C"/></svg>
       <sc-for list="{{punten}}" as="p" hint-placeholder-count="3">
         <button type="button" onClick="{{p.pick}}" aria-label="{{p.naam}}" style="{{p.markerStyle}}"><span style="{{p.dotStyle}}">{{p.nr}}</span></button>
       </sc-for>
