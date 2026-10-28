@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<title>Ontvangst door Lisa</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&amp;family=Nunito+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#0A341E}a:hover{color:#14492c}
+.op{animation:op 800ms cubic-bezier(.22,.61,.36,1) both}
+.op2{animation:op 800ms 160ms cubic-bezier(.22,.61,.36,1) both}
+.op3{animation:op 800ms 320ms cubic-bezier(.22,.61,.36,1) both}
+@keyframes op{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.op,.op2,.op3{animation:none}}
+.lbl{font-size:12px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+.keus{min-height:56px;padding:0 18px;border-radius:18px;border:1px solid rgba(10,52,30,0.14);background:#F7F3EB;color:#0A341E;font-family:inherit;font-size:17px;text-align:left;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.bel{flex:1;min-height:52px;border-radius:999px;font-family:inherit;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; position: relative; overflow: hidden; color: #0A341E; font-family: 'Nunito Sans', system-ui, sans-serif; background: #ECE5D7">
+  <div style="position: absolute; inset: 0 0 132px 0; overflow-y: auto; padding: 22px 24px 20px; display: flex; flex-direction: column; gap: 22px">
+    <a href="CStart.dc.html" aria-label="Naar de startpagina" style="font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 0.32em; color: inherit; text-decoration: none">UPKEEPERS</a>
+
+    <div class="op" style="display: flex; gap: 16px; align-items: center">
+      <span style="position: relative; flex: 0 0 auto; width: 76px; height: 76px; border-radius: 999px; background: radial-gradient(120% 120% at 20% 10%, #2A5B40 0%, #123522 70%); border: 1px solid #CBA45C; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 30px; color: #F7F3EB">L
+        <span style="position: absolute; right: 2px; bottom: 4px; width: 14px; height: 14px; border-radius: 999px; background: #2F5D45; border: 2px solid #ECE5D7"></span>
+      </span>
+      <span style="display: flex; flex-direction: column; gap: 3px">
+        <span class="lbl">{{rolRegel}}</span>
+        <span style="font-size: 17px">Lisa van Dam</span>
+        <span style="font-size: 14px; color: rgba(10,52,30,0.66)">Nu bereikbaar · werkdagen 08:00 tot 18:00</span>
+      </span>
+    </div>
+
+    <div class="op2" style="display: flex; flex-direction: column; gap: 10px">
+      <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 34px; line-height: 1.1; letter-spacing: -0.02em">Welkom, Sanne. Ik ben Lisa.</h1>
+      <p style="margin: 0; font-size: 18px; font-weight: 300; line-height: 1.5; color: rgba(10,52,30,0.8)">Ik heb je huis aan de Kastanjelaan net leren kennen: 1932, houten kozijnen, waarschijnlijk op palen. Voordat we iets plannen, wil ik weten wat voor jou het belangrijkst is.</p>
+    </div>
+
+    <sc-if value="{{kiezen}}" hint-placeholder-val="{{ true }}">
+      <div class="op3" style="display: flex; flex-direction: column; gap: 8px">
+        <sc-for list="{{keuzes}}" as="k" hint-placeholder-count="4">
+          <button type="button" class="keus" onClick="{{k.pick}}"><span>{{k.tekst}}</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </sc-for>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{antwoord}}" hint-placeholder-val="{{ false }}">
+      <div class="op" style="display: flex; flex-direction: column; gap: 12px">
+        <span style="align-self: flex-end; max-width: 80%; padding: 12px 16px; border-radius: 20px 20px 6px 20px; background: #0A341E; color: #F7F3EB; font-size: 16px; line-height: 1.4">{{gekozen}}</span>
+        <div style="display: flex; gap: 10px; align-items: flex-end">
+          <span style="flex: 0 0 auto; width: 30px; height: 30px; border-radius: 999px; background: linear-gradient(160deg, #2A5B40, #123522); border: 1px solid rgba(203,164,92,0.6); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 13px; color: #F7F3EB">L</span>
+          <span style="max-width: 84%; padding: 14px 16px; border-radius: 20px 20px 20px 6px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.08); font-size: 16px; line-height: 1.5">{{lisaZegt}}</span>
+        </div>
+        <a href="{{volgendeHref}}" style="min-height: 52px; border-radius: 999px; background: #2F5D45; color: #F7F3EB; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 17px; text-decoration: none">{{volgendeTekst}}</a>
+        <button type="button" onClick="{{opnieuw}}" style="align-self: center; min-height: 40px; border: 0; background: transparent; color: rgba(10,52,30,0.66); font-family: inherit; font-size: 15px; cursor: pointer">Iets anders kiezen</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{founding}}" hint-placeholder-val="{{ true }}">
+      <div style="display: flex; gap: 12px; align-items: center; padding: 14px 16px; border-radius: 18px; border: 1px solid #CBA45C">
+        <span style="font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 13px; letter-spacing: 0.08em; color: #8A6D32; flex: 0 0 auto">Nº 038</span>
+        <span style="font-size: 15px; line-height: 1.45">Als Founding Member ben je bij drukte als eerste aan de beurt. Je hoeft het niet te vragen.</span>
+      </div>
+    </sc-if>
+  </div>
+
+  <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 20px 28px; background: #ECE5D7; border-top: 1px solid rgba(10,52,30,0.06); display: flex; flex-direction: column; gap: 8px">
+    <span style="text-align: center; font-size: 14px; color: rgba(10,52,30,0.62)">Liever even praten? Lisa neemt zelf op.</span>
+    <div style="display: flex; gap: 8px">
+      <button type="button" onClick="{{bel}}" class="bel" style="border: 0; background: #0A341E; color: #F7F3EB">{{belTekst}}</button>
+      <button type="button" onClick="{{app}}" class="bel" style="border: 1px solid rgba(10,52,30,0.18); background: transparent; color: #0A341E">{{appTekst}}</button>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { k: -1, bel: false, app: false };
+  }
+  renderVals() {
+    const st = this.state;
+    const lid = (this.props && this.props.lid) || 'founding';
+    const opties = [
+      { tekst: 'Er is iets dat me zorgen baart', lisa: 'Vertel het me, met een foto als dat kan. Dan kijk ik vandaag nog wie er het best bij past, en je hoort vóór je iets beslist wat het kost.', href: 'CMelden.dc.html', knop: 'Laat het me zien' },
+      { tekst: 'Weten wat er de komende jaren aankomt', lisa: 'Bij een huis uit 1932 zijn dat meestal de kozijnen, de fundering en de isolatie. Bij de Woning-APK zetten we het voor je op een rij, met wanneer en ongeveer wat het kost.', href: 'CMelden.dc.html?klus=apk', knop: 'Plan je Woning-APK' },
+      { tekst: 'Gewoon dat alles goed blijft', lisa: 'Dan regelen wij het onderhoud op tijd, en hoor je alleen van ons als er iets te doen is. We beginnen met de Woning-APK, dan weet ik wat je huis nodig heeft.', href: 'CMelden.dc.html?klus=apk', knop: 'Plan je Woning-APK' },
+      { tekst: 'Ik weet het nog niet', lisa: 'Helemaal goed. Kijk rustig rond in je huis. Ik ben er als je me nodig hebt, en ik bel je over een week even.', href: 'CStart.dc.html', knop: 'Bekijk je huis' }
+    ];
+    const o = opties[st.k] || opties[0];
+    return {
+      rolRegel: lid === 'founding' ? 'JE VASTE PERSOON · FOUNDING' : 'JE VASTE PERSOON BIJ UPKEEPERS',
+      founding: lid === 'founding',
+      kiezen: st.k < 0, antwoord: st.k >= 0,
+      keuzes: opties.map((x, i) => ({ tekst: x.tekst, pick: () => this.setState({ k: i }) })),
+      gekozen: o.tekst, lisaZegt: o.lisa, volgendeHref: o.href, volgendeTekst: o.knop,
+      opnieuw: () => this.setState({ k: -1 }),
+      bel: () => this.setState({ bel: true }), belTekst: st.bel ? '✓ Lisa belt je zo' : 'Bel Lisa',
+      app: () => this.setState({ app: true }), appTekst: st.app ? '✓ Ze appt je terug' : 'App Lisa'
+    };
+  }
+}
+</script>
+</body>
+</html>

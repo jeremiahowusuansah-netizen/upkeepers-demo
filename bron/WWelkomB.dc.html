@@ -17,6 +17,7 @@ a{color:#0A341E}a:hover{color:#14492c}
 @keyframes op{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.op,.op2{animation:none}}
 .lbl{font-size:12px;letter-spacing:0.22em;color:rgba(10,52,30,0.62)}
+.vak > *{flex-shrink:0}
 .groot{font-family:'Montserrat',sans-serif;font-weight:200;line-height:0.9;letter-spacing:-0.045em}
 </style>
 </helmet>
@@ -32,7 +33,7 @@ a{color:#0A341E}a:hover{color:#14492c}
   </div>
 
   <sc-if value="{{s0}}" hint-placeholder-val="{{ true }}">
-    <div style="position: absolute; left: 24px; right: 24px; top: 110px; bottom: 150px; display: flex; flex-direction: column; overflow-y: auto">
+    <div class="vak" style="position: absolute; left: 24px; right: 24px; top: 110px; bottom: 150px; display: flex; flex-direction: column; overflow-y: auto">
       <span class="lbl op">JE ACCOUNT STAAT · DIT VONDEN WE BIJ KASTANJELAAN 14</span>
       <span class="op" style="margin-top: 40px; font-size: 20px; font-weight: 300">Gebouwd in</span>
       <span class="groot op" style="font-size: 132px">1932</span>
@@ -44,31 +45,30 @@ a{color:#0A341E}a:hover{color:#14492c}
         <path d="M134 74h28v28h-28zM180 74h28v28h-28zM148 74v28M194 74v28M134 112h28v36M180 112h28v20h-28z" stroke="#0A341E" stroke-width="0.9"/>
         <path d="M120 60h102" stroke="#CBA45C"/>
       </svg>
-      <p class="op2" style="margin: 26px 0 0; font-size: 19px; font-weight: 300; line-height: 1.5">Bijna honderd jaar oud. Houten kozijnen en vloeren vragen bij zo'n huis vaker aandacht.</p>
-      <span style="margin-top: auto; font-size: 13px; color: rgba(10,52,30,0.58)">Bron: Kadaster, Basisregistratie Adressen en Gebouwen</span>
+      <p class="op2" style="margin: 26px 0 0; font-size: 19px; font-weight: 300; line-height: 1.5">Het jaar dat de Afsluitdijk dichtging. In Hilversum bouwde stadsarchitect Dudok toen aan zijn raadhuis, en in straten als de jouwe kwamen huizen met houten kozijnen en vloeren. Die vragen nu, bijna honderd jaar later, de meeste zorg.</p>
+      <span style="margin-top: auto; padding-top: 18px; font-size: 13px; color: rgba(10,52,30,0.58)">Bron: Kadaster, Basisregistratie Adressen en Gebouwen</span>
     </div>
   </sc-if>
 
   <sc-if value="{{s1}}" hint-placeholder-val="{{ false }}">
-    <div style="position: absolute; left: 24px; right: 24px; top: 110px; bottom: 150px; display: flex; flex-direction: column; overflow-y: auto">
-      <span class="lbl op">HET DAK</span>
-      <span class="op" style="margin-top: 40px; font-size: 20px; font-weight: 300">Een zadeldak van</span>
-      <span class="groot op" style="font-size: 132px">9 m</span>
+    <div class="vak" style="position: absolute; left: 24px; right: 24px; top: 110px; bottom: 150px; display: flex; flex-direction: column; overflow-y: auto">
+      <span class="lbl op">DE MUREN</span>
+      <span class="op" style="margin-top: 40px; font-size: 20px; font-weight: 300">Waarschijnlijk al een</span>
+      <span class="groot op" style="font-size: 92px; line-height: 0.95">spouw&shy;muur</span>
       <svg class="op2" width="342" height="150" viewBox="0 0 342 150" fill="none" aria-hidden="true" style="margin-top: 26px">
         <path d="M0 148h342" stroke="#0A341E" stroke-width="1.2"/>
-        <path d="M70 70L171 8l101 62" stroke="#0A341E" stroke-width="1.2" stroke-linejoin="round"/>
-        <path d="M94 56l8 5M118 41l8 5M142 26l8 5M200 26l-8 5M224 41l-8 5M248 56l-8 5" stroke="rgba(10,52,30,0.4)"/>
-        <path d="M70 70v78h202V70" stroke="#0A341E" stroke-width="1.2"/>
-        <path d="M62 72h18v6H62zM262 72h18v6h-18z" stroke="#0A341E" stroke-width="0.9"/>
-        <path d="M300 8v140M296 8h8M296 148h8" stroke="#CBA45C"/>
+        <path d="M120 10h34v138h-34zM188 10h34v138h-34z" stroke="#0A341E" stroke-width="1.2"/>
+        <path d="M120 24h34M120 38h34M120 52h34M120 66h34M120 80h34M120 94h34M120 108h34M120 122h34M120 136h34M188 24h34M188 38h34M188 52h34M188 66h34M188 80h34M188 94h34M188 108h34M188 122h34M188 136h34" stroke="rgba(10,52,30,0.28)" stroke-width="0.8"/>
+        <path d="M171 14v130" stroke="#CBA45C" stroke-dasharray="4 5"/>
+        <path d="M60 148h222" stroke="#0A341E" stroke-width="1.2"/>
       </svg>
-      <p class="op2" style="margin: 26px 0 0; font-size: 19px; font-weight: 300; line-height: 1.5">Met pannen. De goot en de pannen verdienen elk jaar een blik, vooral na de bladval.</p>
-      <span style="margin-top: auto; font-size: 13px; color: rgba(10,52,30,0.58)">Bron: 3D BAG, TU Delft</span>
+      <p class="op2" style="margin: 26px 0 0; font-size: 19px; font-weight: 300; line-height: 1.5">Twee muren met lucht ertussen; rond 1930 werd dat gewoon. Is die ruimte nog leeg, dan kun je haar laten vullen zonder te breken. Dat scheelt merkbaar in je stookkosten.</p>
+      <span style="margin-top: auto; padding-top: 18px; font-size: 13px; color: rgba(10,52,30,0.58)">Een indicatie op basis van het bouwjaar, geen meting. De Woning-APK kijkt het na</span>
     </div>
   </sc-if>
 
   <sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
-    <div style="position: absolute; left: 24px; right: 24px; top: 110px; bottom: 150px; display: flex; flex-direction: column; overflow-y: auto">
+    <div class="vak" style="position: absolute; left: 24px; right: 24px; top: 110px; bottom: 150px; display: flex; flex-direction: column; overflow-y: auto">
       <span class="lbl op">DE GROND ONDER JE HUIS</span>
       <span class="op" style="margin-top: 40px; font-size: 20px; font-weight: 300">Waarschijnlijk op</span>
       <span class="groot op" style="font-size: 92px; line-height: 0.95">houten palen</span>
@@ -79,8 +79,8 @@ a{color:#0A341E}a:hover{color:#14492c}
         <path d="M0 58h342M0 82h342M0 106h342" stroke="rgba(10,52,30,0.14)" stroke-dasharray="2 4"/>
         <path d="M60 20h222" stroke="#CBA45C"/>
       </svg>
-      <p class="op2" style="margin: 26px 0 0; font-size: 19px; font-weight: 300; line-height: 1.5">Dat is normaal voor deze buurt en tijd. We kijken ernaar bij de APK. Een oordeel over je huis geven we pas daarna.</p>
-      <span style="margin-top: auto; font-size: 13px; color: rgba(10,52,30,0.58)">Bron: Funderingsviewer, KCAF. Een indicatie per buurt, geen meting</span>
+      <p class="op2" style="margin: 26px 0 0; font-size: 19px; font-weight: 300; line-height: 1.5">Dat is normaal voor deze buurt en tijd. Houten palen blijven goed zolang ze onder water staan; zakt het grondwater, dan kunnen ze gaan rotten. We kijken ernaar bij de APK. Een oordeel over je huis geven we pas daarna.</p>
+      <span style="margin-top: auto; padding-top: 18px; font-size: 13px; color: rgba(10,52,30,0.58)">Bron: Funderingsviewer, KCAF. Een indicatie per buurt, geen meting</span>
     </div>
   </sc-if>
 

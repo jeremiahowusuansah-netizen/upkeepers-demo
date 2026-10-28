@@ -41,11 +41,11 @@ a{color:#0A341E}a:hover{color:#14492c}
     <sc-if value="{{klant}}" hint-placeholder-val="{{ true }}">
       <div class="op" style="margin: 18px 16px 0; padding: 12px 14px; border-radius: 16px; background: #0A341E; color: #F7F3EB; display: flex; flex-direction: column; gap: 3px">
         <span style="display: flex; justify-content: space-between; font-size: 13px; letter-spacing: 0.12em; color: rgba(247,243,235,0.7)"><span>UPKEEPERS · GEWIJZIGD</span><span style="letter-spacing: 0">08:14</span></span>
-        <span style="font-size: 16px">Ahmed komt later: 10:30 in plaats van 09:00.</span>
+        <span style="font-size: 16px">{{naam}} komt later: 10:30 in plaats van 09:00.</span>
       </div>
 
       <div class="op2" style="padding: 24px 28px 0; display: flex; flex-direction: column; gap: 10px">
-        <span class="lbl" style="font-size: 13px">CV-KETEL · JAARLIJKS ONDERHOUD</span>
+        <span class="lbl" style="font-size: 13px">{{klusLabel}}</span>
         <h1 style="margin: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 38px; line-height: 1.05; letter-spacing: -0.025em">{{kop}}</h1>
         <p style="margin: 4px 0 0; font-size: 17px; font-weight: 300; line-height: 1.5; color: rgba(10,52,30,0.72)">{{uitleg}}</p>
         <div style="display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 10px; row-gap: 2px; margin-top: 6px; font-size: 14px; letter-spacing: 0.12em">
@@ -56,13 +56,13 @@ a{color:#0A341E}a:hover{color:#14492c}
       </div>
 
       <div class="op3" style="padding: 24px 28px 0; display: flex; flex-direction: column">
-        <div class="tl"><span class="stip" style="background: #0A341E"></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">Ahmed meldt dat hij uitloopt</span><span style="font-size: 13px; color: rgba(10,52,30,0.62)">Vandaag om 08:12</span></span></div>
+        <div class="tl"><span class="stip" style="background: #0A341E"></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">{{naam}} meldt dat hij uitloopt</span><span style="font-size: 13px; color: rgba(10,52,30,0.62)">Vandaag om 08:12</span></span></div>
         <div class="tl"><span class="lijn"></span><span></span></div>
         <div class="tl"><span class="stip" style="background: #0A341E"></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">Wij zetten een nieuwe tijd voor je klaar</span><span style="font-size: 13px; color: rgba(10,52,30,0.62)">Vandaag om 08:14, ruim voor je tijdvak</span></span></div>
         <div class="tl"><span class="lijn"></span><span></span></div>
         <div class="tl"><span class="stip" style="{{stipKies}}"></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px">{{stapKies}}</span><span style="font-size: 13px; color: rgba(10,52,30,0.62)">{{stapKiesTijd}}</span></span></div>
         <div class="tl"><span class="lijn"></span><span></span></div>
-        <div class="tl"><span class="stip" style="border: 1px solid rgba(10,52,30,0.4)"></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; color: rgba(10,52,30,0.72)">Ahmed belt aan</span><span style="font-size: 13px; color: rgba(10,52,30,0.62)">{{aanbelTijd}}</span></span></div>
+        <div class="tl"><span class="stip" style="border: 1px solid rgba(10,52,30,0.4)"></span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 16px; color: rgba(10,52,30,0.72)">{{naam}} belt aan</span><span style="font-size: 13px; color: rgba(10,52,30,0.62)">{{aanbelTijd}}</span></span></div>
       </div>
 
       <sc-if value="{{open}}" hint-placeholder-val="{{ true }}">
@@ -76,7 +76,7 @@ a{color:#0A341E}a:hover{color:#14492c}
 
       <sc-if value="{{kiezen}}" hint-placeholder-val="{{ false }}">
         <div class="op" style="margin: 24px 20px 0; padding: 20px; display: flex; flex-direction: column; gap: 8px; border-radius: 22px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.08)">
-          <span class="lbl">KIES EEN ANDER MOMENT · AHMED</span>
+          <span class="lbl">KIES EEN ANDER MOMENT · {{naamHoofd}}</span>
           <sc-for list="{{momenten}}" as="m" hint-placeholder-count="3">
             <button type="button" class="knop2" onClick="{{m.pick}}" style="display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-radius: 16px">
               <span>{{m.dag}}</span><span style="font-size: 14px; letter-spacing: 0.08em; color: rgba(10,52,30,0.72)">{{m.tijd}}</span>
@@ -141,14 +141,17 @@ class Component extends DCLogic {
     const tijdvak = gekozen ? (gekozen.dag.toUpperCase() + ' · ' + gekozen.tijd) : 'VANDAAG · 10:30–12:30';
     const gekozenUit = uitloop.find(u => String(u.min) === st.uit);
     const namen = ['Klant', 'Vakman'];
+    const kz = ((this.props && this.props.klus) || st.klus) === 'kozijnen';
+    const naam = kz ? 'Marco' : 'Ahmed';
     return {
+      naam, naamHoofd: naam.toUpperCase(), klusLabel: kz ? 'KOZIJNEN · ZUIDGEVEL' : 'CV-KETEL · JAARLIJKS ONDERHOUD',
       tabs: namen.map((n, i) => ({
         naam: n, aan: i === st.t ? 'true' : 'false',
         pick: () => this.setState({ t: i }),
         style: 'min-height: 36px; border-radius: 999px; border: 0; cursor: pointer; font-family: inherit; font-size: 15px; transition: background 300ms, color 300ms; ' + (i === st.t ? 'background: #0A341E; color: #F7F3EB' : 'background: transparent; color: #0A341E')
       })),
       klant: st.t === 0, vakman: st.t === 1,
-      kop: gekozen ? 'Ahmed komt ' + gekozen.dag.toLowerCase().replace('vandaag', 'vandaag om 14:00') : 'Ahmed komt om 10:30',
+      kop: gekozen ? naam + ' komt ' + gekozen.dag.toLowerCase().replace('vandaag', 'vandaag om 14:00') : naam + ' komt om 10:30',
       uitleg: 'Hij loopt uit bij de klus vóór de jouwe. Je hoort het vóór je tijdvak begint, zoals we afspraken.',
       nieuwTijdvak: tijdvak,
       open: st.keuze === '', kiezen: st.keuze === 'ander' && !gekozen, klaar,
@@ -160,7 +163,7 @@ class Component extends DCLogic {
       ander: () => this.setState({ keuze: 'ander' }),
       terug: () => this.setState({ keuze: 'ja' }),
       momenten: momenten.map(m => ({ ...m, pick: () => this.setState({ keuze: 'ander', moment: m.dag }) })),
-      klaarKop: gekozen ? '✓ Verzet naar ' + gekozen.dag.toLowerCase() + ', ' + gekozen.tijd : '✓ Vastgelegd: Ahmed komt om 10:30',
+      klaarKop: gekozen ? '✓ Verzet naar ' + gekozen.dag.toLowerCase() + ', ' + gekozen.tijd : '✓ Vastgelegd: ' + naam + ' komt om 10:30',
       vKop: st.uit === 'niet' ? 'Doorgegeven' : (gekozenUit ? 'Doorgegeven' : 'Loop je uit?'),
       vUitleg: st.uit ? 'Wij zetten de klant een nieuwe tijd klaar en laten het jou weten als die vaststaat.' : 'Meld het vóór 09:00. Wij zetten de klant een nieuwe tijd klaar; jij hoeft niemand te bellen.',
       vOpen: !st.uit, vKlaar: !!st.uit,

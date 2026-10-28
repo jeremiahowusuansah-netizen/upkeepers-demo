@@ -80,10 +80,28 @@ a{color:#0A341E}
         </sc-if>
       </div>
 
+      <sc-if value="{{founding}}" hint-placeholder-val="{{ false }}">
+        <div class="op2" style="display: flex; flex-direction: column; gap: 10px; padding: 18px; border-radius: 22px; background: #0A341E; color: #F7F3EB; border: 1px solid #CBA45C">
+          <span style="font-size: 12px; letter-spacing: 0.22em; color: #CBA45C">ALLEEN VOOR FOUNDING MEMBERS</span>
+          <sc-for list="{{extra}}" as="x" hint-placeholder-count="4">
+            <div style="display: flex; gap: 14px; align-items: baseline; padding: 10px 0; border-top: 1px solid rgba(247,243,235,0.14)"><span style="font-family: 'Montserrat', sans-serif; font-size: 13px; letter-spacing: 0.1em; color: #CBA45C; flex: 0 0 22px">{{x.nr}}</span><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 17px; line-height: 1.4">{{x.tekst}}</span><span style="font-size: 14px; line-height: 1.4; color: rgba(247,243,235,0.7)">{{x.uitleg}}</span></span></div>
+          </sc-for>
+        </div>
+      </sc-if>
+
       <div style="display: flex; flex-direction: column; padding: 0 4px">
         <sc-for list="{{inbegrepen}}" as="x" hint-placeholder-count="4">
           <div style="display: flex; gap: 14px; align-items: baseline; padding: 13px 0; border-top: 1px solid rgba(10,52,30,0.1)"><span style="font-family: 'Montserrat', sans-serif; font-size: 13px; letter-spacing: 0.1em; color: #8A6D32; flex: 0 0 22px">{{x.nr}}</span><span style="font-size: 17px; line-height: 1.45">{{x.tekst}}</span></div>
         </sc-for>
+      </div>
+
+      <div style="display: flex; gap: 14px; align-items: center; padding: 16px 18px; border-radius: 20px; background: #F7F3EB; border: 1px solid rgba(10,52,30,0.08)">
+        <span style="flex: 0 0 auto; width: 48px; height: 48px; border-radius: 999px; background: linear-gradient(160deg, #2A5B40, #123522); border: 1px solid rgba(203,164,92,0.6); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 20px; color: #F7F3EB">L</span>
+        <span style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+          <span style="font-size: 17px">Twijfel je wat bij je past?</span>
+          <span style="font-size: 14px; line-height: 1.45; color: rgba(10,52,30,0.7)">Lisa denkt met je mee. Ze kent je huis al uit de gegevens die we vonden.</span>
+          <span style="display: flex; gap: 8px; margin-top: 4px"><button type="button" onClick="{{lisa}}" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid rgba(10,52,30,0.18); background: transparent; color: #0A341E; font-family: inherit; font-size: 15px; cursor: pointer">{{lisaTekst}}</button></span>
+        </span>
       </div>
     </div>
     </sc-if>
@@ -155,7 +173,7 @@ a{color:#0A341E}
     <sc-if value="{{vKies}}" hint-placeholder-val="{{ true }}"><button type="button" class="knop" onClick="{{naarOverzicht}}">Ga verder met {{naamKort}}</button></sc-if>
     <sc-if value="{{vOverzicht}}" hint-placeholder-val="{{ false }}"><button type="button" class="knop" onClick="{{betaal}}">Betaal {{bedrag}} met {{wijzeNaam}}</button></sc-if>
     <sc-if value="{{vWelkom}}" hint-placeholder-val="{{ false }}">
-      <a href="WWelkomA.dc.html" class="knop">Bekijk je huis</a>
+      <a href="{{welkomHref}}" class="knop">Bekijk je huis</a>
       <button type="button" onClick="{{wallet}}" style="min-height: 52px; border-radius: 999px; border: 0; background: #0A0A0A; color: #FFFFFF; font-family: -apple-system, system-ui, sans-serif; font-size: 17px; font-weight: 500; cursor: pointer">{{walletTekst}}</button>
     </sc-if>
   </div>
@@ -224,7 +242,16 @@ class Component extends DCLogic {
         if (typeof window !== 'undefined') { try { localStorage.setItem('upk-lid', lid); } catch (e) {} if (window.UPK) window.UPK.lid = lid; }
       },
       welkomKop: founding ? 'Welkom, Sanne. Je bent lid nummer 38.' : 'Welkom, Sanne.',
-      welkomZin: founding ? 'Je prijs staat vast zolang je lid bent. Je pas staat in de app, en in Wallet als je wilt.' : 'Je pas staat in de app, en in Wallet als je wilt.',
+      welkomZin: founding ? 'Er komen er nooit meer dan honderd. Je prijs staat vast zolang je lid bent, en Lisa is vanaf nu je vaste persoon bij ons.' : 'Je pas staat in de app, en in Wallet als je wilt.',
+      welkomHref: ((this.props && this.props.welkom === 'B') || (() => { try { return typeof localStorage !== 'undefined' && localStorage.getItem('upk-welkom') === 'B'; } catch (e) { return false; } })()) ? 'WWelkomB.dc.html' : 'WWelkomA.dc.html',
+      extra: [
+        { nr: 'I', tekst: 'Lisa, je vaste persoon bij UPKeepers', uitleg: 'Ze kent je huis en je geschiedenis. Geen wachtrij, geen nieuw verhaal.' },
+        { nr: 'II', tekst: 'Voorrang bij het inplannen', uitleg: 'Is het druk, dan ben jij als eerste aan de beurt.' },
+        { nr: 'III', tekst: 'Je prijs staat vast', uitleg: 'Zolang je lid bent, ook als de prijs voor nieuwe leden stijgt.' },
+        { nr: 'IV', tekst: 'Je denkt mee over wat we bouwen', uitleg: 'Twee keer per jaar vragen we de eerste honderd wat beter kan.' }
+      ],
+      lisa: () => this.setState({ lisa: true }),
+      lisaTekst: st.lisa ? '✓ Lisa belt je binnen een uur' : 'Laat Lisa je bellen',
       wallet: () => this.setState({ wallet: true }),
       walletTekst: st.wallet ? '✓ Staat in Wallet' : 'Zet in Apple Wallet'
     };
