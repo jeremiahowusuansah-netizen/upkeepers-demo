@@ -1,0 +1,469 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"></head><body><title>UPKeepers Klantreis</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Nunito+Sans:wght@300;400;600&display=swap">
+<style>
+/* Layout: één telefoonkolom, rolwissel bovenaan, de klus loopt door drie rollen. Bewust één thema: zand en crème van UPKeepers. */
+:root{
+  --zand:#ECE5D7; --creme:#F7F3EB; --inkt:#0A341E; --groen:#2F5D45; --goud:#CBA45C; --fout:#8A2E1F;
+  --gedempt:rgba(10,52,30,0.64); --lijn:rgba(10,52,30,0.12); --wit:#FFFFFF;
+  --kop:'Montserrat',system-ui,sans-serif; --tekst:'Nunito Sans',system-ui,sans-serif;
+  color-scheme:light;
+}
+html,body{height:100%}
+body{background:var(--zand);color:var(--inkt);font-family:var(--tekst);font-size:16px;line-height:1.45;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+*{box-sizing:border-box}
+button,input,textarea{font-family:inherit;font-size:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--goud);outline-offset:2px}
+.app{max-width:430px;margin:0 auto;padding-block:12px 40px;display:flex;flex-direction:column;gap:14px}
+.balk{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--zand);padding-block:6px;display:flex;flex-direction:column;gap:8px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--zand)}
+.rollen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;border-radius:999px;background:var(--creme);border:1px solid var(--lijn)}
+.rol{position:relative;min-height:40px;border:0;border-radius:999px;background:transparent;font-size:15px}
+.rol[aria-selected="true"]{background:var(--inkt);color:var(--creme)}
+.rol .stip{position:absolute;top:7px;right:12px;width:7px;height:7px;border-radius:999px;background:var(--goud)}
+.zet{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;color:var(--gedempt);padding:0 6px}
+.zet b{font-weight:600;color:var(--inkt)}
+.link{border:0;background:transparent;padding:6px 0;font-size:13px;color:var(--gedempt);text-decoration:underline;text-underline-offset:3px}
+.lbl{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gedempt)}
+h1{margin:0;font-family:var(--kop);font-weight:300;font-size:34px;line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+h2{margin:0;font-family:var(--kop);font-weight:300;font-size:24px;line-height:1.15;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0}
+.zacht{color:var(--gedempt);font-weight:300}
+.kop{display:flex;flex-direction:column;gap:8px;padding:8px 8px 0}
+.kaart{display:flex;flex-direction:column;gap:10px;padding:18px;border-radius:22px;background:var(--creme);border:1px solid var(--lijn)}
+.kaart.goud{border-color:rgba(203,164,92,.6)}
+.kaart.donker{background:var(--inkt);color:var(--creme);border:0}
+.kaart.donker .lbl{color:rgba(247,243,235,.7)}
+.knop{min-height:52px;border:0;border-radius:999px;background:var(--inkt);color:var(--creme);font-size:17px;padding:0 20px}
+.knop:disabled{opacity:.35;cursor:not-allowed}
+.knop2{min-height:52px;border-radius:999px;background:transparent;border:1px solid rgba(10,52,30,.18);font-size:17px;padding:0 20px}
+.knoppen{display:grid;gap:8px}
+.twee{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid rgba(10,52,30,.18);background:var(--creme);font-size:15px}
+.chip[aria-pressed="true"]{background:var(--inkt);color:var(--creme);border-color:var(--inkt)}
+.raster{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.tegel{min-height:76px;border-radius:18px;border:1px solid var(--lijn);background:var(--creme);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-size:14px}
+.tegel[aria-pressed="true"]{border-color:var(--inkt);box-shadow:inset 0 0 0 1px var(--inkt)}
+.tegel svg{width:24px;height:24px}
+.rij{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:12px 0;border-bottom:1px solid var(--lijn)}
+.rij:last-child{border-bottom:0}
+.rij span:first-child{color:var(--gedempt);font-size:14px}
+.rij span:last-child{text-align:right;min-width:0}
+.veld{display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--gedempt)}
+.veld input,.veld textarea{min-height:50px;border-radius:14px;border:1px solid rgba(10,52,30,.18);background:var(--wit);padding:12px 14px;font-size:17px;color:var(--inkt)}
+.veld textarea{resize:none}
+.vink{display:flex;gap:10px;align-items:flex-start;font-size:15px;line-height:1.4}
+.vink input{width:22px;height:22px;margin-top:1px;accent-color:var(--inkt);flex:0 0 auto}
+.bericht{padding:12px 14px;border-radius:16px;background:var(--inkt);color:var(--creme);display:flex;flex-direction:column;gap:2px}
+.bericht small{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.12em;color:rgba(247,243,235,.7)}
+.ok{padding:14px 16px;border-radius:16px;background:rgba(47,93,69,.12);font-size:16px}
+.voortgang{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.voortgang span{height:2px;background:var(--lijn)}
+.voortgang span.aan{background:var(--inkt)}
+.voortgang span.nu{background:var(--goud)}
+.vlabels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;font-size:12px;color:var(--gedempt)}
+.tl{display:flex;flex-direction:column}
+.tl-r{display:grid;grid-template-columns:20px 1fr;column-gap:12px}
+.tl-s{width:11px;height:11px;border-radius:999px;margin:6px 0 0 4px;background:var(--inkt)}
+.tl-s.open{background:transparent;border:1px solid rgba(10,52,30,.4)}
+.tl-s.nu{background:var(--goud)}
+.tl-l{width:1px;min-height:16px;margin-left:9px;background-image:linear-gradient(rgba(10,52,30,.3) 50%,transparent 0);background-size:1px 5px}
+.tl-t{display:flex;flex-direction:column;gap:1px;padding-bottom:2px}
+.tl-t small{font-size:12px;color:var(--gedempt)}
+.foto{height:120px;border-radius:16px;background:linear-gradient(160deg,#1B4A31 0%,#0C2A19 100%);position:relative;overflow:hidden}
+.foto span{position:absolute;left:10px;bottom:10px;font-size:12px;padding:4px 9px;border-radius:999px;background:rgba(247,243,235,.94);color:var(--inkt)}
+.foto img{width:100%;height:100%;object-fit:cover}
+.vk{display:flex;gap:12px;align-items:center}
+.av{flex:0 0 auto;width:46px;height:46px;border-radius:999px;background:linear-gradient(160deg,#2A5B40,#123522);border:1px solid rgba(203,164,92,.6);display:flex;align-items:center;justify-content:center;font-family:var(--kop);font-weight:300;font-size:19px;color:var(--creme)}
+.keus{width:28px;height:28px;border-radius:999px;border:1px solid rgba(10,52,30,.3);display:flex;align-items:center;justify-content:center;font-size:13px;flex:0 0 auto}
+.keus.aan{background:var(--inkt);color:var(--creme);border-color:var(--inkt)}
+.vkr{display:flex;gap:12px;align-items:center;width:100%;padding:12px;border-radius:16px;border:1px solid var(--lijn);background:var(--creme);text-align:left}
+.vkr div{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
+.vkr small{font-size:13px;color:var(--gedempt)}
+.spoed{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:16px;border:1px solid rgba(10,52,30,.14)}
+.rood{border:2px solid var(--fout);color:var(--fout);border-radius:14px;min-height:48px;display:flex;align-items:center;justify-content:center;font-weight:600}
+.blad{position:fixed;inset:0;z-index:20;display:flex;align-items:flex-end;justify-content:center;background:rgba(10,52,30,.32)}
+.blad>div{width:100%;max-width:460px;max-height:86%;overflow-y:auto;background:var(--creme);border-radius:26px 26px 0 0;padding:16px max(20px,env(safe-area-inset-left,0px)) calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:14px}
+.greep{align-self:center;width:40px;height:4px;border-radius:999px;background:rgba(10,52,30,.18)}
+.reisstap{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--lijn);font-size:15px}
+.reisstap:last-child{border-bottom:0}
+.reisstap i{font-style:normal;width:22px;height:22px;flex:0 0 auto;border-radius:999px;border:1px solid rgba(10,52,30,.3);display:flex;align-items:center;justify-content:center;font-size:12px}
+.reisstap.af i{background:var(--inkt);color:var(--creme);border-color:var(--inkt)}
+.reisstap.nu i{background:var(--goud);border-color:var(--goud);color:var(--inkt)}
+.reisstap small{display:block;color:var(--gedempt);font-size:13px}
+.sync{font-size:12px;color:var(--gedempt);text-align:center}
+@keyframes op{from{opacity:.001;transform:translateY(8px)}to{opacity:1;transform:none}}
+.scherm{display:flex;flex-direction:column;gap:14px;animation:op 500ms cubic-bezier(.22,.61,.36,1) both}
+@media (prefers-reduced-motion:reduce){.scherm{animation:none}}
+.verborgen{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+
+<div class="app">
+  <div class="balk">
+    <div class="rollen" role="tablist" aria-label="Rol" id="rollen"></div>
+    <div class="zet"><span id="zet"></span><span style="display:flex;gap:14px"><button class="link" data-act="reis">Jouw reis</button><button class="link" data-act="opnieuw">Opnieuw</button></span></div>
+  </div>
+  <main id="scherm"></main>
+  <p class="sync" id="sync">Voorbeeldgegevens · niets wordt echt verstuurd of betaald</p>
+</div>
+<div id="blad"></div>
+
+<script>
+(function(){
+// ---------- Vaste gegevens van de demo (voorbeelden) ----------
+const KLANT = { naam:'Sanne', achternaam:'de Vries', adres:'Kastanjelaan 14', plaats:'Hilversum', postcode:'1213 AB', huis:'14', woning:'Tussenwoning, 1932, 142 m²', tel:'06 •• •• 41 27' };
+const VAKMANNEN = [
+  { id:'ahmed', naam:'Ahmed B.', vak:'Loodgieter · 14 jaar', score:'4,9 uit 38 klussen', past:'Kan do 30 okt ochtend en vr 31 okt' },
+  { id:'kees', naam:'Kees V.', vak:'Loodgieter · 9 jaar', score:'4,6 uit 51 klussen', past:'Kan wo 29 okt middag', signaal:'Signaal: twee keer later dan het tijdvak' },
+  { id:'youssef', naam:'Youssef A.', vak:'Allround · in opbouw', score:'4,8 uit 6 klussen', past:'Kan do 30 okt middag' }
+];
+const MOMENTEN = [
+  { id:'wo-m', dag:'Wo 29 okt', deel:'Middag', tijd:'13:00–15:00' },
+  { id:'do-o', dag:'Do 30 okt', deel:'Ochtend', tijd:'09:00–11:00' },
+  { id:'do-m', dag:'Do 30 okt', deel:'Middag', tijd:'13:00–15:00' },
+  { id:'vr-o', dag:'Vr 31 okt', deel:'Ochtend', tijd:'09:00–11:00' },
+  { id:'ma-o', dag:'Ma 3 nov', deel:'Ochtend', tijd:'09:00–11:00' },
+  { id:'di-m', dag:'Di 4 nov', deel:'Middag', tijd:'13:00–15:00' }
+];
+const PRIJZEN = [
+  { id:'v95', tekst:'€ 95,00', soort:'Vaste prijs', vakman:'€ 70,00' },
+  { id:'b95', tekst:'€ 95 tot € 145', soort:'Bandbreedte', vakman:'€ 70 tot € 110' },
+  { id:'b145', tekst:'€ 145 tot € 195', soort:'Bandbreedte', vakman:'€ 110 tot € 150' }
+];
+const RUIMTES = {
+  Keuken:['Kraan','Afvoer','Afzuigkap','Stopcontact'], Badkamer:['Kraan','Douche','Toilet','Kitnaden'],
+  Woonkamer:['Radiator','Kozijn','Stopcontact','Vloer'], Slaapkamer:['Radiator','Kozijn','Stopcontact','Plafond'],
+  Zolder:['Cv-ketel','Dakraam','Isolatie','Leiding'], Buiten:['Dakgoot','Dak','Gevel','Schutting']
+};
+const ICONEN = {
+  Keuken:'<path d="M4 10h16v10H4zM8 10V4h8v6M9 14h6"/>', Badkamer:'<path d="M4 12h16v3a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM7 12V6a2 2 0 0 1 4 0"/>',
+  Woonkamer:'<path d="M4 18v-6a3 3 0 0 1 6 0h4a3 3 0 0 1 6 0v6zM4 18v2M20 18v2"/>', Slaapkamer:'<path d="M3 18V8M3 14h18v4M21 18V12a3 3 0 0 0-3-3H10v5"/>',
+  Zolder:'<path d="M3 20L12 5l9 15zM9 20v-5h6v5"/>', Buiten:'<path d="M3 11l9-7 9 7M5 10v10h14V10"/>'
+};
+const ROLLEN = [ { id:'klant', naam:'Klant' }, { id:'admin', naam:'Klantenservice' }, { id:'vakman', naam:'Vakman' } ];
+
+// Wie is aan zet, per fase, en wat die moet doen.
+const AANZET = {
+  nieuw:['klant','meld je aan'], lid:['klant','meld een klus'], gemeld:['admin','kies prijs en vakmannen'],
+  aangeboden:['vakman','neem de opdracht aan'], aangenomen:['klant','ga akkoord met tijd en prijs'],
+  gepland:['vakman','de dag van de klus'], later:['klant','kies je nieuwe tijd'], onderweg:['vakman','start de klus'],
+  bezig:['vakman','werk en lever op'], vondst:['klant','beslis over de vondst'], opgeleverd:['klant','keur het werk goed'],
+  klopt:['admin','bel Sanne en los het op'], goedgekeurd:[null,'de reis is rond']
+};
+
+// De reis per rol, voor het blad "Jouw reis".
+const REIS = {
+  klant:[ ['Aanmelden','Postcode, woning, over jou, lidmaatschap',['nieuw']], ['Welkom','Wat we al van je huis weten',['nieuw']],
+    ['Klus melden','Ruimte, wat er is, drie momenten',['lid']], ['Wachten','Binnen één werkdag weet je wie, wanneer en wat het kost',['gemeld','aangeboden']],
+    ['Tijd en prijs akkoord','Vóór er iemand komt',['aangenomen']], ['Bericht bij uitloop','Altijd vóór je tijdvak, met een nieuwe tijd',['later']],
+    ['De vakman komt','Onderweg, aan het werk',['gepland','onderweg','bezig']], ['Een vondst?','Altijd met een voorstel en een prijs',['vondst']],
+    ['Goedkeuren','Foto’s van voor en na',['opgeleverd','klopt']], ['Dossier bijgewerkt','Van aandacht naar goed',['goedgekeurd']] ],
+  admin:[ ['Nieuw lid','Komt vanzelf binnen',['nieuw']], ['Melding beoordelen','Wat is het, wat kost het',['lid','gemeld']],
+    ['Drie vakmannen op volgorde','Daarna loopt het vanzelf',['gemeld']], ['Aanbod en akkoord','Loopt vanzelf; jij kijkt mee',['aangeboden','aangenomen']],
+    ['Uitloop','Nieuwe tijd staat vanzelf klaar',['later']], ['Klant aan de telefoon','Alles van Sanne op één scherm',[]],
+    ['Iets klopt niet','Bellen, samen oplossen',['klopt']], ['Uitbetaling','Pas na goedkeuring',['goedgekeurd']] ],
+  vakman:[ ['Nieuwe opdracht','Plaats, wat er gezien is, vergoeding',['aangeboden']], ['Aannemen','Kies een moment van de klant',['aangeboden']],
+    ['De dag van de klus','Op tijd, of uitloop melden vóór het tijdvak',['aangenomen','gepland','later']], ['Onderweg en aan het werk','',['onderweg']],
+    ['Vondst melden','Met voorstel, duur en prijs',['bezig','vondst']], ['Opleveren','Foto’s, wat je deed',['bezig']],
+    ['Betaling','Na goedkeuring van de klant',['opgeleverd','klopt','goedgekeurd']] ]
+};
+const VOLGORDE = ['nieuw','lid','gemeld','aangeboden','aangenomen','gepland','later','onderweg','bezig','vondst','opgeleverd','klopt','goedgekeurd'];
+
+function begin(){ return { fase:'nieuw', rev:0, lid:null, melding:null, prijs:null, keuzes:[], idx:0, moment:null, later:null, vondst:null, oplevering:null, klopt:null, log:[] }; }
+
+// ---------- Opslag: gedeeld via db, anders alleen op dit toestel ----------
+let S = begin();
+let db = null, ref = null;
+const KEY = 'upk-reis-v1';
+try { const r = localStorage.getItem(KEY); if (r) S = JSON.parse(r); } catch(e){}
+const L = { rol:'klant', stap:0, welkom:0, mstap:0, ruimte:null, element:null, wat:null, tekst:'De kraan druppelt ook als hij dicht is.', foto:null, spoed:false, gekozen:[], prijs:null, keuzes:[], vmoment:null, weiger:false, uit:null, ander:false, vtekst:'Kraanpatroon vervangen en de kraan opnieuw vastgezet. Lekt niet meer.', reden:null, ftab:'te-doen', naam:'Sanne de Vries', tel:'06 12 34 41 27', av:false, plan:null, vondstOpen:false };
+try { const r = localStorage.getItem(KEY+'-rol'); if (r) L.rol = r; } catch(e){}
+
+function bewaar(){
+  S.rev = (S.rev||0) + 1;
+  try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){}
+  if (ref) ref.set(JSON.parse(JSON.stringify(S))).catch(()=>{});
+  teken();
+}
+function log(wie, tijd, tekst){ S.log = (S.log||[]).concat([{ wie, tijd, tekst }]); }
+function zet(fase){ S.fase = fase; }
+
+(async function(){
+  try {
+    db = window.claude && await window.claude.use('db');
+    if (!db) return;
+    ref = db.doc('reis/klus');
+    ref.onSnapshot(snap => {
+      if (snap.exists) { const d = snap.data(); if ((d.rev||0) >= (S.rev||0)) { S = JSON.parse(JSON.stringify(d)); try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} teken(); } }
+      else ref.set(JSON.parse(JSON.stringify(S))).catch(()=>{});
+      document.getElementById('sync').textContent = 'Gedeeld: open deze pagina op een tweede telefoon en speel een andere rol · voorbeeldgegevens, niets wordt echt verstuurd of betaald';
+    }, () => {});
+  } catch(e){}
+})();
+
+// ---------- Hulpjes ----------
+const esc = s => String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const vm = () => VAKMANNEN.find(v => v.id === (S.keuzes||[])[S.idx||0]) || VAKMANNEN[0];
+const vnaam = () => vm().naam.split(' ')[0];
+const mom = id => MOMENTEN.find(m => m.id === id);
+const prijs = () => PRIJZEN.find(p => p.id === S.prijs) || PRIJZEN[1];
+const tijdvak = () => S.later && S.later.nieuw ? S.later.nieuw : (S.moment ? mom(S.moment).dag + ', ' + mom(S.moment).tijd : '');
+const ico = n => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true">' + (ICONEN[n]||ICONEN.Buiten) + '</svg>';
+const bericht = (soort, tijd, tekst) => '<div class="bericht" role="status"><small><span>UPKEEPERS · ' + soort + '</span><span>' + tijd + '</span></small><span>' + tekst + '</span></div>';
+const voortgang = (nu) => { const n=['Bevestigd','Onderweg','Gestart','Afgerond']; return '<div class="voortgang">' + n.map((x,i)=>'<span class="'+(i<nu?'aan':i===nu?'nu':'')+'"></span>').join('') + '</div><div class="vlabels">' + n.map((x,i)=>'<span style="'+(i===nu?'color:var(--inkt)':'')+'">'+x+'</span>').join('') + '</div>'; };
+const wachten = (wie, wat) => '<div class="kaart"><span class="lbl">Niets te doen</span><p>' + wat + '</p><button class="knop2" data-act="rol" data-v="' + wie + '">Kijk mee als ' + ROLLEN.find(r=>r.id===wie).naam.toLowerCase() + '</button></div>';
+const kop = (lbl, titel, sub) => '<div class="kop">' + (lbl?'<span class="lbl">'+lbl+'</span>':'') + '<h1>' + titel + '</h1>' + (sub?'<p class="zacht">'+sub+'</p>':'') + '</div>';
+const tl = rijen => '<div class="tl">' + rijen.map((r,i)=>(i?'<div class="tl-r"><span class="tl-l"></span><span></span></div>':'') + '<div class="tl-r"><span class="tl-s '+(r[2]||'')+'"></span><span class="tl-t"><span>'+r[0]+'</span><small>'+r[1]+'</small></span></div>').join('') + '</div>';
+const ix = f => VOLGORDE.indexOf(f);
+const voorbij = f => ix(S.fase) > ix(f);
+
+// ---------- KLANT ----------
+function klant(){
+  const f = S.fase;
+  if (f === 'nieuw') return aanmelden();
+  if (f === 'lid' && L.mstap > 0) return melden();
+  let h = '';
+  const k = '<div class="kop"><span class="lbl">' + KLANT.adres + ' · ' + KLANT.plaats + '</span><h1>Goedemorgen, ' + esc((L.naam||'Sanne').split(' ')[0]) + '</h1><p class="zacht">' + (f==='goedgekeurd' ? 'Je keuken is weer goed.' : 'Je huis is in goede staat.') + '</p></div>';
+  if (f === 'lid') {
+    return k + '<div class="kaart goud"><span class="lbl">Klaar om te beginnen</span><h2>Is er iets dat aandacht vraagt?</h2><p class="zacht">Meld het met een foto. Kost het iets, dan zie je eerst de prijs en beslis jij.</p><button class="knop" data-act="melden">Meld een klus</button></div>'
+      + '<div class="kaart"><span class="lbl">Je woning</span><div class="rij"><span>Woning</span><span>' + KLANT.woning + '</span></div><div class="rij"><span>Lidmaatschap</span><span>' + lidTekst() + '</span></div><div class="rij"><span>Woning-APK</span><span>Wordt ingepland</span></div></div>';
+  }
+  if (f === 'gemeld' || f === 'aangeboden') {
+    return k + '<div class="kaart"><span class="lbl">Je melding · ' + esc(S.melding.ruimte) + '</span><h2>' + esc(S.melding.element) + ' ' + esc(S.melding.wat).toLowerCase() + '</h2><p class="zacht">' + esc(S.melding.tekst) + '</p>'
+      + tl([['Melding ontvangen','Ma 27 okt, 07:58'], [f==='gemeld'?'We bekijken wat het is en wat het kost':'We zoeken de vakman die het best past', f==='gemeld'?'Nu':'Ma 27 okt, 09:20', 'nu'], ['Je hoort wie er komt, wanneer en wat het kost','Binnen één werkdag','open']]) + '</div>';
+  }
+  if (f === 'aangenomen') {
+    return k + bericht('TE DOEN','10:05', vnaam() + ' kan ' + mom(S.moment).dag.toLowerCase() + ', ' + mom(S.moment).tijd + '.')
+      + '<div class="kaart goud"><span class="lbl">Tijd en prijs · ' + esc(S.melding.element) + '</span><div class="vk"><div class="av">' + vnaam()[0] + '</div><div style="display:flex;flex-direction:column;gap:2px;min-width:0"><span>' + vm().naam + '</span><span class="zacht" style="font-size:14px">' + vm().vak + ' · ' + vm().score + '</span></div></div>'
+      + '<div class="rij"><span>Wanneer</span><span>' + mom(S.moment).dag + ', ' + mom(S.moment).tijd + '</span></div><div class="rij"><span>' + prijs().soort + '</span><span>' + prijs().tekst + ' incl. btw</span></div>'
+      + '<div class="knoppen"><button class="knop" data-act="k-akkoord">Akkoord</button><button class="knop2" data-act="k-ander">Ander moment</button></div><p class="zacht" style="font-size:14px;text-align:center">Je betaalt pas na je goedkeuring van het werk.</p></div>';
+  }
+  if (f === 'gepland') {
+    return k + bericht('GEREGELD','wo 19:00', vnaam() + ' komt morgen ' + tijdvak().split(', ')[1] + ' voor je ' + esc(S.melding.element).toLowerCase() + '.')
+      + '<div class="kaart"><span class="lbl">' + tijdvak().toUpperCase() + '</span><h2>' + vnaam() + ' komt voor je ' + esc(S.melding.element).toLowerCase() + '</h2><p class="zacht">Je hoeft alleen thuis te zijn. Loopt hij uit, dan hoor je het vóór je tijdvak begint.</p>' + voortgang(0) + '</div>';
+  }
+  if (f === 'later') return klantLater();
+  if (f === 'onderweg') return k + '<div class="kaart"><span class="lbl">' + tijdvak().toUpperCase() + '</span><h2>' + vnaam() + ' is onderweg</h2><p class="zacht">Hij is er binnen twintig minuten.</p>' + voortgang(1) + '</div>';
+  if (f === 'bezig') return k + '<div class="kaart"><span class="lbl">' + esc(S.melding.element).toUpperCase() + ' · ' + esc(S.melding.ruimte).toUpperCase() + '</span><h2>' + vnaam() + ' is aan het werk</h2><p class="zacht">Je krijgt bericht als het af is.</p>' + voortgang(2) + (S.vondst && S.vondst.status==='akkoord' ? '<div class="ok">Akkoord gegeven: ' + vnaam() + ' vervangt de sifon nu, € 45,00 komt op dezelfde factuur.</div>' : '') + (S.vondst && S.vondst.status==='later' ? '<div class="ok">De sifon staat bij je klussen om later in te plannen.</div>' : '') + '</div>';
+  if (f === 'vondst') {
+    return k + bericht('TE DOEN','10:50', vnaam() + ' vond iets en heeft een voorstel.')
+      + '<div class="kaart goud"><span class="lbl">' + vnaam() + ' vond iets · met voorstel</span><div class="foto"><span>De sifon onder het aanrecht, 10:48</span></div><p>De sifon onder het aanrecht lekt bij de koppeling, daardoor wordt het kastje vochtig. ' + vnaam() + ' kan hem nu vervangen; hij heeft er een bij zich.</p><div class="rij"><span>Duur</span><span>20 minuten</span></div><div class="rij"><span>Prijs</span><span>€ 45,00 incl. btw</span></div><div class="twee"><button class="knop" data-act="k-vondst-ja">Doe het nu</button><button class="knop2" data-act="k-vondst-later">Later inplannen</button></div></div>';
+  }
+  if (f === 'opgeleverd') return goedkeuren();
+  if (f === 'klopt') return k + '<div class="kaart"><span class="lbl">Gemeld · ' + esc(S.klopt) + '</span><h2>We bellen je binnen één werkdag</h2>' + tl([['Wij bekijken je foto’s naast die van ' + vnaam(),'Nu','nu'],['We bellen je en spreken samen af hoe het wordt opgelost','','open'],['Pas als jij het goedkeurt, wordt ' + vnaam() + ' betaald','','open']]) + '</div>';
+  if (f === 'goedgekeurd') {
+    return '<div class="kop"><span class="lbl">Goedgekeurd · 11:48</span><h1>Je keuken is weer goed</h1><p class="zacht">' + vnaam() + ' krijgt nu zijn betaling. Jouw factuur staat bij Account.</p></div>'
+      + '<div class="kaart"><span class="lbl">Zo veranderde je dossier</span><div class="rij"><span>' + esc(S.melding.element) + ', ' + esc(S.melding.ruimte).toLowerCase() + '</span><span>Aandacht → Goed</span></div>' + (S.vondst && S.vondst.status==='akkoord' ? '<div class="rij"><span>Sifon, keuken</span><span>Vervangen</span></div>' : '') + (S.vondst && S.vondst.status==='later' ? '<div class="rij"><span>Sifon, keuken</span><span>Later inplannen</span></div>' : '') + '<div class="rij"><span>Factuur</span><span>' + factuur() + '</span></div></div>'
+      + '<div class="kaart"><span class="lbl">Wat ' + vnaam() + ' deed</span><p>' + esc(S.oplevering||'') + '</p></div>'
+      + '<button class="knop2" data-act="opnieuw">Speel de reis opnieuw</button>';
+  }
+  return h;
+}
+function lidTekst(){ return { maand:'Maand, € 39,95', jaar:'Jaar, € 399', founding:'Founding Member, € 179 per halfjaar' }[S.lid] || 'Maand, € 39,95'; }
+function factuur(){ const b = S.prijs==='v95' ? 95 : S.prijs==='b145' ? 160 : 120; const v = S.vondst && S.vondst.status==='akkoord' ? 45 : 0; return '€ ' + (b+v) + ',00 incl. btw (voorbeeld)'; }
+
+function aanmelden(){
+  const s = L.stap;
+  const bol = '<div class="voortgang" style="grid-template-columns:repeat(5,minmax(0,1fr))">' + [0,1,2,3,4].map(i=>'<span class="'+(i<s?'aan':i===s?'nu':'')+'"></span>').join('') + '</div>';
+  if (s === 0) return '<div class="scherm">' + bol + kop('UPKeepers · jouw woningassistent','Weet wat je huis nodig heeft, en wanneer.','Nu in Amsterdam, Amstelveen en ’t Gooi.') + '<div class="kaart"><label class="veld" for="pc">Postcode<input id="pc" value="' + KLANT.postcode + '" autocomplete="postal-code"></label><label class="veld" for="hn">Huisnummer<input id="hn" value="' + KLANT.huis + '" inputmode="numeric"></label><button class="knop" data-act="a-volgende">Zoek mijn woning</button></div></div>';
+  if (s === 1) return '<div class="scherm">' + bol + kop('Hier zijn we actief', KLANT.adres + ', ' + KLANT.plaats, 'Gevonden in de BAG.') + '<div class="kaart"><div class="rij"><span>Type</span><span>Tussenwoning</span></div><div class="rij"><span>Bouwjaar</span><span>1932</span></div><div class="rij"><span>Oppervlakte</span><span>142 m²</span></div><div class="rij"><span>Energielabel</span><span>C</span></div><div class="vink"><span class="zacht" style="font-size:14px">We werken alleen voor huiseigenaren.</span></div><button class="knop" data-act="a-volgende">Dit is mijn huis</button></div></div>';
+  if (s === 2) return '<div class="scherm">' + bol + kop('Over jou','Wie ben je?','') + '<div class="kaart"><label class="veld" for="nm">Naam<input id="nm" value="' + esc(L.naam) + '" autocomplete="name"></label><label class="veld" for="tl">Telefoon<input id="tl" value="' + esc(L.tel) + '" inputmode="tel" autocomplete="tel"></label><label class="vink" for="av"><input type="checkbox" id="av"' + (L.av?' checked':'') + '><span>Ik ga akkoord met de algemene voorwaarden en het privacybeleid.</span></label><button class="knop" data-act="a-volgende"' + (L.av?'':' disabled') + '>Verder</button></div></div>';
+  if (s === 3) return '<div class="scherm">' + bol + kop('Lidmaatschap','Kies hoe je betaalt','Je kunt maandelijks opzeggen na de eerste twaalf maanden.') + '<div class="kaart">' + [['maand','Maand','€ 39,95 per maand'],['jaar','Jaar','€ 399 per jaar'],['founding','Founding Member','€ 179 per halfjaar']].map(o=>'<button class="vkr" data-act="a-plan" data-v="'+o[0]+'" aria-pressed="'+(L.plan===o[0])+'" style="'+(L.plan===o[0]?'border-color:var(--inkt);box-shadow:inset 0 0 0 1px var(--inkt)':'')+'"><div><span>'+o[1]+'</span><small>'+o[2]+'</small></div></button>').join('') + '<button class="knop" data-act="a-volgende"' + (L.plan?'':' disabled') + '>Betaal met iDEAL</button><p class="zacht" style="font-size:13px;text-align:center">In deze demo wordt niets betaald.</p></div></div>';
+  // stap 4: welkom, één ding per scherm
+  const w = [['Gebouwd in 1932','Je huis staat er bijna honderd jaar. Uit die tijd zijn houten kozijnen en een zadeldak gewoon.','Bron: BAG'],['Een zadeldak van 9 m','Pannen gaan lang mee; de goten en het lood vragen elk najaar aandacht.','Bron: luchtfoto en 3D-kaart'],['Waarschijnlijk op houten palen','In deze buurt en bouwperiode is dat gebruikelijk. De Woning-APK kijkt of de kruipruimte droog is.','Bron: funderingskaart, mijn afleiding van de bouwperiode']][L.welkom];
+  return '<div class="scherm">' + bol + '<div class="kop"><span class="lbl">Welkom · ' + (L.welkom+1) + ' van 3</span><h1>' + w[0] + '</h1><p class="zacht">' + w[1] + '</p><p class="zacht" style="font-size:13px">' + w[2] + '</p></div><button class="knop" data-act="a-welkom">' + (L.welkom<2?'Volgende':'Naar mijn woning') + '</button></div>';
+}
+
+function melden(){
+  const st = L.mstap, kopje = '<div class="voortgang" style="grid-template-columns:repeat(5,minmax(0,1fr))">' + [1,2,3,4,5].map(i=>'<span class="'+(i<st?'aan':i===st?'nu':'')+'"></span>').join('') + '</div>';
+  const terug = '<button class="link" data-act="m-terug" style="align-self:flex-start">Terug</button>';
+  if (st === 1) return '<div class="scherm">' + kopje + terug + kop('Klus melden · 1 van 5','In welke ruimte zit het?','') + '<div class="raster">' + Object.keys(RUIMTES).map(r=>'<button class="tegel" data-act="m-ruimte" data-v="'+r+'" aria-pressed="'+(L.ruimte===r)+'">'+ico(r)+r+'</button>').join('') + '</div></div>';
+  if (st === 2) return '<div class="scherm">' + kopje + terug + kop('Klus melden · 2 van 5','Waar gaat het om?', esc(L.ruimte)) + '<div class="chips">' + RUIMTES[L.ruimte].map(e=>'<button class="chip" data-act="m-element" data-v="'+e+'" aria-pressed="'+(L.element===e)+'">'+e+'</button>').join('') + '</div><span class="lbl" style="padding:0 8px">Wat gebeurt er?</span><div class="chips">' + ['Lekt','Druppelt','Zit los','Doet het niet','Iets anders'].map(e=>'<button class="chip" data-act="m-wat" data-v="'+e+'" aria-pressed="'+(L.wat===e)+'">'+e+'</button>').join('') + '</div><button class="knop" data-act="m-volgende"' + (L.element&&L.wat?'':' disabled') + '>Verder</button></div>';
+  if (st === 3) return '<div class="scherm">' + kopje + terug + kop('Klus melden · 3 van 5','Laat zien wat er is','Een foto helpt de vakman het meest.') + '<div class="kaart"><label class="foto" for="fotoin" style="display:block;cursor:pointer">' + (L.foto?'<img src="'+L.foto+'" alt="Jouw foto">':'') + '<span>' + (L.foto?'Jouw foto · tik om te wisselen':'+ Foto of video') + '</span></label><input type="file" id="fotoin" accept="image/*" class="verborgen"><label class="veld" for="tx">In je eigen woorden<textarea id="tx" rows="3">' + esc(L.tekst) + '</textarea></label><button class="link" data-act="m-spoed" style="align-self:flex-start">' + (L.spoed?'Sluit':'Is het spoed?') + '</button>' + (L.spoed?'<div class="spoed"><div class="rood">Acuut gevaar: bel 112</div><span><b>Water lekt:</b> hoofdkraan dicht, bij de watermeter.</span><span><b>Stroom vonkt:</b> groep uit in de meterkast.</span><span><b>Gaslucht:</b> naar buiten, bel 0800-9009.</span></div>':'') + '<button class="knop" data-act="m-volgende">Verder</button></div><p class="zacht" style="font-size:13px;padding:0 8px">Een foto blijft in deze demo op je eigen toestel.</p></div>';
+  if (st === 4) return '<div class="scherm">' + kopje + terug + kop('Kies drie momenten · ' + L.gekozen.length + ' van 3','Wanneer ben je thuis?','Past het de vakman niet, dan stelt hij drie andere momenten voor.') + '<div class="knoppen">' + MOMENTEN.map(m=>{const a=L.gekozen.includes(m.id);return '<button class="vkr" data-act="m-moment" data-v="'+m.id+'" style="'+(a?'border-color:var(--inkt);box-shadow:inset 0 0 0 1px var(--inkt)':'')+'"><span class="keus '+(a?'aan':'')+'">'+(a?L.gekozen.indexOf(m.id)+1:'')+'</span><div><span>'+m.dag+'</span><small>'+m.deel+', '+m.tijd+'</small></div></button>';}).join('') + '</div><button class="knop" data-act="m-volgende"' + (L.gekozen.length===3?'':' disabled') + '>Verder</button></div>';
+  return '<div class="scherm">' + kopje + terug + kop('Klus melden · 5 van 5','Klopt dit?','') + '<div class="kaart"><div class="rij"><span>Waar</span><span>' + esc(L.ruimte) + '</span></div><div class="rij"><span>Wat</span><span>' + esc(L.element) + ', ' + esc(L.wat).toLowerCase() + '</span></div><div class="rij"><span>Wat je meegaf</span><span>' + esc(L.tekst) + '</span></div><div class="rij"><span>Momenten</span><span>' + L.gekozen.map(id=>mom(id).dag+' '+mom(id).deel.toLowerCase()).join('<br>') + '</span></div></div><div class="kaart"><span class="lbl">Wat je kunt verwachten</span>' + tl([['Binnen één werkdag weet je wie er komt, wanneer precies, en wat het kost',''],['De vakman komt','De avond ervoor krijg je een herinnering'],['Jij keurt het goed','Met foto’s van voor en na']]) + '</div><button class="knop" data-act="m-verstuur">Verstuur melding</button></div>';
+}
+
+function klantLater(){
+  const kies = !S.later.gekozen;
+  const alt = [['Vandaag','14:00–16:00'],['Vr 31 okt','09:00–11:00'],['Ma 3 nov','13:00–15:00']];
+  const nieuw = S.later.voorstel;
+  return '<div class="scherm">' + bericht('GEWIJZIGD','08:14', vnaam() + ' komt later: ' + nieuw + ' in plaats van ' + mom(S.moment).tijd.split('–')[0] + '.')
+    + kop(esc(S.melding.element).toUpperCase() + ' · ' + esc(S.melding.ruimte).toUpperCase(), vnaam() + ' komt om ' + nieuw, 'Hij loopt uit bij de klus vóór de jouwe. Je hoort het vóór je tijdvak begint, zoals we afspraken.')
+    + '<div style="padding:0 8px">' + tl([[vnaam() + ' meldt dat hij uitloopt','Vandaag om 08:12'],['Wij zetten een nieuwe tijd voor je klaar','Vandaag om 08:14, ruim voor je tijdvak'],['Jij kiest: ' + nieuw + ' of een ander moment','Nu','nu'],[vnaam() + ' belt aan','','open']]) + '</div>'
+    + (L.ander ? '<div class="kaart"><span class="lbl">Kies een ander moment · ' + vnaam() + '</span>' + alt.map((a,i)=>'<button class="vkr" data-act="k-later-alt" data-v="'+i+'"><div><span>'+a[0]+'</span><small>'+a[1]+'</small></div></button>').join('') + '<button class="link" data-act="k-later-terug" style="align-self:center">Toch ' + nieuw + '</button></div>'
+      : '<div class="kaart goud"><span class="lbl">Ons voorstel</span><button class="knop" data-act="k-later-ja">' + nieuw + ' past me</button><button class="knop2" data-act="k-later-ander">Kies een ander moment</button><p class="zacht" style="font-size:14px;text-align:center">Bij meer dan een uur uitloop verzet je kosteloos.</p></div>') + '</div>';
+}
+
+function goedkeuren(){
+  if (L.reden === 'open') return '<div class="scherm">' + kop(esc(S.melding.element).toUpperCase(),'Wat klopt er niet?', vnaam() + ' wordt pas betaald als het klopt. Je hoeft het niet met hem uit te praten, dat doen wij.') + '<div class="knoppen">' + ['Niet af','Beschadigd','Anders dan afgesproken','Iets anders'].map(r=>'<button class="vkr" data-act="k-klopt" data-v="'+r+'"><div><span>'+r+'</span></div></button>').join('') + '</div><button class="link" data-act="k-klopt-terug" style="align-self:center">Terug</button></div>';
+  return '<div class="scherm">' + bericht('TE DOEN','11:35','Keur het werk van ' + vnaam() + ' goed.') + kop('Opgeleverd 11:35 · ' + esc(S.melding.element).toUpperCase(),'Bekijk het werk van ' + vnaam(),'')
+    + '<div class="twee"><div class="foto">' + (L.foto?'<img src="'+L.foto+'" alt="">':'') + '<span>Vóór · ma 27 okt</span></div><div class="foto" style="background:linear-gradient(160deg,#2F5D45,#123522)"><span>Ná · vandaag</span></div></div>'
+    + '<div class="kaart"><span class="lbl">Wat er gebeurd is</span><p><b style="font-weight:600">' + vnaam() + ':</b> “' + esc(S.oplevering||'') + '”</p>' + (S.vondst&&S.vondst.status==='akkoord'?'<p class="zacht">Ook de sifon onder het aanrecht vervangen, zoals je akkoord gaf.</p>':'') + '</div>'
+    + '<div class="kaart"><span class="lbl">Zo verandert je dossier</span><div class="rij"><span>' + esc(S.melding.element) + ', ' + esc(S.melding.ruimte).toLowerCase() + '</span><span>Aandacht → Goed</span></div></div>'
+    + '<div class="knoppen"><button class="knop" data-act="k-goed">Keur het werk goed</button><button class="knop2" data-act="k-klopt-open">Er klopt iets niet</button></div></div>';
+}
+
+// ---------- KLANTENSERVICE ----------
+function admin(){
+  const tabs = '<div class="rollen" style="grid-template-columns:repeat(2,minmax(0,1fr))"><button class="rol" data-act="ftab" data-v="te-doen" aria-selected="' + (L.ftab==='te-doen') + '">Te doen</button><button class="rol" data-act="ftab" data-v="klant" aria-selected="' + (L.ftab==='klant') + '">Klant aan de telefoon</button></div>';
+  if (L.ftab === 'klant') return '<div class="scherm">' + tabs + telefoon() + '</div>';
+  const f = S.fase;
+  let h = kop('Lisa · supportdienst', f==='gemeld'?'Een melding wacht op jou':f==='klopt'?'Sanne meldt dat iets niet klopt':'Alles loopt vanzelf','');
+  if (f === 'gemeld') {
+    const p = L.prijs, kz = L.keuzes;
+    h += '<div class="kaart goud"><span class="lbl">Nieuwe melding · ma 27 okt 07:58</span><h2>' + esc(S.melding.element) + ' ' + esc(S.melding.wat).toLowerCase() + ', ' + esc(S.melding.ruimte).toLowerCase() + '</h2><p>“' + esc(S.melding.tekst) + '”</p><div class="rij"><span>Klant</span><span>Sanne de Vries, ' + KLANT.adres + '</span></div><div class="rij"><span>Kan</span><span>' + S.melding.momenten.map(id=>mom(id).dag+' '+mom(id).deel.toLowerCase()).join('<br>') + '</span></div><div class="rij"><span>Foto</span><span>' + (S.melding.foto?'Ja':'Nee') + '</span></div></div>'
+      + '<div class="kaart"><span class="lbl">1 · Wat kost het de klant?</span><div class="knoppen">' + PRIJZEN.map(x=>'<button class="vkr" data-act="f-prijs" data-v="'+x.id+'" style="'+(p===x.id?'border-color:var(--inkt);box-shadow:inset 0 0 0 1px var(--inkt)':'')+'"><div><span>'+x.tekst+' incl. btw</span><small>'+x.soort+' · vakman krijgt '+x.vakman+' excl. btw</small></div></button>').join('') + '</div><p class="zacht" style="font-size:13px">Bedragen zijn voorbeelden; de platformfee is nog niet besloten.</p></div>'
+      + '<div class="kaart"><span class="lbl">2 · Kies drie vakmannen, op volgorde · ' + kz.length + ' van 3</span>' + VAKMANNEN.map(v=>{const n=kz.indexOf(v.id);return '<button class="vkr" data-act="f-vakman" data-v="'+v.id+'"><span class="keus '+(n>=0?'aan':'')+'">'+(n>=0?n+1:'')+'</span><div><span>'+v.naam+'</span><small>'+v.vak+' · '+v.score+'</small><small>'+v.past+'</small>'+(v.signaal?'<small style="color:var(--inkt)">'+v.signaal+'</small>':'')+'</div></button>';}).join('') + '<p class="zacht" style="font-size:14px">Reageert de 1e keus niet binnen 4 uur, of zegt die nee, dan gaat het aanbod vanzelf naar de 2e en daarna naar de 3e. Pas als alle drie nee zeggen, komt de klus terug bij jou.</p><button class="knop" data-act="f-stuur"' + (p&&kz.length===3?'':' disabled') + '>Stuur naar 1e keus</button></div>';
+  } else if (f === 'klopt') {
+    h += '<div class="kaart goud"><span class="lbl">Sanne · ' + esc(S.klopt) + '</span><p>Sanne keurde het werk aan de ' + esc(S.melding.element).toLowerCase() + ' niet goed. ' + vnaam() + ' wordt pas betaald als het klopt.</p><div class="rij"><span>Bel</span><span>' + KLANT.tel + '</span></div><button class="knop" data-act="f-opgelost">Gebeld: ' + vnaam() + ' komt kosteloos terug</button><p class="zacht" style="font-size:13px">In de demo staat het werk daarna weer klaar om goed te keuren.</p></div>';
+  } else if (f === 'nieuw' || f === 'lid') {
+    h += f==='lid' ? '<div class="kaart"><span class="lbl">Nieuw lid · zo 26 okt 20:14</span><p>Sanne de Vries, ' + KLANT.adres + ', ' + lidTekst() + '. Woning-APK nog in te plannen.</p></div>' : '';
+    h += wachten('klant', f==='nieuw' ? 'Er is nog geen klant. Begin als klant met aanmelden.' : 'Sanne heeft nog niets gemeld. Zodra ze een klus meldt, staat die hier.');
+  } else if (f === 'goedgekeurd') {
+    h += '<div class="kaart"><span class="lbl">Afgerond · 11:48</span><p>Sanne keurde het werk goed. De ' + esc(S.melding.element).toLowerCase() + ' staat in haar dossier op goed.</p><div class="rij"><span>Uitbetaling aan ' + vnaam() + '</span><span>Staat klaar</span></div><div class="rij"><span>Factuur aan Sanne</span><span>' + factuur() + '</span></div></div>';
+  } else {
+    const wat = { aangeboden: 'Het aanbod ligt bij ' + vm().naam + ' (' + (S.idx+1) + 'e keus). Zegt hij nee, dan gaat het vanzelf door.', aangenomen: vm().naam + ' nam aan voor ' + tijdvak() + '. Sanne krijgt tijd en prijs ter akkoord.', gepland: 'Gepland: ' + vm().naam + ', ' + tijdvak() + '. Sanne krijgt de avond ervoor een herinnering.', later: vm().naam + ' meldde om 08:12 uitloop. De nieuwe tijd stond om 08:14 vanzelf klaar bij Sanne; jij hoeft niets te doen.', onderweg: vm().naam + ' is onderweg naar Sanne.', bezig: vm().naam + ' is aan het werk.', vondst: vm().naam + ' meldde een vondst met voorstel (sifon, € 45). Sanne beslist.', opgeleverd: vm().naam + ' leverde op om 11:35. Wacht op goedkeuring van Sanne.' }[f] || '';
+    h += '<div class="kaart"><span class="lbl">Loopt vanzelf · je hoeft niets te doen</span><p>' + wat + '</p></div>';
+  }
+  h += '<div class="kaart"><span class="lbl">Wat er gebeurde</span>' + (S.log.length ? tl(S.log.slice().reverse().map(r=>[esc(r.tekst), esc(r.tijd) + ' · ' + ROLLEN.find(x=>x.id===r.wie).naam])) : '<p class="zacht">Nog niets.</p>') + '</div>';
+  return '<div class="scherm">' + tabs + h + '</div>';
+}
+function telefoon(){
+  if (S.fase === 'nieuw') return '<div class="kaart"><span class="lbl">Zoek op naam, telefoon, adres of postcode</span><p class="zacht">Nog geen klant in de demo. Meld je eerst aan als klant.</p></div>';
+  const laatste = S.log.length ? S.log[S.log.length-1] : null;
+  return '<div class="kaart"><span class="lbl">Klant sinds okt 2026 · gevonden op ' + KLANT.postcode + ' ' + KLANT.huis + '</span><h2>' + esc(L.naam||'Sanne de Vries') + '</h2><div class="rij"><span>Telefoon</span><span>' + KLANT.tel + '</span></div><div class="rij"><span>Adres</span><span>' + KLANT.adres + ', ' + KLANT.plaats + '</span></div><div class="rij"><span>Woning</span><span>' + KLANT.woning + ', label C</span></div><div class="rij"><span>Abonnement</span><span>' + lidTekst() + '</span></div><div class="rij"><span>Betaling</span><span>Incasso, alles betaald</span></div></div>'
+    + (laatste ? '<div class="kaart goud"><span class="lbl">Laatste gebeurtenis · ' + esc(laatste.tijd) + '</span><p>' + esc(laatste.tekst) + '</p>' + (S.melding?'<div class="rij"><span>Klus</span><span>' + esc(S.melding.element) + ', ' + esc(S.melding.ruimte).toLowerCase() + '</span></div>':'') + (S.moment?'<div class="rij"><span>Vakman en tijd</span><span>' + vm().naam + ', ' + tijdvak() + '</span></div>':'') + '</div>' : '')
+    + '<div class="kaart"><span class="lbl">Eerdere gesprekken met klantenservice</span><p class="zacht">Nog geen. Een gesprek wordt hier samengevat, met de actie erbij.</p></div>';
+}
+
+// ---------- VAKMAN ----------
+function vakman(){
+  const f = S.fase, naam = vm().naam;
+  const k = (lbl,t,s) => kop(lbl,t,s);
+  if (['nieuw','lid','gemeld'].includes(f)) return '<div class="scherm">' + k('UPKeepers · vakman · ' + naam, 'Geen nieuwe opdrachten','') + wachten(f==='gemeld'?'admin':'klant', f==='gemeld' ? 'Er ligt een melding bij klantenservice. Zodra die een vakman kiest, komt de opdracht hier binnen.' : 'Nog geen melding van een klant.') + '</div>';
+  if (f === 'aangeboden') {
+    if (L.weiger) return '<div class="scherm">' + k('Weigeren','Geen probleem. Waarom niet?','De opdracht gaat vanzelf naar de volgende vakman.') + '<div class="knoppen">' + ['Geen tijd','Niet mijn vak','Te ver weg','Iets anders'].map(r=>'<button class="vkr" data-act="v-weiger-ja" data-v="'+r+'"><div><span>'+r+'</span></div></button>').join('') + '</div><button class="link" data-act="v-weiger-terug" style="align-self:center">Toch bekijken</button></div>';
+    const m = S.melding;
+    return '<div class="scherm">' + bericht('NIEUWE OPDRACHT','09:20', 'Loodgieterswerk in Hilversum, ' + prijs().vakman + ' excl. btw.') + k('KL-2026-0421 · ' + naam + ' · ' + (S.idx+1) + 'e keus','Nieuwe opdracht','')
+      + '<div class="kaart"><div class="rij"><span>Plaats</span><span>Hilversum, Kastanjelaan-buurt. Adres na aannemen</span></div><div class="rij"><span>Bouwdeel</span><span>' + esc(m.element) + ', ' + esc(m.ruimte).toLowerCase() + '</span></div><div class="rij"><span>Wat er gezien is</span><span>' + esc(m.wat) + '. “' + esc(m.tekst) + '”' + (m.foto?' · 1 foto':'') + '</span></div><div class="rij"><span>Duur</span><span>Ongeveer een uur</span></div><div class="rij"><span>Vergoeding</span><span>' + prijs().vakman + ' excl. btw</span></div><p class="zacht" style="font-size:14px">Hoe je het aanpakt, bepaal jij. Zie je ter plekke meer, meld het in de app en stel voor wat jij zou doen.</p></div>'
+      + '<div class="kaart"><span class="lbl">Klant kan · kies er één</span>' + m.momenten.map(id=>{const x=mom(id),a=L.vmoment===id;return '<button class="vkr" data-act="v-moment" data-v="'+id+'" style="'+(a?'border-color:var(--inkt);box-shadow:inset 0 0 0 1px var(--inkt)':'')+'"><span class="keus '+(a?'aan':'')+'">'+(a?'✓':'')+'</span><div><span>'+x.dag+'</span><small>'+x.deel+', '+x.tijd+'</small></div></button>';}).join('') + '<p class="zacht" style="font-size:13px">Past geen van de drie? Stuur er drie terug, de klant kiest opnieuw.</p></div>'
+      + '<div class="twee"><button class="knop2" data-act="v-weiger">Weiger</button><button class="knop" data-act="v-neem"' + (L.vmoment?'':' disabled') + '>Neem aan</button></div></div>';
+  }
+  if (f === 'aangenomen') return '<div class="scherm">' + k('Aangenomen · ' + naam, tijdvak(), 'Sanne krijgt tijd en prijs ter akkoord. Daarna staat het in je agenda.') + wachten('klant','De klant moet nog akkoord geven op tijd en prijs.') + '</div>';
+  if (f === 'gepland' && !S.vertrokken) {
+    const tv = tijdvak();
+    if (S.later && S.later.gekozen) return '<div class="scherm">' + k('Nieuwe tijd · ' + esc(S.later.nieuw), 'Sanne verwacht je ' + esc(S.later.nieuw.split(', ')[1]||S.later.nieuw), 'Doorgegeven en vastgelegd. Je hoeft niemand te bellen.') + '<div class="knoppen"><button class="knop" data-act="v-vertrek">Ik vertrek</button></div></div>';
+    return '<div class="scherm">' + k('Vandaag · ' + (mom(S.moment).tijd.split('–')[0]) + ' · ' + KLANT.adres, 'Loop je uit?', 'Meld het vóór ' + mom(S.moment).tijd.split('–')[0] + '. Wij zetten de klant een nieuwe tijd klaar; jij hoeft niemand te bellen.')
+      + '<div class="kaart"><span class="lbl">De klant vraagt</span><p>Niet aanbellen tot 10:00, de baby slaapt. Sleutel ligt bij de buren, nr. 16, alleen voor deze klus.</p><div class="rij"><span>Adres</span><span>' + KLANT.adres + ', ' + KLANT.plaats + '</span></div><div class="rij"><span>Verwacht</span><span>' + tv + '</span></div></div>'
+      + '<button class="knop" data-act="v-vertrek">Ik ben op tijd, ik vertrek</button><div class="knoppen">' + [['Half uur later',30],['Uur later',60],['Anderhalf uur later',90]].map(u=>'<button class="vkr" data-act="v-later" data-v="'+u[1]+'" style="min-height:58px"><div><span>'+u[0]+'</span></div></button>').join('') + '</div></div>';
+  }
+  if (f === 'later') return '<div class="scherm">' + k('Doorgegeven · 08:12','Wij regelen het met de klant','Je bent er om ' + esc(S.later.voorstel) + '. Sanne krijgt die tijd als voorstel; je hoort het zodra ze kiest.') + wachten('klant','Sanne kiest nu haar nieuwe tijd.') + '</div>';
+  if (f === 'onderweg') return '<div class="scherm">' + k(KLANT.adres + ' · ' + KLANT.plaats,'Onderweg naar Sanne','Parkeren voor de deur, vergunning op het dashboard.') + '<div class="kaart"><span class="lbl">De klant vraagt</span><p>Niet aanbellen tot 10:00. Sleutel bij nr. 16, alleen vandaag; breng hem terug als je weggaat.</p></div><button class="knop" data-act="v-start">Ik ben er, start de klus</button></div>';
+  if (f === 'bezig') {
+    const vondstGemeld = !!S.vondst;
+    return '<div class="scherm">' + k('Aan het werk · ' + esc(S.melding.element), 'Zeg wat je zag en deed','De klant ziet alleen wat je oplevert.')
+      + (vondstGemeld ? '<div class="ok">' + (S.vondst.status==='akkoord' ? 'Sanne gaf akkoord: vervang de sifon nu, € 45,00 op dezelfde factuur.' : S.vondst.status==='later' ? 'Sanne plant de sifon later in. Alleen de kraan vandaag.' : 'Voorstel verstuurd. Sanne beslist.') + '</div>'
+        : (L.vondstOpen ? '<div class="kaart goud"><span class="lbl">Vondst melden · met voorstel</span><p>Sifon onder het aanrecht lekt bij de koppeling.</p><div class="rij"><span>Voorstel</span><span>Nu vervangen, ik heb er een bij me</span></div><div class="rij"><span>Duur</span><span>20 minuten</span></div><div class="rij"><span>Prijs klant</span><span>€ 45,00 incl. btw</span></div><button class="knop" data-act="v-vondst">Stuur voorstel naar Sanne</button></div>' : '<button class="knop2" data-act="v-vondst-open">Ik zie nog iets: meld een vondst</button>'))
+      + '<div class="kaart"><span class="lbl">Foto’s · zoveel als je wilt</span><div class="twee"><div class="foto"><span>Vóór</span></div><div class="foto" style="background:linear-gradient(160deg,#2F5D45,#123522)"><span>Ná</span></div></div><label class="veld" for="vt">Wat je deed, in je eigen woorden<textarea id="vt" rows="3">' + esc(L.vtekst) + '</textarea></label><p class="zacht" style="font-size:13px">In de app spreek je dit in en wordt het uitgeschreven.</p><button class="knop" data-act="v-oplever">Lever op</button></div></div>';
+  }
+  if (f === 'vondst') return '<div class="scherm">' + k('Vondst gemeld · 10:50','Sanne beslist over de sifon','Ga intussen door met de kraan.') + wachten('klant','Sanne krijgt je voorstel: nu vervangen voor € 45,00, of later inplannen.') + '</div>';
+  if (f === 'opgeleverd' || f === 'klopt') return '<div class="scherm">' + k('Opgeleverd · 11:35','Wacht op goedkeuring', f==='klopt' ? 'Sanne meldde dat iets niet klopt. Klantenservice belt haar en laat je weten wat er nodig is.' : 'Je wordt betaald zodra Sanne het werk goedkeurt.') + wachten(f==='klopt'?'admin':'klant', f==='klopt' ? 'Klantenservice lost het op met Sanne.' : 'Sanne bekijkt je foto’s en keurt het werk goed.') + '</div>';
+  if (f === 'goedgekeurd') return '<div class="scherm">' + k('Goedgekeurd · 11:48','Je betaling staat klaar','') + '<div class="kaart"><div class="rij"><span>Klus</span><span>' + esc(S.melding.element) + ', Kastanjelaan 14</span></div><div class="rij"><span>Vergoeding</span><span>' + prijs().vakman + (S.vondst&&S.vondst.status==='akkoord'?' + € 32,00 sifon':'') + ' excl. btw</span></div><div class="rij"><span>Uitbetaling</span><span>Binnen de afgesproken termijn</span></div><p class="zacht" style="font-size:13px">Bedragen en termijn zijn voorbeelden; de uitbetalingstermijn is nog niet besloten.</p></div></div>';
+  return '';
+}
+
+// ---------- Tekenen ----------
+function teken(){
+  const az = AANZET[S.fase] || [null,''];
+  document.getElementById('rollen').innerHTML = ROLLEN.map(r => '<button class="rol" role="tab" data-act="rol" data-v="' + r.id + '" aria-selected="' + (L.rol===r.id) + '">' + r.naam + (az[0]===r.id && L.rol!==r.id ? '<span class="stip" aria-label="aan zet"></span>' : '') + '</button>').join('');
+  document.getElementById('zet').innerHTML = az[0] ? 'Aan zet: <b>' + ROLLEN.find(r=>r.id===az[0]).naam + '</b> · ' + az[1] : '<b>Rond</b> · ' + az[1];
+  const el = document.getElementById('scherm');
+  el.innerHTML = L.rol === 'klant' ? '<div class="scherm">' + klant() + '</div>' : L.rol === 'admin' ? admin() : vakman();
+  const fi = document.getElementById('fotoin');
+  if (fi) fi.addEventListener('change', e => { const file = e.target.files && e.target.files[0]; if (!file) return; const r = new FileReader(); r.onload = () => { L.foto = r.result; teken(); }; r.readAsDataURL(file); });
+  const av = document.getElementById('av'); if (av) av.addEventListener('change', e => { L.av = e.target.checked; leesVelden(); teken(); });
+}
+function leesVelden(){
+  const v = id => { const e = document.getElementById(id); return e ? e.value : null; };
+  if (v('nm') !== null) L.naam = v('nm');
+  if (v('tl') !== null) L.tel = v('tl');
+  if (v('tx') !== null) L.tekst = v('tx');
+  if (v('vt') !== null) L.vtekst = v('vt');
+}
+function reisBlad(){
+  const rol = L.rol, i = ix(S.fase);
+  const stappen = REIS[rol];
+  let nuGezet = false;
+  const rijen = stappen.map((s,n) => {
+    const fasen = s[2];
+    const nu = fasen.includes(S.fase);
+    const af = !nu && fasen.length && fasen.every(f => ix(f) < i) ;
+    let cls = nu && !nuGezet ? 'nu' : af ? 'af' : '';
+    if (cls==='nu') nuGezet = true;
+    return '<div class="reisstap ' + cls + '"><i>' + (cls==='af'?'✓':n+1) + '</i><span>' + s[0] + (s[1]?'<small>'+s[1]+'</small>':'') + '</span></div>';
+  }).join('');
+  return '<div class="blad" data-act="sluit"><div role="dialog" aria-label="Jouw reis" data-stop="1"><span class="greep"></span><span class="lbl">De reis van de ' + ROLLEN.find(r=>r.id===rol).naam.toLowerCase() + '</span><div>' + rijen + '</div><button class="knop2" data-act="sluit">Sluiten</button></div></div>';
+}
+
+// ---------- Handelingen ----------
+const doe = {
+  rol: v => { L.rol = v; try { localStorage.setItem(KEY+'-rol', v); } catch(e){} window.scrollTo(0,0); },
+  ftab: v => { L.ftab = v; },
+  reis: () => { document.getElementById('blad').innerHTML = reisBlad(); return 'stil'; },
+  sluit: () => { document.getElementById('blad').innerHTML = ''; return 'stil'; },
+  opnieuw: () => { const rev = S.rev || 0; S = begin(); S.rev = rev; Object.assign(L, { stap:0, welkom:0, mstap:0, ruimte:null, element:null, wat:null, foto:null, spoed:false, gekozen:[], prijs:null, keuzes:[], vmoment:null, weiger:false, ander:false, reden:null, plan:null, av:false, vondstOpen:false, rol:'klant' }); bewaar(); return 'stil'; },
+  'a-volgende': () => { L.stap++; window.scrollTo(0,0); },
+  'a-plan': v => { L.plan = v; },
+  'a-welkom': () => { if (L.welkom < 2) { L.welkom++; return; } S.lid = L.plan || 'maand'; zet('lid'); log('klant','Zo 26 okt, 20:14', 'Sanne meldde zich aan (' + lidTekst() + ')'); bewaar(); return 'stil'; },
+  melden: () => { L.mstap = 1; window.scrollTo(0,0); },
+  'm-terug': () => { L.mstap = Math.max(0, L.mstap-1); },
+  'm-ruimte': v => { L.ruimte = v; L.element = RUIMTES[v][0]; L.wat = null; L.mstap = 2; },
+  'm-element': v => { L.element = v; },
+  'm-wat': v => { L.wat = v; },
+  'm-spoed': () => { L.spoed = !L.spoed; },
+  'm-moment': v => { const a = L.gekozen.indexOf(v); if (a >= 0) L.gekozen.splice(a,1); else if (L.gekozen.length < 3) L.gekozen.push(v); },
+  'm-volgende': () => { L.mstap++; window.scrollTo(0,0); },
+  'm-verstuur': () => { S.melding = { ruimte:L.ruimte, element:L.element, wat:L.wat, tekst:L.tekst, momenten:L.gekozen.slice(), foto:!!L.foto }; zet('gemeld'); L.mstap = 0; log('klant','Ma 27 okt, 07:58','Sanne meldde: ' + L.element.toLowerCase() + ' ' + L.wat.toLowerCase() + ', ' + L.ruimte.toLowerCase()); bewaar(); return 'stil'; },
+  'f-prijs': v => { L.prijs = v; },
+  'f-vakman': v => { const a = L.keuzes.indexOf(v); if (a >= 0) L.keuzes.splice(a,1); else if (L.keuzes.length < 3) L.keuzes.push(v); },
+  'f-stuur': () => { S.prijs = L.prijs; S.keuzes = L.keuzes.slice(); S.idx = 0; zet('aangeboden'); log('admin','Ma 27 okt, 09:20','Lisa koos ' + prijs().tekst + ' en stuurde het aanbod naar ' + vm().naam); bewaar(); return 'stil'; },
+  'f-opgelost': () => { zet('opgeleverd'); log('admin','Do 30 okt, 13:10','Lisa belde Sanne: ' + vnaam() + ' kwam kosteloos terug en loste het op'); bewaar(); return 'stil'; },
+  'v-moment': v => { L.vmoment = v; },
+  'v-weiger': () => { L.weiger = true; },
+  'v-weiger-terug': () => { L.weiger = false; },
+  'v-weiger-ja': v => { const was = vm().naam; L.weiger = false; L.vmoment = null; if ((S.idx||0) < 2) { S.idx = (S.idx||0) + 1; log('vakman','Ma 27 okt, 09:40', was + ' weigerde (' + v.toLowerCase() + '); aanbod ging vanzelf naar ' + vm().naam); } else { zet('gemeld'); S.idx = 0; log('vakman','Ma 27 okt, 10:30','Alle drie weigerden; de klus ging terug naar klantenservice'); } bewaar(); return 'stil'; },
+  'v-neem': () => { S.moment = L.vmoment; zet('aangenomen'); log('vakman','Ma 27 okt, 10:05', vm().naam + ' nam aan voor ' + mom(S.moment).dag + ', ' + mom(S.moment).tijd); bewaar(); return 'stil'; },
+  'k-akkoord': () => { zet('gepland'); log('klant','Ma 27 okt, 10:11','Sanne ging akkoord met ' + tijdvak() + ' en ' + prijs().tekst); bewaar(); return 'stil'; },
+  'k-ander': () => { zet('aangeboden'); S.moment = null; log('klant','Ma 27 okt, 10:12','Sanne vroeg een ander moment; ' + vm().naam + ' kiest opnieuw'); bewaar(); return 'stil'; },
+  'v-later': v => { const start = mom(S.moment).tijd.split('–')[0]; const [h,m] = start.split(':').map(Number); const t = h*60+m+Number(v); const nieuw = String(Math.floor(t/60)).padStart(2,'0') + ':' + String(t%60).padStart(2,'0'); S.later = { min:Number(v), voorstel:nieuw }; zet('later'); log('vakman', mom(S.moment).dag + ', 08:12', vm().naam + ' meldde ' + v + ' minuten uitloop'); log('admin', mom(S.moment).dag + ', 08:14', 'Nieuwe tijd ' + nieuw + ' vanzelf klaargezet bij Sanne'); L.ander = false; bewaar(); return 'stil'; },
+  'k-later-ja': () => { const eind = (() => { const [h,m] = S.later.voorstel.split(':').map(Number); const t=h*60+m+120; return String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0'); })(); S.later.gekozen = true; S.later.nieuw = mom(S.moment).dag + ', ' + S.later.voorstel + '–' + eind; zet('gepland'); log('klant', mom(S.moment).dag + ', 08:16','Sanne koos ' + S.later.voorstel); bewaar(); return 'stil'; },
+  'k-later-ander': () => { L.ander = true; },
+  'k-later-terug': () => { L.ander = false; },
+  'k-later-alt': v => { const a = [['Vandaag','14:00–16:00'],['Vr 31 okt','09:00–11:00'],['Ma 3 nov','13:00–15:00']][Number(v)]; S.later.gekozen = true; S.later.nieuw = (a[0]==='Vandaag'?mom(S.moment).dag:a[0]) + ', ' + a[1]; zet('gepland'); log('klant', mom(S.moment).dag + ', 08:17','Sanne verzette kosteloos naar ' + S.later.nieuw); L.ander = false; bewaar(); return 'stil'; },
+  'v-vertrek': () => { zet('onderweg'); log('vakman', (tijdvak().split(',')[0]) + ', ' + (S.later?'10:05':'08:40'), vm().naam + ' is onderweg'); bewaar(); return 'stil'; },
+  'v-start': () => { zet('bezig'); log('vakman', tijdvak().split(',')[0] + ', 10:31', vm().naam + ' is gestart'); bewaar(); return 'stil'; },
+  'v-vondst-open': () => { L.vondstOpen = true; },
+  'v-vondst': () => { S.vondst = { status:'voorgesteld' }; zet('vondst'); log('vakman', tijdvak().split(',')[0] + ', 10:50', vm().naam + ' meldde een vondst: sifon lekt, voorstel € 45,00'); L.vondstOpen = false; bewaar(); return 'stil'; },
+  'k-vondst-ja': () => { S.vondst.status = 'akkoord'; zet('bezig'); log('klant', tijdvak().split(',')[0] + ', 10:52','Sanne gaf akkoord op de sifon, € 45,00'); bewaar(); return 'stil'; },
+  'k-vondst-later': () => { S.vondst.status = 'later'; zet('bezig'); log('klant', tijdvak().split(',')[0] + ', 10:52','Sanne plant de sifon later in'); bewaar(); return 'stil'; },
+  'v-oplever': () => { leesVelden(); S.oplevering = L.vtekst; zet('opgeleverd'); log('vakman', tijdvak().split(',')[0] + ', 11:35', vm().naam + ' leverde op met foto’s'); bewaar(); return 'stil'; },
+  'k-goed': () => { zet('goedgekeurd'); log('klant', tijdvak().split(',')[0] + ', 11:48','Sanne keurde het werk goed; uitbetaling aan ' + vm().naam + ' staat klaar'); bewaar(); return 'stil'; },
+  'k-klopt-open': () => { L.reden = 'open'; },
+  'k-klopt-terug': () => { L.reden = null; },
+  'k-klopt': v => { S.klopt = v; L.reden = null; zet('klopt'); log('klant', tijdvak().split(',')[0] + ', 11:50','Sanne meldde: ' + v.toLowerCase()); bewaar(); return 'stil'; }
+};
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-act]');
+  if (!b) return;
+  if (b.dataset.act === 'sluit' && e.target.closest('[data-stop]') && !e.target.closest('button')) return;
+  leesVelden();
+  const r = doe[b.dataset.act] && doe[b.dataset.act](b.dataset.v);
+  if (r !== 'stil') teken();
+});
+teken();
+})();
+</script>
+</body></html>
