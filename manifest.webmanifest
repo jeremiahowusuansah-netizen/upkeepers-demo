@@ -1,0 +1,14 @@
+{
+  "name": "UPKeepers",
+  "short_name": "UPKeepers",
+  "description": "Prototype van de UPKeepers-app, met voorbeeldgegevens.",
+  "lang": "nl",
+  "id": "./app.html",
+  "start_url": "./app.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ECE5D7",
+  "theme_color": "#ECE5D7",
+  "icons": []
+}

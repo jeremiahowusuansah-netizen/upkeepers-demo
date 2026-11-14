@@ -7,6 +7,9 @@
 <meta name="theme-color" content="#ECE5D7">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="UPKeepers">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
 <title>UPKeepers</title>
 <style>
 html,body{margin:0;background:#ECE5D7;-webkit-text-size-adjust:100%}
@@ -24,6 +27,8 @@ button{touch-action:manipulation}
   try { const t = localStorage.getItem('upk-woningtype'); if (t) window.UPK.woningtype = t; } catch (e) {}
   try { const g = localStorage.getItem('upk-tekst'); if (g) window.UPK.tekst = g; } catch (e) {}
   try { const l = localStorage.getItem('upk-lid'); if (l) window.UPK.lid = l; } catch (e) {}
+  // Vanaf het beginscherm: wie al lid is, opent op het startscherm; anders begint het bij het aanmelden.
+  if (window.UPK.lid) window.UPK_START = 'CStart';
 </script>
 </head>
 <body>
@@ -33,6 +38,8 @@ button{touch-action:manipulation}
   // Altijd de nieuwste versie laden, ook na een update op GitHub Pages.
   const v = Date.now();
   document.write('<script src="bundel.js?' + v + '"><\/script><script src="dcplayer.js?' + v + '"><\/script>');
+  // Bewaart de app op het toestel, zodat hij ook zonder internet opent (sw.js).
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('sw.js').catch(() => {});
 </script>
 </body>
 </html>
